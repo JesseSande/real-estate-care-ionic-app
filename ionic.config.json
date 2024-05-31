@@ -1,0 +1,8 @@
+{
+  "name": "RealEstateCare_IonicApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "45b97ffa"
+}
