@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
-  { //Eerste geschreven m.b.v. ChatGPT
+  { //Eerste geschreven m.b.v. ChatGPT, de rest op dezelfde manier zelf toegevoegd.
     path: '/afgerond-details',
     component: () => import('@/views/AfgerondDetails.vue')
   },
