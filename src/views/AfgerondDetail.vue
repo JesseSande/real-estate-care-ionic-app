@@ -26,3 +26,4 @@
   import { notifications, settings } from 'ionicons/icons';
   import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>
+

@@ -1,12 +1,3 @@
-/*Opmaak toolbar en tabbar, algemeen op alle pagina's.*/
-:root {
-    --ion-tab-bar-background: rgb(0, 170, 162);
-    --ion-tab-bar-color: rgb(92, 201, 195);
-    --ion-tab-bar-color-selected: rgb(249,249,249);
-    --ion-toolbar-background: rgb(41,52,57);
-    --ion-toolbar-color: rgb(249,249,249);
-}
-
 /*Opmaak cards, gebruikt in de 4 componenten Afgerond.vue, Instellingen.vue, Kennisbase.vue en Toegewezen.vue.*/
 .card {
     display: flex;

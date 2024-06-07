@@ -41,3 +41,4 @@
 import { IonHeader, IonToolbar, IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { informationCircle, search, build, notifications, settings } from 'ionicons/icons';
 </script>
+
