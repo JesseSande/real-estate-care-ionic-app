@@ -12,12 +12,16 @@
         </ion-toolbar>
       </ion-header>
 
-      <ExploreContainer name="Tab 3 page" />
+      <!--<ExploreContainer name="Tab 3 page" />-->
+      <p>Hier komt straks een informatiepagina</p>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+  import { notifications, settings } from 'ionicons/icons';
+  import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>
+
+

@@ -1,14 +1,25 @@
 <template>
-  <div id="container">
+  <!--<div id="container">
     <strong>{{ name }}</strong>
     <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </div>-->
+  <div class="grid-container">
+        <Toegewezen />
+        <Afgerond />
+        <Kennisbase />
+        <Instellingen />
+      </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
-  name: String,
-});
+  defineProps({
+    name: String,
+  });
+
+  import Toegewezen from '@/components/Toegewezen.vue';
+  import Afgerond from '@/components/Afgerond.vue';
+  import Kennisbase from '@/components/Kennisbase.vue';
+  import Instellingen from '@/components/Instellingen.vue';
 </script>
 
 <style scoped>
@@ -35,5 +46,12 @@ defineProps({
 
 #container a {
   text-decoration: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
 }
 </style>
