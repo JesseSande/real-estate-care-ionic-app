@@ -12,5 +12,5 @@
 - De pagina met de inspecties wordt nu nog getoond ‘op’ de andere onderdelen van de app (waarmee ik bedoel, de andere gemaakte onderdelen zijn nu niet te zien). Als ik het goed heb begrepen uit de opdracht, wordt dit in de volgende opdracht verder afgemaakt. Er wordt nu in de mock-up data verwezen naar pdf’s en foto’s die er in werkelijkheid nog niet zijn. 
 - To do's: Later nog aanpassen en ook de Style Guide checken (bijv PascalCase voor component benamingen).
 
-  ## Note
-  - Ik weet dat dit nog niet een officiële/juiste opzet is voor een Read Me file in een werkelijk project, maar heb voor deze opdracht deze ruimte gebruikt om wat algemene notities te delen.  
+## Note
+- Ik weet dat dit nog niet een officiële/juiste opzet is voor een Read Me file in een werkelijk project, maar heb voor deze opdracht deze ruimte gebruikt om wat algemene notities te delen.  
