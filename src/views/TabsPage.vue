@@ -34,11 +34,22 @@
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <InspectionList />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import { IonHeader, IonToolbar, IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { informationCircle, search, build, notifications, settings } from 'ionicons/icons';
+
+import InspectionList from '@/components/InspectionList.vue';
 </script>
 
