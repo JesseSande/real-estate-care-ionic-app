@@ -1,5 +1,5 @@
-## Versie voor opdracht 3 controleren
-- Gebruik branch RED-opdr3-branch
+## Versie voor opdracht 3 openen om feedback te geven
+- Gebruik hiervoor branch RED-opdr3-branch i.p.v. main
   
 ## Reflectie logboek
 - Ik heb een JSON bestand aangemaakt om de mock-up inspecties toe te voegen. Binnen dit bestand heb ik 5 mock-up inspecties aangemaakt, een van ieder type inspectie, en een dubbele voor schade opnemen. 
