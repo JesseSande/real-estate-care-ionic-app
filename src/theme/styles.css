@@ -1,25 +1,26 @@
 /*Opmaak cards, gebruikt in de 4 componenten Afgerond.vue, Instellingen.vue, Kennisbase.vue en Toegewezen.vue.*/
 .card {
-    display: flex;
-    flex-direction: column;
-    height: 325px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 5px lightgrey;
-    text-decoration: none;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px lightgrey;
+  text-decoration: none;
+}
 
-  .icon {
-    font-size: 75px;
-    color: rgb(41,52,57);
-  }
+.icon {
+  font-size: 75px;
+  color: rgb(41,52,57);
+}
   
-  p {
-    margin: 20px 0 0 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: rgb(41,52,57);
-  }
+p {
+  margin: 20px 0 0 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(41,52,57);
+}
+

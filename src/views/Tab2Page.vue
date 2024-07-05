@@ -24,3 +24,9 @@
   import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>
 
+<style scoped>
+  ion-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+</style>

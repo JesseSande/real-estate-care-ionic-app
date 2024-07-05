@@ -1,29 +1,23 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="primary">
-          <ion-button>
-            <ion-icon slot="icon-only" :icon="notifications"></ion-icon>
-          </ion-button>
-          <ion-button>
-            <ion-icon slot="icon-only" :icon="settings"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-buttons slot="secondary">
-          <img src="@/assets/logo REC-1.7.png" alt="logo-afbeelding" width="275px">
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+    <IonHeaderComponent />
     <ion-content>
       <p>Details van toegewezen taken komen hier.</p>
     </ion-content>
+    <IonTabsComponent />
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-  import { notifications, settings } from 'ionicons/icons';
+  import { IonPage, IonContent } from '@ionic/vue';
+  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import ExploreContainer from '@/components/ExploreContainer.vue';
+  import IonTabsComponent from '@/components/IonTabsComponent.vue';
 </script>
 
+<style scoped>
+  ion-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+</style>
