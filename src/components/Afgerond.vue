@@ -1,7 +1,7 @@
 <template>
   <router-link to="/afgerond-details" class="card">
     <ion-icon :icon="checkmarkCircle" class="icon"></ion-icon>
-    <p>Afgerond</p>
+    <h2>Afgerond</h2>
   </router-link>
 </template>
 
@@ -10,5 +10,6 @@
 </script>
 
 <style scoped>
-@import '../theme/styles.css';
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 </style>

@@ -1,7 +1,7 @@
 <template>
   <router-link to="/kennisbase-details" class="card">
     <ion-icon :icon="folder" class="icon"></ion-icon>
-    <p>Kennisbase</p>
+    <h2>Kennisbase</h2>
   </router-link>
 </template>
 
@@ -10,5 +10,6 @@
 </script>
 
 <style scoped>
-@import '../theme/styles.css';
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 </style>

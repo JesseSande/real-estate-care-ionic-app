@@ -4,11 +4,11 @@
     <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>-->
   <div class="grid-container">
-        <Toegewezen />
-        <Afgerond />
-        <Kennisbase />
-        <Instellingen />
-      </div>
+    <Toegewezen />
+    <Afgerond />
+    <Kennisbase />
+    <Instellingen />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,35 +23,43 @@
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+  #container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
-}
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
 
-#container a {
-  text-decoration: none;
-}
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+  }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 16px;
-}
+  #container a {
+    text-decoration: none;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding-top: 16px;
+    text-align: center;
+  }
+
+  .grid-container a {
+    padding: 0px;
+  }
 </style>

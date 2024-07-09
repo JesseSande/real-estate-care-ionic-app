@@ -1,8 +1,31 @@
+<!--Code m.b.t. de dark mode toggle is afkomstig van: https://ionicframework.com/docs/theming/dark-mode--> 
+
 <template>
   <ion-page>
     <IonHeaderComponent />
     <ion-content>
-      <p>Details van instellingen komen hier.</p>
+      <h1>Instellingen</h1>
+      <h2>Accountgegevens</h2>
+      <ion-avatar>
+        <img alt="Silhouette van het hoofd van een persoon" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <h4>Gebruikersnaam</h4>
+      <p>Admin</p>
+      <h4>E-mailadres</h4>
+      <p>admin@email.com</p>
+      <hr>
+      <h2>Accountinstellingen</h2>
+      <ion-list :inset="true">
+        <ion-item>
+          <ion-toggle :checked="paletteToggle" @ionChange="toggleChange($event)" justify="space-between">Donkere modus</ion-toggle>
+        </ion-item>
+        <ion-item :button="true">Tekstgrootte</ion-item>
+        <ion-item>
+          <ion-toggle justify="space-between">Dikgedrukte tekst</ion-toggle>
+        </ion-item>
+      </ion-list>
+      <hr>
+      <h2>Uitloggen</h2>
       <ion-button class="afmeldenButton" expand="block" @click="logout">Uitloggen</ion-button>
     </ion-content>
     <IonTabsComponent />
@@ -10,10 +33,11 @@
 </template>
 
 <script setup lang="ts">
-  import { IonPage, IonContent } from '@ionic/vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
+  import { IonPage, IonContent, IonList, IonItem, IonToggle, IonButton, IonAvatar } from '@ionic/vue';
+  import type { ToggleCustomEvent } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import ExploreContainer from '@/components/ExploreContainer.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
   const router = useRouter();
@@ -22,18 +46,58 @@
     localStorage.removeItem('user');
     router.push('/login');
   };
+
+  const paletteToggle = ref(false);
+
+  // Use matchMedia to check the user preference
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // Add or remove the "ion-palette-dark" class on the html element
+  const toggleDarkPalette = (shouldAdd) => {
+    document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+  };
+
+  // Check/uncheck the toggle and update the palette based on isDark
+  const initializeDarkPalette = (isDark) => {
+    paletteToggle.value = isDark;
+    toggleDarkPalette(isDark);
+  };
+
+  // Initialize the dark palette based on the initial
+  // value of the prefers-color-scheme media query
+  initializeDarkPalette(prefersDark.matches);
+
+  // Listen for changes to the prefers-color-scheme media query
+  prefersDark.addEventListener('change', (mediaQuery) => initializeDarkPalette(mediaQuery.matches));
+
+  // Listen for the toggle check/uncheck to toggle the dark palette
+  const toggleChange = (ev: ToggleCustomEvent) => {
+    toggleDarkPalette(ev.detail.checked);
+  };
 </script>
 
 <style scoped>
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
+  
+  hr {
+    margin: 1em auto;
+    border-top: 1px solid rgb(0, 170, 162);
+  }
+  
+  h2 {
+    color: rgb(0, 170, 162) !important;
+  }
+
+  ion-item {
+    --margin: 0px;
+    font-size: 20px;
+  }
+
   .afmeldenButton {
         margin: 15px;
         --background: rgb(0, 170, 162);
         --background-activated: rgb(92, 201, 195);
         --background-focused: rgb(92, 201, 195);
-  }
-
-  ion-content {
-    --padding-start: 20px;
-    --padding-end: 20px;
   }
 </style>

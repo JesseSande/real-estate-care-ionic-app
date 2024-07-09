@@ -34,5 +34,9 @@
     const goToSettings = () => {
         router.push('/instellingen-details');
     };
-
 </script>
+
+<style>
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
+</style>

@@ -52,6 +52,9 @@
 </script>
 
 <style scoped>
+    @import '../theme/styles.css';
+    @import '../theme/variables.css';
+
     ion-page {
         display: flex;
         flex-direction: column;

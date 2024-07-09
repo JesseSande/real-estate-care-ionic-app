@@ -40,6 +40,9 @@
 </script>
 
 <style scoped>
+    @import '../theme/styles.css';
+    @import '../theme/variables.css';
+
     ul {
         list-style-type: none;
         padding: 0;

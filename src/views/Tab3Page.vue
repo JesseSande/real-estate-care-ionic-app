@@ -13,7 +13,12 @@
       </ion-header>
 
       <!--<ExploreContainer name="Tab 3 page" />-->
-      <p>Hier komt straks een informatiepagina</p>
+      <h1>Informatie</h1>
+      <p>Dit is een informatiepagina. 
+      Op deze pagina wordt in de uiteindelijke app belangrijke informatie over de app genoemd.
+      In deze demoversie is dat niet het geval.</p>
+      <p>Deze demoversie van de Real Estate Care case is gemaakt door Jesse van de Sande.</p>
+      <p>Versie: juli 2024</p>
     </ion-content>
   </ion-page>
 </template>
@@ -25,8 +30,6 @@
 </script>
 
 <style scoped>
-  ion-content {
-    --padding-start: 20px;
-    --padding-end: 20px;
-  }
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 </style>

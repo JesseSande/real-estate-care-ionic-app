@@ -24,5 +24,10 @@
   import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>
 
+<style>
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
+</style>
+
 
 

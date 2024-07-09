@@ -1,14 +1,15 @@
 <template>
   <router-link to="/instellingen-details" class="card">
     <ion-icon :icon="settings" class="icon"></ion-icon>
-    <p>Instellingen</p>
+    <h2>Instellingen</h2>
   </router-link>
 </template>
 
 <script setup lang="ts">
-    import { settings } from 'ionicons/icons';
+  import { settings } from 'ionicons/icons';
 </script>
 
 <style scoped>
-@import '../theme/styles.css';
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 </style>

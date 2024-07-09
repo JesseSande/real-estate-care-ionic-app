@@ -4,7 +4,8 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
 <template>
     <ion-page>
         <IonHeaderComponent />
-        <ion-content> 
+        <ion-content>
+            <h1>Meldingen</h1> 
             <ion-list> 
                 <ion-item v-for="notification in notifications" :key="notification.id">
                     <ion-label>
@@ -25,10 +26,15 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
     import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
     const notifications = ref([
-        { id: 1, title: 'Melding 1', message: 'Dit is de eerste melding.' },
-        { id: 2, title: 'Melding 2', message: 'Dit is de tweede melding.' },
+        { id: 1, title: 'Melding 1', message: 'Dit is de eerste fictieve melding.' },
+        { id: 2, title: 'Melding 2', message: 'Dit is de tweede fictieve melding.' },
     ]);
 </script>
+
+<style>
+    @import '../theme/styles.css';
+    @import '../theme/variables.css';
+</style>
 
 
 

@@ -16,8 +16,6 @@
 </script>
 
 <style scoped>
-  ion-content {
-    --padding-start: 20px;
-    --padding-end: 20px;
-  }
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
 </style>

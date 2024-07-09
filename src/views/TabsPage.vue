@@ -11,3 +11,7 @@
   import { IonPage } from '@ionic/vue';
 </script>
 
+<style>
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
+</style>
