@@ -24,14 +24,13 @@
         <iframe :src="pdfSrc" width="100%" height="600px"></iframe>
       </div>
     </ion-content>
-    <IonTabsComponent />
+    <!--<IonTabsComponent />-->
   </ion-page>
 </template>
 
 <script setup lang="ts">
   import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import ExploreContainer from '@/components/ExploreContainer.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
   //M.b.v. ChatGPT4o
@@ -40,8 +39,9 @@
   const pdfSrc = ref('');
 
   const loadPDF = (path: string) => {
+    console.log(`Loading PDF: ${path}`); // Debug: log the path
     pdfSrc.value = path;
-  };
+};
 </script>
 
 <style scoped>
@@ -49,6 +49,6 @@
   @import '../theme/variables.css';
 
   .pdf-container {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
 </style>

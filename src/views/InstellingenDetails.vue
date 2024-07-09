@@ -1,4 +1,4 @@
-<!--Code m.b.t. de dark mode toggle is afkomstig van: https://ionicframework.com/docs/theming/dark-mode--> 
+<!--Code m.b.t. de dark mode toggle is afkomstig van: https://ionicframework.com/docs/theming/dark-mode --> 
 
 <template>
   <ion-page>
@@ -10,25 +10,22 @@
         <img alt="Silhouette van het hoofd van een persoon" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
       </ion-avatar>
       <h4>Gebruikersnaam</h4>
-      <p>Admin</p>
+      <p>Demo Account</p>
       <h4>E-mailadres</h4>
-      <p>admin@email.com</p>
+      <p>demo@email.com</p>
       <hr>
       <h2>Accountinstellingen</h2>
       <ion-list :inset="true">
         <ion-item>
           <ion-toggle :checked="paletteToggle" @ionChange="toggleChange($event)" justify="space-between">Donkere modus</ion-toggle>
         </ion-item>
-        <ion-item :button="true">Tekstgrootte</ion-item>
-        <ion-item>
-          <ion-toggle justify="space-between">Dikgedrukte tekst</ion-toggle>
-        </ion-item>
+        <ion-item :button="true">Meldingen</ion-item>
       </ion-list>
       <hr>
       <h2>Uitloggen</h2>
-      <ion-button class="afmeldenButton" expand="block" @click="logout">Uitloggen</ion-button>
+      <ion-button class="visibleButton" expand="block" @click="logout">Uitloggen</ion-button>
     </ion-content>
-    <IonTabsComponent />
+    <!--<IonTabsComponent />-->
   </ion-page>
 </template>
 
@@ -80,24 +77,16 @@
   @import '../theme/styles.css';
   @import '../theme/variables.css';
   
-  hr {
-    margin: 1em auto;
-    border-top: 1px solid rgb(0, 170, 162);
-  }
-  
-  h2 {
-    color: rgb(0, 170, 162) !important;
-  }
-
   ion-item {
     --margin: 0px;
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
-  .afmeldenButton {
-        margin: 15px;
-        --background: rgb(0, 170, 162);
-        --background-activated: rgb(92, 201, 195);
-        --background-focused: rgb(92, 201, 195);
+  .visibleButton {
+    margin: 1rem;
+  }
+
+  h2 {
+    color: var(--ion-color-firstcolor);
   }
 </style>

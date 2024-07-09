@@ -35,7 +35,7 @@
   @import '../theme/styles.css';
   @import '../theme/variables.css';
   
-  p, h2 {
-    color: rgb(41,52,57);
+  h2 {
+    color: var(--ion-color-firstcolor);
   }
 </style>

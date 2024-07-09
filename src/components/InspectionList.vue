@@ -49,14 +49,9 @@
     }
 
     li {
-        margin: 10px 0;
-        padding: 10px;
-        border: 1px solid rgb(0,170,162);
+        margin: 0.625rem 0;
+        padding: 0.625rem;
+        border: 1px solid var(--ion-color-firstcolor);
         border-radius: 4px;
-        color: rgb(41,52,57);
-    }
-
-    h1 {
-        color: rgb(41,52,57);
     }
 </style>

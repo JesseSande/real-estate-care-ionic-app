@@ -2,7 +2,6 @@
   <ion-page>
     <IonHeaderComponent />
     <ion-content>
-      <p>Details van afgeronde taken komen hier.</p>
       <InspectionList />
     </ion-content>
   </ion-page>
@@ -11,7 +10,6 @@
 <script setup lang="ts">
   import { IonPage, IonContent } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import ExploreContainer from '@/components/ExploreContainer.vue';
   import InspectionList from '@/components/InspectionList.vue';
 </script>
 

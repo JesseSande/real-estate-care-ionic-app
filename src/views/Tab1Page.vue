@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
+        <ion-title></ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -24,7 +24,7 @@
   import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>
 
-<style>
+<style scoped>
   @import '../theme/styles.css';
   @import '../theme/variables.css';
 </style>

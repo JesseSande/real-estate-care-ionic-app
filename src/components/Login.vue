@@ -1,3 +1,5 @@
+<!--Code van de alert, bij template en bij script, is gemaakt m.b.v. ChatGPT4o-->
+
 <template>
     <ion-page>
         <ion-header>
@@ -24,10 +26,18 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        <ion-button class="aanmeldenButton" expand="block" @click="login">Inloggen</ion-button>
+                        <ion-button class="visibleButton" expand="block" @click="login">Inloggen</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
+            <ion-alert 
+                :is-open="showAlert"
+                header="2FA Verificatie"
+                message="Voer de verificatiecode in."
+                :buttons="alertButtons"
+                :inputs="alertInputs"
+                @didDismiss="dismissAlert"
+            ></ion-alert>
         </ion-content>
     </ion-page>
 </template>
@@ -35,18 +45,68 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import { useRouter } from 'vue-router';
-    import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonGrid, IonRow, IonCol, IonItem, IonLabel, IonInput, IonButton } from '@ionic/vue';
+    import { 
+        IonPage, 
+        IonHeader, 
+        IonToolbar, 
+        IonTitle, 
+        IonContent, 
+        IonGrid, 
+        IonRow, 
+        IonCol, 
+        IonItem, 
+        IonLabel, 
+        IonInput, 
+        IonButton, 
+        IonAlert,
+    } from '@ionic/vue';
 
     const username = ref('');
     const password = ref('');
+    const showAlert = ref(false);
+    const verificationCode = ref('');
     const router = useRouter();
 
+    const alertInputs = [
+        {
+            name: 'verificationCode',
+            type: 'text',
+            placeholder: 'Verificatiecode',
+            value: verificationCode.value
+        }
+    ];
+
+    const alertButtons = [
+        {
+            text: 'Annuleren',
+            role: 'cancel',
+            handler: () => dismissAlert()
+        },
+        {
+            text: 'OK',
+            handler: (data) => verifyCode(data.verificationCode)
+        }
+    ];
+
     const login = () => {
-        if (username.value === 'admin' && password.value === 'admin') {
-            localStorage.setItem('user', JSON.stringify({ username: username.value }));
-            router.push('/tabs/tab1');
+        if (username.value === 'demoaccount' && password.value === 'demodemo123') { //Simuleer inlog
+            showAlert.value = true; // Toon de alert voor 2FA
         } else {
             alert('Ongeldige inloggegevens');
+        }
+    };
+
+    const dismissAlert = () => {
+        showAlert.value = false;
+    };
+
+    const verifyCode = (code: string) => {
+        if (code === '123456') { //Simuleer verificatiecode
+            localStorage.setItem('user', JSON.stringify({ username: username.value }));
+            dismissAlert();
+            router.push('/tabs/tab1');
+        } else {
+            alert('Ongeldige verificatiecode');
         }
     };
 </script>
@@ -60,36 +120,37 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        padding: 20px; 
+        height: 100%;
+    }
+
+    ion-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        text-align: center;
     }
 
     .logoLogin {
         display: block;
-        margin: 50px auto;
-    }
-
-    ion-content {
-        padding-start: 20px;
-        padding-end: 20px;
+        margin: 3.125rem auto;
     }
 
     ion-item {
-        margin-bottom: 15px;
+        margin-bottom: 1rem;
         width: 100%; 
     }
 
     ion-input {
-        --placeholder-font-size: 24px;
-        color: rgb(41, 52, 57);
+        --placeholder-font-size: 1.5rem;
+        color: var(--ion-color-secondcolor);
     }
 
-    .aanmeldenButton {
-        margin-top: 20px;
-        margin-left: 15px;
-        margin-right: 15px; 
-        --background: rgb(0, 170, 162);
-        --background-activated: rgb(92, 201, 195);
-        --background-focused: rgb(92, 201, 195);
+    .visibleButton {
+        margin-top: 1.25rem;
+        margin-left: 1rem;
+        margin-right: 1rem; 
     }
 </style>

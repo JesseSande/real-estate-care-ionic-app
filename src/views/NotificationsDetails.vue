@@ -31,9 +31,13 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
     ]);
 </script>
 
-<style>
+<style scoped>
     @import '../theme/styles.css';
     @import '../theme/variables.css';
+
+    ::v-deep ion-content h2, p {
+        color: var(--ion-text-color) !important;
+    }
 </style>
 
 

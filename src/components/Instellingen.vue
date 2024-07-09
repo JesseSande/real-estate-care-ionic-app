@@ -1,7 +1,9 @@
 <template>
   <router-link to="/instellingen-details" class="card">
     <ion-icon :icon="settings" class="icon"></ion-icon>
-    <h2>Instellingen</h2>
+    <ion-text>
+      <h2>Instellingen</h2>
+    </ion-text>
   </router-link>
 </template>
 
@@ -12,4 +14,8 @@
 <style scoped>
   @import '../theme/styles.css';
   @import '../theme/variables.css';
+
+  h2 {
+    color: var(--ion-text-color);
+  }
 </style>

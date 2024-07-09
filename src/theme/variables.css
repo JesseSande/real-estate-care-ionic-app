@@ -3,10 +3,104 @@ http://ionicframework.com/docs/theming/ */
 
 /*Opmaak toolbar en tabbar, algemeen op alle pagina's.*/
 :root {
-    --ion-tab-bar-background: rgb(0, 170, 162);
-    --ion-tab-bar-color: rgb(92, 201, 195);
-    --ion-tab-bar-color-selected: rgb(249,249,249);
+	--ion-color-firstcolor: #00aaa2;
+	--ion-color-firstcolor-rgb: 0,170,162;
+	--ion-color-firstcolor-contrast: #000000;
+	--ion-color-firstcolor-contrast-rgb: 0,0,0;
+	--ion-color-firstcolor-shade: #00968f;
+	--ion-color-firstcolor-tint: #1ab3ab;
+
+    --ion-color-secondcolor: #293439;
+	--ion-color-secondcolor-rgb: 41,52,57;
+	--ion-color-secondcolor-contrast: #ffffff;
+	--ion-color-secondcolor-contrast-rgb: 255,255,255;
+	--ion-color-secondcolor-shade: #242e32;
+	--ion-color-secondcolor-tint: #3e484d;
+
+    --ion-color-thirdcolor: #5cc9c3;
+	--ion-color-thirdcolor-rgb: 92,201,195;
+	--ion-color-thirdcolor-contrast: #000000;
+	--ion-color-thirdcolor-contrast-rgb: 0,0,0;
+	--ion-color-thirdcolor-shade: #51b1ac;
+	--ion-color-thirdcolor-tint: #6ccec9;
+
+    --ion-color-fourthcolor: #f9f9f9;
+	--ion-color-fourthcolor-rgb: 249,249,249;
+	--ion-color-fourthcolor-contrast: #000000;
+	--ion-color-fourthcolor-contrast-rgb: 0,0,0;
+	--ion-color-fourthcolor-shade: #dbdbdb;
+	--ion-color-fourthcolor-tint: #fafafa;
+
+    --ion-background-color: white;
+    --ion-tab-bar-background: var(--ion-color-firstcolor);
+    --ion-tab-bar-color: var(--ion-color-thirdcolor);
+    --ion-tab-bar-color-selected: var(--ion-color-fourthcolor);
     --ion-tab-bar-border: 0px;
-    --ion-toolbar-background: rgb(41,52,57);
-    --ion-toolbar-color: rgb(249,249,249);
+    --ion-toolbar-background: var(--ion-color-secondcolor);
+    --ion-toolbar-color: var(--ion-color-fourthcolor);
+    --ion-text-color: var(--ion-color-secondcolor);
+    --ion-card-background: white; 
+    --ion-card-box-shadow: 2px 2px 5px lightgrey;
+    --ion-searchbar-background: rgb(235, 235, 235); 
+    --ion-searchbar-color: var(--ion-color-secondcolor); 
+
+    --ion-background-color-dark: #1e1e1e;
+    --ion-tab-bar-background-dark: var(--ion-color-firstcolor);
+    --ion-tab-bar-color-dark: var(--ion-color-thirdcolor);
+    --ion-tab-bar-color-selected-dark: var(--ion-color-fourthcolor);
+    --ion-toolbar-background-dark: var(--ion-color-secondcolor);
+    --ion-toolbar-color-dark: var(--ion-color-fourthcolor);
+    --ion-text-color-dark: var(--ion-color-fourthcolor); 
+}
+
+.ion-color-firstcolor {
+	--ion-color-base: var(--ion-color-firstcolor);
+	--ion-color-base-rgb: var(--ion-color-firstcolor-rgb);
+	--ion-color-contrast: var(--ion-color-firstcolor-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-firstcolor-contrast-rgb);
+	--ion-color-shade: var(--ion-color-firstcolor-shade);
+	--ion-color-tint: var(--ion-color-firstcolor-tint);
+}
+
+.ion-color-secondcolor {
+	--ion-color-base: var(--ion-color-secondcolor);
+	--ion-color-base-rgb: var(--ion-color-secondcolor-rgb);
+	--ion-color-contrast: var(--ion-color-secondcolor-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-secondcolor-contrast-rgb);
+	--ion-color-shade: var(--ion-color-secondcolor-shade);
+	--ion-color-tint: var(--ion-color-secondcolor-tint);
+}
+
+.ion-color-thirdcolor {
+	--ion-color-base: var(--ion-color-thirdcolor);
+	--ion-color-base-rgb: var(--ion-color-thirdcolor-rgb);
+	--ion-color-contrast: var(--ion-color-thirdcolor-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-thirdcolor-contrast-rgb);
+	--ion-color-shade: var(--ion-color-thirdcolor-shade);
+	--ion-color-tint: var(--ion-color-thirdcolor-tint);
+}
+
+.ion-color-fourthcolor {
+	--ion-color-base: var(--ion-color-fourthcolor);
+	--ion-color-base-rgb: var(--ion-color-fourthcolor-rgb);
+	--ion-color-contrast: var(--ion-color-fourthcolor-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-fourthcolor-contrast-rgb);
+	--ion-color-shade: var(--ion-color-fourthcolor-shade);
+	--ion-color-tint: var(--ion-color-fourthcolor-tint);
+    --ion-card-background: var(--ion-color-b)
+}
+
+/* This sets a different item background when dark mode is enabled on ios and md */
+.ion-palette-dark {
+    --ion-background-color: var(--ion-background-color-dark);
+    --ion-tab-bar-background: var(--ion-tab-bar-background-dark);
+    --ion-tab-bar-color: var(--ion-tab-bar-color-dark);
+    --ion-tab-bar-color-selected: var(--ion-tab-bar-color-selected-dark);
+    --ion-toolbar-background: var(--ion-toolbar-background-dark);
+    --ion-toolbar-color: var(--ion-toolbar-color-dark);
+    --ion-text-color: var(--ion-text-color-dark);
+    --ion-card-background: black; 
+    --ion-card-box-shadow: 2px 2px 5px rgb(99, 99, 99);
+    --ion-searchbar-background: rgb(235, 235, 235); 
+    --ion-searchbar-color: var(--ion-color-secondcolor); 
 }

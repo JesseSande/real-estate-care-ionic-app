@@ -1,41 +1,59 @@
 /*Opmaak cards, gebruikt in de 4 componenten Afgerond.vue, Instellingen.vue, Kennisbase.vue en Toegewezen.vue.*/
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 325px;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 2px 2px 5px lightgrey;
-  text-decoration: none;
-}
 
-.icon {
-  font-size: 75px;
-  color: rgb(41,52,57);
-}
-  
-h1, h2, h3, h4, h5, h6, p {
-  color: rgb(41,52,57);
-}
-
+/*HTML elements*/
 p {
   margin: 0 0 20px 0;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: normal;
 }
 
 h1 {
-  margin: 20px 0;
+  margin: 1.25rem 0;
 }
 
 h2 {
-  margin: 20px 0;
+  margin: 1.25rem 0;
+  color: var(--ion-color-myteal);
 }
 
-ion-content {
-  --padding-start: 20px;
-  --padding-end: 20px;
+hr {
+  margin: 1em auto;
+  border-top: 1px solid var(--ion-color-firstcolor);
 }
+
+/*Ionic elements*/
+ion-content {
+  --padding-start: 1.25rem;
+  --padding-end: 1.25rem;
+}
+
+ion-toggle {
+  --track-background-checked: var(--ion-color-firstcolor);
+}
+
+/*Classes*/
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--ion-card-background);
+  box-shadow: var(--ion-card-box-shadow);
+  text-decoration: none;
+}
+
+.icon {
+  font-size: 4.6875rem;
+  color: var(--ion-text-color);
+}
+
+.visibleButton {
+  --background: var(--ion-color-firstcolor);
+  --background-activated: var(--ion-color-firstcolor);
+  --background-focused: var(--ion-color-firstcolor);
+}
+
