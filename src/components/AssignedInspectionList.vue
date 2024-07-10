@@ -1,22 +1,20 @@
-/* Code in template en in script m.b.v. Chat-GPT4o */
-
 <template>
     <div>
-        <h1>Uitgevoerde inspecties</h1>
+        <h1>Toegewezen inspecties</h1>
         <ul>
             <li v-for="inspection in sortedInspections" :key="inspection.id" @click="selectInspection(inspection)">
                 <strong>{{ inspection.date.toLocaleString() }}</strong> - {{ inspection.location }} - {{ inspection.type }}
             </li>
         </ul>
-        <InspectionDetails v-if="selectedInspection" :inspection="selectedInspection" />
+        <AssignedInspectionDetails v-if="selectedInspection" :inspection="selectedInspection" />
     </div>
 </template>
 
 <script setup>
     import { ref, computed, onMounted } from 'vue';
-    import { fetchInspections } from '@/services/inspectionService';
+    import { fetchAssignedInspections } from '@/services/inspectionService';
     import Inspection from '@/models/Inspection';
-    import InspectionDetails from '@/components/InspectionDetails.vue';
+    import AssignedInspectionDetails from '@/components/AssignedInspectionDetails.vue';
 
     const inspections = ref([]);
     const selectedInspection = ref(null);
@@ -26,7 +24,7 @@
     );
 
     onMounted(async () => {
-        const data = await fetchInspections();
+        const data = await fetchAssignedInspections();
         if (Array.isArray(data)) {
             inspections.value = data.map(item => new Inspection(item));
         } else {
