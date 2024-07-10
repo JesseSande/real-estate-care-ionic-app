@@ -28,6 +28,3 @@
   @import '../theme/styles.css';
   @import '../theme/variables.css';
 </style>
-
-
-

@@ -39,6 +39,3 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
         color: var(--ion-text-color) !important;
     }
 </style>
-
-
-

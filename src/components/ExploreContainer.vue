@@ -1,3 +1,4 @@
+ExploreContainer.vue:
 <template>
   <div class="grid-container">
     <Toegewezen />

@@ -39,7 +39,7 @@
   const pdfSrc = ref('');
 
   const loadPDF = (path: string) => {
-    console.log(`Loading PDF: ${path}`); // Debug: log the path
+    console.log(Loading PDF: ${path}); // Debug: log the path
     pdfSrc.value = path;
 };
 </script>
