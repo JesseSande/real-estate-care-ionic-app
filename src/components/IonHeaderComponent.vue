@@ -32,7 +32,7 @@
   };
 
   const goToSettings = () => {
-    router.push('/instellingen-details');
+    router.push('/settings-details');
   };
 </script>
 

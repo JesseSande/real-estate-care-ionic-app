@@ -1,14 +1,14 @@
 <template>
-  <router-link to="/afgerond-details" class="card">
-    <ion-icon :icon="checkmarkCircle" class="icon"></ion-icon>
+  <router-link to="/settings-details" class="card">
+    <ion-icon :icon="settings" class="icon"></ion-icon>
     <ion-text>
-      <h2>Afgerond</h2>
+      <h2>Instellingen</h2>
     </ion-text>
   </router-link>
 </template>
 
 <script setup lang="ts">
-  import { checkmarkCircle } from 'ionicons/icons';
+  import { settings } from 'ionicons/icons';
 </script>
 
 <style scoped>

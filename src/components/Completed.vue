@@ -1,14 +1,14 @@
 <template>
-  <router-link to="/kennisbase-details" class="card">
-    <ion-icon :icon="folder" class="icon"></ion-icon>
+  <router-link to="/completed-details" class="card">
+    <ion-icon :icon="checkmarkCircle" class="icon"></ion-icon>
     <ion-text>
-      <h2>Kennisbase</h2>
+      <h2>Afgerond</h2>
     </ion-text>
   </router-link>
 </template>
 
 <script setup lang="ts">
-  import { folder } from 'ionicons/icons';
+  import { checkmarkCircle } from 'ionicons/icons';
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <ion-page>
     <IonHeaderComponent />
     <ion-content>
-      <h1>Kennisbase</h1>
+      <h1>Knowledgebase</h1>
       <ion-list>
         <ion-item button @click="loadPDF('/pdf/case_Real_Estate_Care.pdf')">
           <ion-label>
@@ -33,15 +33,14 @@
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
-  //M.b.v. ChatGPT4o
   import { ref } from 'vue';
 
   const pdfSrc = ref('');
 
   const loadPDF = (path: string) => {
-    console.log(Loading PDF: ${path}); // Debug: log the path
+    console.log(`Loading PDF: ${path}`); // Debug: log the path
     pdfSrc.value = path;
-};
+  };
 </script>
 
 <style scoped>

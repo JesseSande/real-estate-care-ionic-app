@@ -35,13 +35,10 @@ import '@ionic/vue/css/palettes/dark.class.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const pinia = createPinia()
-
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
-
-app.use(pinia)
+  .use(router)
+  .use(createPinia());
 
 router.isReady().then(() => {
   app.mount('#app');

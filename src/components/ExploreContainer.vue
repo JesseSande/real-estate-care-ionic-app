@@ -1,10 +1,10 @@
 ExploreContainer.vue:
 <template>
   <div class="grid-container">
-    <Toegewezen />
-    <Afgerond />
-    <Kennisbase />
-    <Instellingen />
+    <Assigned />
+    <Completed />
+    <Knowledgebase />
+    <Settings />
   </div>
 </template>
 
@@ -13,10 +13,10 @@ ExploreContainer.vue:
     name: String,
   });
 
-  import Toegewezen from '@/components/Toegewezen.vue';
-  import Afgerond from '@/components/Afgerond.vue';
-  import Kennisbase from '@/components/Kennisbase.vue';
-  import Instellingen from '@/components/Instellingen.vue';
+  import Assigned from '@/components/Assigned.vue';
+  import Completed from '@/components/Completed.vue';
+  import Knowledgebase from '@/components/Knowledgebase.vue';
+  import Settings from '@/components/Settings.vue';
 </script>
 
 <style scoped>
