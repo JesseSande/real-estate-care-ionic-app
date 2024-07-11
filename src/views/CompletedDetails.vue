@@ -4,7 +4,7 @@
     <ion-content>
       <h1>Afgeronde inspecties</h1>
       <ion-list lines="none">
-        <ion-item v-for="inspection in completedInspections" :key="inspection.id" @click="selectInspection(inspection)">
+        <ion-item detail="true" v-for="inspection in completedInspections" :key="inspection.id" @click="selectInspection(inspection)">
           <ion-label>
             <h2>{{ inspection.date }}</h2>
             <h3>{{ inspection.type }}</h3>

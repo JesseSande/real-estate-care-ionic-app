@@ -35,24 +35,28 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   { //Eerste geschreven m.b.v. ChatGPT, de rest op dezelfde manier zelf toegevoegd.
-    path: '/completed-details',
-    component: () => import('@/views/CompletedDetails.vue')
-  },
-  { 
-    path: '/settings-details',
-    component: () => import('@/views/SettingsDetails.vue')
-  },
-  { 
-    path: '/knowledgebase-details',
-    component: () => import('@/views/KnowledgebaseDetails.vue')
-  },
-  { 
     path: '/assigned-details',
     component: () => import('@/views/AssignedDetails.vue')
   },
   {
+    path: '/assigned-details/:id',
+    component: () => import('@/views/AssignedInspectionDetails.vue')
+  },
+  { 
+    path: '/completed-details',
+    component: () => import('@/views/CompletedDetails.vue')
+  },
+  {
     path: '/notifications-details',
     component: () => import('@/views/NotificationsDetails.vue')
+  },
+  {
+    path: '/settings-details',
+    component: () => import('@/views/SettingsDetails.vue')
+  },
+  {
+    path: '/knowledgebase-details',
+    component: () => import('@/views/KnowledgebaseDetails.vue')
   }
 ];
 

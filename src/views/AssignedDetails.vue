@@ -4,7 +4,7 @@
     <ion-content>
       <h1>Toegewezen inspecties</h1>
       <ion-list lines="none">
-        <ion-item v-for="inspection in assignedInspections" :key="inspection.id" @click="selectInspection(inspection)">
+        <ion-item detail="true" v-for="inspection in assignedInspections" :key="inspection.id" @click="selectInspection(inspection)">
           <ion-label>
             <h2>{{ inspection.date }}</h2>
             <h3>{{ inspection.type }}</h3>
@@ -20,22 +20,22 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import { useInspectionStore } from '@/stores/inspectionStore';
+  import { useRouter } from 'vue-router';
   import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
   const inspectionStore = useInspectionStore();
   const assignedInspections = ref([]);
+  const router = useRouter();
 
   onMounted(async () => {
     await inspectionStore.fetchAssignedInspections();
-    console.log('Fetched Assigned Inspections:', inspectionStore.AssignedInspections);  
     assignedInspections.value = inspectionStore.assignedInspections;
   });
 
   const selectInspection = (inspection) => {
-    console.log('Selected inspection:', inspection);
-    // Hier kun je de logica toevoegen om de inspectiedetails weer te geven
+    router.push(`/assigned-details/${inspection.id}`);
   };
 </script>
 
