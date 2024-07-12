@@ -2,7 +2,7 @@
   <ion-page>
     <IonHeaderComponent />
     <ion-content>
-      <h1>Knowledgebase</h1>
+      <h1>Kennisbase</h1>
       <ion-list>
         <ion-item button @click="loadPDF('/pdf/case_Real_Estate_Care.pdf')">
           <ion-label>
