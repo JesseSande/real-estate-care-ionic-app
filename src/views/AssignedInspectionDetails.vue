@@ -380,6 +380,24 @@ onMounted(() => {
         installationInspection: false,
         modificationInventory: false
     };
+
+    // Vink de juiste optie aan op basis van het type inspectie
+    switch (inspection.value.type) {
+        case 'schade':
+            options.value.damageRecording = true;
+            break;
+        case 'onderhoud':
+            options.value.maintenanceRecording = true;
+            break;
+        case 'installatie':
+            options.value.installationInspection = true;
+            break;
+        case 'modificatie':
+            options.value.modificationInventory = true;
+            break;
+        default:
+            break;
+    }
 });
 
 const takePhoto = async () => {
