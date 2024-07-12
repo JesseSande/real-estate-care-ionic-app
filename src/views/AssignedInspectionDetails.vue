@@ -88,12 +88,11 @@
                             <!-- Bewijsmateriaal (foto) uploaden (button met keuze foto maken of uploaden, niet verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Bewijsmateriaal</ion-label>
-                                <ion-button class="visibleButton" @click="presentPhotoOptions">Kies foto</ion-button>
-                                <input type="file" ref="fileInput" @change="handleFileUpload" accept="image/*" style="display: none;" />
+                                <ion-button class="visibleButton" @click="presentPhotoOptions('damageRecording')">Maak of upload een foto</ion-button>
                                 <ul>
-                                    <li v-for="(photo, index) in photos" :key="index">
+                                    <li v-for="(photo, index) in photos.damageRecording" :key="index">
                                         {{ photo.fileName }}
-                                        <ion-button fill="clear" @click="confirmDeletePhoto(index)">
+                                        <ion-button fill="clear" @click="confirmDeletePhoto('damageRecording', index)">
                                             <ion-icon :icon="trash"></ion-icon>
                                         </ion-button>
                                     </li>
@@ -153,7 +152,18 @@
                             </ion-item>
 
                             <!-- Bewijsmateriaal (foto) uploaden (button met keuze foto maken of uploaden, niet verplicht) -->
-                            
+                            <ion-item>
+                                <ion-label position="stacked">Bewijsmateriaal</ion-label>
+                                <ion-button class="visibleButton" @click="presentPhotoOptions('maintenanceRecording')">Maak of upload een foto</ion-button>
+                                <ul>
+                                    <li v-for="(photo, index) in photos.maintenanceRecording" :key="index">
+                                        {{ photo.fileName }}
+                                        <ion-button fill="clear" @click="confirmDeletePhoto('maintenanceRecording', index)">
+                                            <ion-icon :icon="trash"></ion-icon>
+                                        </ion-button>
+                                    </li>
+                                </ul>
+                            </ion-item>
                         </div>
                 
 
@@ -216,7 +226,18 @@
                             </ion-item>
 
                             <!-- Bewijsmateriaal (foto) uploaden (button met keuze foto maken of uploaden, niet verplicht) -->
-                                                        
+                            <ion-item>
+                                <ion-label position="stacked">Bewijsmateriaal</ion-label>
+                                <ion-button class="visibleButton" @click="presentPhotoOptions('installationInspection')">Maak of upload een foto</ion-button>
+                                <ul>
+                                    <li v-for="(photo, index) in photos.installationInspection" :key="index">
+                                        {{ photo.fileName }}
+                                        <ion-button fill="clear" @click="confirmDeletePhoto('installationInspection', index)">
+                                            <ion-icon :icon="trash"></ion-icon>
+                                        </ion-button>
+                                    </li>
+                                </ul>
+                            </ion-item>                            
                         </div>
 
 
@@ -282,16 +303,24 @@
                             </ion-item>
 
                             <!-- Bewijsmateriaal (foto) uploaden (button met keuze foto maken of uploaden, niet verplicht) -->
-                            
+                            <ion-item>
+                                <ion-label position="stacked">Bewijsmateriaal</ion-label>
+                                <ion-button class="visibleButton" @click="presentPhotoOptions('modificationInventory')">Maak of upload een foto</ion-button>
+                                <ul>
+                                    <li v-for="(photo, index) in photos.modificationInventory" :key="index">
+                                        {{ photo.fileName }}
+                                        <ion-button fill="clear" @click="confirmDeletePhoto('modificationInventory', index)">
+                                            <ion-icon :icon="trash"></ion-icon>
+                                        </ion-button>
+                                    </li>
+                                </ul>
+                            </ion-item>
                         </div>
 
                     </ion-list>                        
                 </div>
                 <ion-button class="visibleButton" @click="completeInspection">Inspectie afronden</ion-button>
             </div>
-            
-            <!-- Actieblad voor het kiezen van foto-opties -->
-            <ion-action-sheet :is-open="showActionSheet" @didDismiss="showActionSheet = false" :buttons="actionSheetButtons"></ion-action-sheet>
 
             <!-- Bevestigingspopup voor het verwijderen van foto's -->
             <ion-alert
@@ -332,17 +361,22 @@ import {
     IonIcon 
 } from '@ionic/vue';
 import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-import IonTabsComponent from '@/components/IonTabsComponent.vue';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 const route = useRoute();
 const inspectionStore = useInspectionStore();
 const inspection = ref(null);
-const photos = ref([]);
 const showActionSheet = ref(false);
-const fileInput = ref(null);
 const showDeleteAlert = ref(false);
 const deleteIndex = ref(null);
+const currentCategory = ref(null);
+
+const photos = ref({
+    damageRecording: [],
+    maintenanceRecording: [],
+    installationInspection: [],
+    modificationInventory: []
+});
 
 const options = ref(null);
 const inspectionDetails = ref({
@@ -371,9 +405,8 @@ const inspectionDetails = ref({
 onMounted(() => {
     const id = route.params.id;
     inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
-    console.log('Selected inspection:', inspection.value);  // Voor debugging
+    console.log('Selected inspection:', inspection.value);
 
-    // Initialiseer options nadat de inspectie is gevonden
     options.value = {
         damageRecording: false,
         maintenanceRecording: false,
@@ -381,7 +414,6 @@ onMounted(() => {
         modificationInventory: false
     };
 
-    // Vink de juiste optie aan op basis van het type inspectie
     switch (inspection.value.type) {
         case 'schade':
             options.value.damageRecording = true;
@@ -408,7 +440,7 @@ const takePhoto = async () => {
             quality: 90,
         });
         const fileName = `photo_${Date.now()}.jpeg`;
-        photos.value.push({ fileName, webPath: image.dataUrl });
+        photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
         console.log('Photo taken:', image);
     } catch (error) {
         if (error.message !== 'User cancelled photos app') {
@@ -417,31 +449,9 @@ const takePhoto = async () => {
     }
 };
 
-const uploadPhoto = () => {
-    fileInput.value.click();
-};
-
-const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        const fileName = file.name;
-        photos.value.push({ fileName, webPath: e.target.result });
-        resetFileInput();
-    };
-    reader.readAsDataURL(file);
-};
-
-const resetFileInput = () => {
-    fileInput.value.value = null;
-};
-
-const triggerFileInput = () => {
-    uploadPhoto();
-};
-
-const presentPhotoOptions = () => {
-    showActionSheet.value = true;
+const presentPhotoOptions = (category) => {
+    currentCategory.value = category;
+    takePhoto();
 };
 
 const alertButtons = [
@@ -450,7 +460,7 @@ const alertButtons = [
         role: 'cancel',
         handler: () => {
             console.log('Geannuleerd');
-            showDeleteAlert.value = false;  // Add this line to reset the alert state
+            showDeleteAlert.value = false;  // Reset the alert state
         },
     },
     {
@@ -462,14 +472,15 @@ const alertButtons = [
     },
 ];
 
-const confirmDeletePhoto = (index) => {
+const confirmDeletePhoto = (category, index) => {
+    currentCategory.value = category;
     deleteIndex.value = index;
     showDeleteAlert.value = true;
 };
 
 const deletePhoto = () => {
     if (deleteIndex.value !== null) {
-        photos.value.splice(deleteIndex.value, 1);
+        photos.value[currentCategory.value].splice(deleteIndex.value, 1);
         deleteIndex.value = null;
         showDeleteAlert.value = false;
     }
@@ -483,19 +494,12 @@ const actionSheetButtons = [
         }
     },
     {
-        text: 'Upload foto',
-        handler: () => {
-            triggerFileInput();
-        }
-    },
-    {
         text: 'Annuleer',
         role: 'cancel'
     }
 ];
 
 const completeInspection = () => {
-    // Logica om de inspectie als afgerond te markeren
     alert('Inspectie afgerond!');
 };
 </script>

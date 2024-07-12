@@ -27,7 +27,7 @@ export const useInspectionStore = defineStore('inspection', {
       try {
         const response = await fetch('https://my-json-server.typicode.com/JesseSande/REC-inspections-database/assignedInspections');
         const data = await response.json();
-        console.log('Assigned Inspections:', data);  // Voeg deze regel toe
+        console.log('Assigned Inspections:', data);  
         this.assignedInspections = data;
       } catch (error) {
         console.error('Error fetching assigned inspections:', error);
@@ -37,7 +37,7 @@ export const useInspectionStore = defineStore('inspection', {
       try {
         const response = await fetch('https://my-json-server.typicode.com/JesseSande/REC-inspections-database/completedInspections');
         const data = await response.json();
-        console.log('Completed Inspections:', data);  // Voeg deze regel toe
+        console.log('Completed Inspections:', data);  
         this.completedInspections = data;
       } catch (error) {
         console.error('Error fetching completed inspections:', error);
