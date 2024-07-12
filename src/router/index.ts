@@ -42,9 +42,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/assigned-details/:id',
     component: () => import('@/views/AssignedInspectionDetails.vue')
   },
-  { 
+  {
     path: '/completed-details',
     component: () => import('@/views/CompletedDetails.vue')
+  },
+  {
+    path: '/completed-details/:id',
+    component: () => import('@/views/CompletedInspectionDetails.vue')
   },
   {
     path: '/notifications-details',

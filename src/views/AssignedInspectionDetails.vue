@@ -13,7 +13,6 @@
                     <!-- Opties voor inspectie -->
                     <ion-list>
 
-
                         <!-- Schade opnemen -->
                         <ion-item>
                             <ion-checkbox v-model="options.damageRecording" slot="start"></ion-checkbox>
@@ -319,7 +318,7 @@
 
                     </ion-list>                        
                 </div>
-                <ion-button class="visibleButton" @click="completeInspection">Inspectie afronden</ion-button>
+                <ion-button class="visibleButton" @click="confirmCompleteInspection">Inspectie afronden</ion-button>
             </div>
 
             <!-- Bevestigingspopup voor het verwijderen van foto's -->
@@ -327,7 +326,15 @@
                 :is-open="showDeleteAlert"
                 header="Foto verwijderen"
                 message="Weet je zeker dat je deze foto wilt verwijderen?"
-                :buttons="alertButtons"
+                :buttons="alertCancelConfirmButtons"
+            ></ion-alert>
+
+            <!-- Bevestigingspopup voor het afronden van de inspectie -->
+            <ion-alert
+                :is-open="showCompleteAlert"
+                header="Inspectie afgerond"
+                message="De inspectie is succesvol afgerond."
+                :buttons="alertOkButton"
             ></ion-alert>
         </ion-content>
     <!--<IonTabsComponent />-->
@@ -335,173 +342,189 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { useInspectionStore } from '@/stores/inspectionStore';
-import { ImageOutline, trash } from 'ionicons/icons';
-import { 
-    IonPage, 
-    IonContent, 
-    IonList, 
-    IonItem, 
-    IonLabel, 
-    IonCheckbox, 
-    IonButton, 
-    IonInput, 
-    IonSelect, 
-    IonSelectOption, 
-    IonDatetime,
-    IonDatetimeButton, 
-    IonModal,
-    IonTextarea, 
-    IonRadio, 
-    IonRadioGroup,
-    IonActionSheet,
-    IonAlert,
-    IonIcon 
-} from '@ionic/vue';
-import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+    import { ref, onMounted } from 'vue';
+    import { useRoute, useRouter } from 'vue-router';
+    import { useInspectionStore } from '@/stores/inspectionStore';
+    import { ImageOutline, trash } from 'ionicons/icons';
+    import { 
+        IonPage, 
+        IonContent, 
+        IonList, 
+        IonItem, 
+        IonLabel, 
+        IonCheckbox, 
+        IonButton, 
+        IonInput, 
+        IonSelect, 
+        IonSelectOption, 
+        IonDatetime,
+        IonDatetimeButton, 
+        IonModal,
+        IonTextarea, 
+        IonRadio, 
+        IonRadioGroup,
+        IonAlert,
+        IonIcon 
+    } from '@ionic/vue';
+    import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
+    import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-const route = useRoute();
-const inspectionStore = useInspectionStore();
-const inspection = ref(null);
-const showActionSheet = ref(false);
-const showDeleteAlert = ref(false);
-const deleteIndex = ref(null);
-const currentCategory = ref(null);
+    const route = useRoute();
+    const router = useRouter();
+    const inspectionStore = useInspectionStore();
+    const inspection = ref(null);
+    const showCompleteAlert = ref(false);
+    const showDeleteAlert = ref(false);
+    const deleteIndex = ref(null);
+    const currentCategory = ref(null);
 
-const photos = ref({
-    damageRecording: [],
-    maintenanceRecording: [],
-    installationInspection: [],
-    modificationInventory: []
-});
+    const photos = ref({
+        damageRecording: [],
+        maintenanceRecording: [],
+        installationInspection: [],
+        modificationInventory: []
+    });
 
-const options = ref(null);
-const inspectionDetails = ref({
-    damageLocation: '',
-    newDamage: false,
-    damageType: '',
-    damageDate: '',
-    immediateActionRequired: false,
-    damageDescription: '',
-    maintenanceLocation: '',
-    maintenanceType: '',
-    maintenanceImmediateActionRequired: false,
-    maintenanceCostEstimate: '',
-    installationLocation: '',
-    installationType: '',
-    reportedMalfunction: '',
-    approved: false,
-    installationComments: '',
-    modificationLocation: '',
-    performedBy: '',
-    modificationDescription: '',
-    actionRequired: '',
-    modificationComments: ''
-});
-
-onMounted(() => {
-    const id = route.params.id;
-    inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
-    console.log('Selected inspection:', inspection.value);
-
-    options.value = {
-        damageRecording: false,
-        maintenanceRecording: false,
-        installationInspection: false,
-        modificationInventory: false
+    const fileInputs = {
+        damageRecording: ref(null),
+        maintenanceRecording: ref(null),
+        installationInspection: ref(null),
+        modificationInventory: ref(null)
     };
 
-    switch (inspection.value.type) {
-        case 'schade':
-            options.value.damageRecording = true;
-            break;
-        case 'onderhoud':
-            options.value.maintenanceRecording = true;
-            break;
-        case 'installatie':
-            options.value.installationInspection = true;
-            break;
-        case 'modificatie':
-            options.value.modificationInventory = true;
-            break;
-        default:
-            break;
-    }
-});
+    const options = ref(null);
+    const inspectionDetails = ref({
+        damageLocation: '',
+        newDamage: false,
+        damageType: '',
+        damageDate: '',
+        immediateActionRequired: false,
+        damageDescription: '',
+        maintenanceLocation: '',
+        maintenanceType: '',
+        maintenanceImmediateActionRequired: false,
+        maintenanceCostEstimate: '',
+        installationLocation: '',
+        installationType: '',
+        reportedMalfunction: '',
+        approved: false,
+        installationComments: '',
+        modificationLocation: '',
+        performedBy: '',
+        modificationDescription: '',
+        actionRequired: '',
+        modificationComments: ''
+    });
 
-const takePhoto = async () => {
-    try {
-        const image = await Camera.getPhoto({
-            resultType: CameraResultType.DataUrl,
-            source: CameraSource.Camera,
-            quality: 90,
-        });
-        const fileName = `photo_${Date.now()}.jpeg`;
-        photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
-        console.log('Photo taken:', image);
-    } catch (error) {
-        if (error.message !== 'User cancelled photos app') {
-            console.error('Error taking photo:', error);
+    onMounted(() => {
+        const id = route.params.id;
+        inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
+        console.log('Selected inspection:', inspection.value);
+
+        options.value = {
+            damageRecording: false,
+            maintenanceRecording: false,
+            installationInspection: false,
+            modificationInventory: false
+        };
+
+        switch (inspection.value.type) {
+            case 'schade':
+                options.value.damageRecording = true;
+                break;
+            case 'onderhoud':
+                options.value.maintenanceRecording = true;
+                break;
+            case 'installatie':
+                options.value.installationInspection = true;
+                break;
+            case 'modificatie':
+                options.value.modificationInventory = true;
+                break;
+            default:
+                break;
         }
-    }
-};
+    });
 
-const presentPhotoOptions = (category) => {
-    currentCategory.value = category;
-    takePhoto();
-};
-
-const alertButtons = [
-    {
-        text: 'Annuleer',
-        role: 'cancel',
-        handler: () => {
-            console.log('Geannuleerd');
-            showDeleteAlert.value = false;  // Reset the alert state
-        },
-    },
-    {
-        text: 'Verwijder',
-        role: 'confirm',
-        handler: () => {
-            deletePhoto();
-        },
-    },
-];
-
-const confirmDeletePhoto = (category, index) => {
-    currentCategory.value = category;
-    deleteIndex.value = index;
-    showDeleteAlert.value = true;
-};
-
-const deletePhoto = () => {
-    if (deleteIndex.value !== null) {
-        photos.value[currentCategory.value].splice(deleteIndex.value, 1);
-        deleteIndex.value = null;
-        showDeleteAlert.value = false;
-    }
-};
-
-const actionSheetButtons = [
-    {
-        text: 'Maak foto',
-        handler: () => {
-            takePhoto();
+    const takePhoto = async () => {
+        try {
+            const image = await Camera.getPhoto({
+                resultType: CameraResultType.DataUrl,
+                source: CameraSource.Camera,
+                quality: 90,
+            });
+            const fileName = `photo_${Date.now()}.jpeg`;
+            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
+            console.log('Photo taken:', image);
+        } catch (error) {
+            if (error.message !== 'User cancelled photos app') {
+                console.error('Error taking photo:', error);
+            }
         }
-    },
-    {
-        text: 'Annuleer',
-        role: 'cancel'
-    }
-];
+    };
 
-const completeInspection = () => {
-    alert('Inspectie afgerond!');
-};
+    const handleFileUpload = (event, category) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const fileName = file.name;
+            photos.value[category].push({ fileName, webPath: e.target.result });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const presentPhotoOptions = (category) => {
+        currentCategory.value = category;
+        takePhoto();
+    };
+
+    const alertOkButton = [
+        {
+            text: 'OK',
+            role: 'confirm',
+            handler: () => {
+                console.log('OK clicked');
+                router.push('/completed-details');
+            }
+        }
+    ];
+
+    const alertCancelConfirmButtons = [
+        {
+            text: 'Annuleer',
+            role: 'cancel',
+            handler: () => {
+                console.log('Geannuleerd');
+            },
+        },
+        {
+            text: 'Verwijder',
+            role: 'confirm',
+            handler: () => {
+                deletePhoto();
+            },
+        },
+    ];
+
+    const confirmDeletePhoto = (category, index) => {
+        currentCategory.value = category;
+        deleteIndex.value = index;
+        showDeleteAlert.value = true;
+    };
+
+    const deletePhoto = () => {
+        if (deleteIndex.value !== null) {
+            photos.value[currentCategory.value].splice(deleteIndex.value, 1);
+            deleteIndex.value = null;
+            showDeleteAlert.value = false;
+        }
+    };
+
+    const confirmCompleteInspection = () => {
+        console.log('Confirm complete inspection clicked');
+        inspectionStore.completeInspection(inspection.value.id);
+        showCompleteAlert.value = true;
+    };
 </script>
 
 <style scoped>
@@ -531,7 +554,7 @@ const completeInspection = () => {
         border: 2px solid var(--ion-color-firstcolor);
     }
 
-    /*Radio stylen zodat het ook lijkt op een radio button. O.b.v. https://ionicframework.com/docs/api/radio */
+    /*Radio stijlen zodat het ook lijkt op een radio button. O.b.v. https://ionicframework.com/docs/api/radio */
     ion-radio {
         --border-radius: 4px;
         --inner-border-radius: 4px;
@@ -552,7 +575,7 @@ const completeInspection = () => {
         border-color: var(--ion-color-firstcolor);
     }
 
-    /*Datum invoer stylen*/
+    /*Datum invoer stijlen*/
     .visibleDatetimeButton {
         padding: 1rem;
     }

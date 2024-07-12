@@ -3,8 +3,11 @@
     <IonHeaderComponent />
     <ion-content>
       <h1>Afgeronde inspecties</h1>
-      <ion-list lines="none">
-        <ion-item detail="true" v-for="inspection in completedInspections" :key="inspection.id" @click="selectInspection(inspection)">
+      <div v-if="sortedCompletedInspections.length === 0">
+        <p>Er zijn geen afgeronde inspecties.</p>
+      </div>
+      <ion-list lines="none" v-else>
+        <ion-item detail="true" v-for="inspection in sortedCompletedInspections" :key="inspection.id" @click="selectInspection(inspection)">
           <ion-label>
             <h2>{{ inspection.date }}</h2>
             <h3>{{ inspection.type }}</h3>
@@ -18,24 +21,21 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { computed } from 'vue';
+  import { useRouter } from 'vue-router';
   import { useInspectionStore } from '@/stores/inspectionStore';
   import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import IonTabsComponent from '@/components/IonTabsComponent.vue';
 
+  const router = useRouter();
   const inspectionStore = useInspectionStore();
-  const completedInspections = ref([]);
 
-  onMounted(async () => {
-    await inspectionStore.fetchCompletedInspections();
-    console.log('Fetched Completed Inspections:', inspectionStore.completedInspections);  
-    completedInspections.value = inspectionStore.completedInspections;
+  const sortedCompletedInspections = computed(() => {
+    return [...inspectionStore.completedInspections].sort((a, b) => new Date(b.date) - new Date(a.date));
   });
 
   const selectInspection = (inspection) => {
-    console.log('Selected inspection:', inspection);
-    // Hier kun je de logica toevoegen om de inspectiedetails weer te geven
+    router.push(`/completed-details/${inspection.id}`);
   };
 </script>
 

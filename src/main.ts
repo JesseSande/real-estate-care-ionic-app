@@ -10,8 +10,9 @@ import { Camera } from '@capacitor/camera';
 
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
-defineCustomElements(window);
+import { useInspectionStore } from '@/stores/inspectionStore'; 
 
+defineCustomElements(window);
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -43,11 +44,16 @@ import '@ionic/vue/css/palettes/dark.class.css';
 /* Theme variables */
 import './theme/variables.css';
 
+const pinia = createPinia();
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(createPinia());
+  .use(pinia);
 
-router.isReady().then(() => {
+router.isReady().then(async () => {
+  const store = useInspectionStore();
+  await store.resetData(); // Initialiseer de standaardgegevens
+  await store.fetchAssignedInspections(); // Haal daarna de toegewezen inspecties op via de externe API
   app.mount('#app');
 });
