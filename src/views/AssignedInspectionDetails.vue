@@ -197,10 +197,10 @@
                                 <ion-textarea v-model="inspectionDetails.reportedMalfunction" placeholder="Voer gemelde storingen in" required></ion-textarea>
                             </ion-item>
 
-                            <!-- Testprocedure (link naar pdf) -->
+                            <!-- Testprocedure (link naar knowledgebase item) -->
                             <ion-item>
                                 <ion-label position="stacked">Testprocedure</ion-label>
-                                <ion-button class="visibleButton" href="path/to/testprocedure.pdf" target="_blank">Bekijk testprocedure</ion-button>
+                                <ion-button class="visibleButton" @click="goToKnowledgebaseItem('testProcedure')">Bekijk testprocedure</ion-button>
                             </ion-item>
 
                             <!-- Goedgekeurd (radio ja/nee, verplicht) -->
@@ -525,6 +525,10 @@
         console.log('Confirm complete inspection clicked');
         inspectionStore.completeInspection(inspection.value.id);
         showCompleteAlert.value = true;
+    };
+
+    const goToKnowledgebaseItem = (id) => {
+        router.push(`/knowledgebase-details/${id}`);
     };
 </script>
 

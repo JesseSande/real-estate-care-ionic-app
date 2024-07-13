@@ -22,8 +22,10 @@
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
     "ionicons": "^7.0.0",
+    "pdfjs-dist": "^4.4.168",
     "pinia": "^2.1.7",
     "vue": "^3.3.0",
+    "vue-pdf-embed": "^2.0.4",
     "vue-router": "^4.2.0"
   },
   "devDependencies": {

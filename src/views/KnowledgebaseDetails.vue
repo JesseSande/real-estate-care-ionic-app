@@ -1,45 +1,39 @@
 <template>
   <ion-page>
     <IonHeaderComponent />
-    <ion-content>
+    <ion-content :fullscreen="true">
       <h1>Kennisbase</h1>
-      <ion-list>
-        <ion-item button @click="loadPDF('/pdf/case_Real_Estate_Care.pdf')">
+      <ion-list lines="none">
+        <ion-item detail="true" v-for="item in knowledgebaseItems" :key="item.id" @click="selectItem(item)">
           <ion-label>
-            <h3>Case Real Estate Care</h3>
-          </ion-label>
-        </ion-item>
-        <ion-item button @click="loadPDF('/pdf/huisstijl_REC.pdf')">
-          <ion-label>
-            <h3>Huisstijl REC</h3>
-          </ion-label>
-        </ion-item>
-        <ion-item button @click="loadPDF('/pdf/logo_REC.pdf')">
-          <ion-label>
-            <h3>Logo REC</h3>
+            <h2>{{ item.title }}</h2>
           </ion-label>
         </ion-item>
       </ion-list>
-      <div v-if="pdfSrc" class="pdf-container">
-        <iframe :src="pdfSrc" width="100%" height="600px"></iframe>
-      </div>
     </ion-content>
     <IonTabBarComponent />
   </ion-page>
 </template>
 
 <script setup lang="ts">
+  import { ref, computed, onMounted } from 'vue';
+  import { useKnowledgebaseStore } from '@/stores/knowledgebaseStore';
+  import { useRouter } from 'vue-router';
   import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
-  import { ref } from 'vue';
+  const knowledgebaseStore = useKnowledgebaseStore();
+  const router = useRouter();
 
-  const pdfSrc = ref('');
+  onMounted(async () => {
+    await knowledgebaseStore.fetchKnowledgebaseItems();
+  });
 
-  const loadPDF = (path: string) => {
-    console.log(`Loading PDF: ${path}`); // Debug: log the path
-    pdfSrc.value = path;
+  const knowledgebaseItems = computed(() => knowledgebaseStore.items);
+
+  const selectItem = (item) => {
+    router.push(`/knowledgebase-details/${item.id}`);
   };
 </script>
 
@@ -47,7 +41,19 @@
   @import '../theme/styles.css';
   @import '../theme/variables.css';
 
-  .pdf-container {
-    margin-top: 1.25rem;
+  h1 {
+    margin: 20px 0;
+  }
+
+  ion-item {
+    margin: 0.625rem 0;
+    padding: 0.625rem;
+    border: 1px solid var(--ion-color-firstcolor);
+    border-radius: 4px; 
+  }
+  
+  ion-label h2 {
+    color: var(--ion-color-secondcolor);
+    margin: 0;
   }
 </style>
