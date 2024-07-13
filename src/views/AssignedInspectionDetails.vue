@@ -337,7 +337,7 @@
                 :buttons="alertOkButton"
             ></ion-alert>
         </ion-content>
-    <!--<IonTabsComponent />-->
+    <IonTabBarComponent />
     </ion-page>
 </template>
 
@@ -367,6 +367,7 @@
         IonIcon 
     } from '@ionic/vue';
     import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
+    import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
     import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
     const route = useRoute();

@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <IonHeaderComponent />
-    <ion-content>
+    <ion-content :fullscreen="true">
       <h1>Toegewezen inspecties</h1>
       <ion-list lines="none">
         <ion-item detail="true" v-for="inspection in assignedInspections" :key="inspection.id" @click="selectInspection(inspection)">
@@ -13,7 +13,7 @@
         </ion-item>
       </ion-list>
     </ion-content>
-    <!--<IonTabsComponent />-->
+    <IonTabBarComponent />
   </ion-page>
 </template>
 
@@ -21,9 +21,9 @@
   import { ref, onMounted } from 'vue';
   import { useInspectionStore } from '@/stores/inspectionStore';
   import { useRouter } from 'vue-router';
-  import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
+  import { IonPage, IonContent, IonList, IonItem, IonLabel, IonToolbar, IonButtons, IonBackButton } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import IonTabsComponent from '@/components/IonTabsComponent.vue';
+  import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
   const inspectionStore = useInspectionStore();
   const assignedInspections = ref([]);

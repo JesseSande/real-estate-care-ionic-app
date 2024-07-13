@@ -24,14 +24,14 @@
         <iframe :src="pdfSrc" width="100%" height="600px"></iframe>
       </div>
     </ion-content>
-    <!--<IonTabsComponent />-->
+    <IonTabBarComponent />
   </ion-page>
 </template>
 
 <script setup lang="ts">
   import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import IonTabsComponent from '@/components/IonTabsComponent.vue';
+  import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
   import { ref } from 'vue';
 

@@ -25,7 +25,7 @@
       <h2>Uitloggen</h2>
       <ion-button class="visibleButton" expand="block" @click="logout">Uitloggen</ion-button>
     </ion-content>
-    <!--<IonTabsComponent />-->
+    <IonTabBarComponent />
   </ion-page>
 </template>
 
@@ -36,6 +36,7 @@
   import type { ToggleCustomEvent } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
+  import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
   const router = useRouter();
 

@@ -13,7 +13,7 @@
                 </div>
             </div>
         </ion-content>
-        <!--<IonTabsComponent />-->
+        <IonTabBarComponent />
     </ion-page>
 </template>
 
@@ -23,6 +23,7 @@
     import { useInspectionStore } from '@/stores/inspectionStore';
     import { IonPage, IonContent } from '@ionic/vue';
     import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
+    import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
     const route = useRoute();
     const inspectionStore = useInspectionStore();

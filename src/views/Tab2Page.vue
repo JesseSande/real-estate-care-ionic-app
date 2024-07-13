@@ -1,16 +1,9 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-title></ion-title>
-      </ion-toolbar>
+      <IonHeaderComponent />
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large"></ion-title>
-        </ion-toolbar>
-      </ion-header>
       <ion-searchbar class="searchBar" placeholder="Zoeken"></ion-searchbar>
     </ion-content>
   </ion-page>
@@ -20,6 +13,7 @@
   import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar } from '@ionic/vue';
   import { notifications, settings } from 'ionicons/icons';
   import { defineComponent } from 'vue';
+  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
 </script>
 
 <style scoped>
@@ -29,5 +23,6 @@
   .searchBar {
     --background: var(--ion-searchbar-background);
     --color: var(--ion-searchbar-color);
+    margin: 0.75rem 0;
 }
 </style>

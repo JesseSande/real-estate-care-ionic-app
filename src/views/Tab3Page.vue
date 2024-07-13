@@ -1,16 +1,9 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-title></ion-title>
-      </ion-toolbar>
+      <IonHeaderComponent />
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large"></ion-title>
-        </ion-toolbar>
-      </ion-header>
       <h1>Informatie</h1>
       <p>Dit is een informatiepagina. 
       Op deze pagina wordt in de uiteindelijke app belangrijke informatie over de app genoemd.
@@ -24,6 +17,7 @@
 <script setup lang="ts">
   import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
   import { notifications, settings } from 'ionicons/icons';
+  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
 </script>
 
 <style scoped>

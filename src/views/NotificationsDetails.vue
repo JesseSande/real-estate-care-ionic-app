@@ -15,7 +15,7 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
                 </ion-item>
             </ion-list>
         </ion-content>
-        <IonTabsComponent />
+        <IonTabBarComponent />
     </ion-page>
 </template>
 
@@ -23,7 +23,7 @@ met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende 
     import { ref } from 'vue';
     import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
     import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-    import IonTabsComponent from '@/components/IonTabsComponent.vue';
+    import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
     const notifications = ref([
         { id: 1, title: 'Melding 1', message: 'Dit is de eerste fictieve melding.' },

@@ -1,13 +1,13 @@
 <template>
   <ion-page>
-    <IonHeaderComponent />
+    <!--<IonHeaderComponent />-->
     <IonTabsComponent />
   </ion-page>
 </template>
 
 <script setup lang="ts">
   import { IonPage } from '@ionic/vue';
-  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
+  //import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
 </script>
 

@@ -13,6 +13,11 @@
         <img @click="goToHome" src="@/assets/logo REC-1.7.png" alt="logo-afbeelding" width="275px">
       </ion-buttons>
     </ion-toolbar>
+    <ion-toolbar class="subHeader">
+      <ion-buttons slot="start">
+        <ion-back-button text="Terug"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
   </ion-header>
 </template>
 
@@ -39,4 +44,12 @@
 <style scoped>
   @import '../theme/styles.css';
   @import '../theme/variables.css';
+
+  ion-toolbar.subHeader {
+    background-color: var(--ion-color-fourthcolor) !important;
+  }
+
+  ion-back-button {
+    padding: 0 0 0 1rem;
+  }
 </style>

@@ -26,7 +26,7 @@ ExploreContainer.vue:
   .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: 90%;
+    height: 95%;
     gap: 1rem;
     padding-top: 1rem;
     text-align: center;
