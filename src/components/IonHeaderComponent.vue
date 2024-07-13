@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
   import { IonHeader, IonToolbar, IonButtons, IonButton, IonBackButton, IonIcon } from '@ionic/vue';
-  import { notifications, settings, caretBack } from 'ionicons/icons';
+  import { notifications, settings } from 'ionicons/icons';
   import { useRouter } from 'vue-router';
 
   const router = useRouter();

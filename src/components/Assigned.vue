@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
   import { clipboard } from 'ionicons/icons';
+  import { IonIcon, IonText } from '@ionic/vue';
 </script>
 
 <style scoped>

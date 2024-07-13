@@ -6,9 +6,7 @@
     <ion-content>
       <h1>Instellingen</h1>
       <h2>Accountgegevens</h2>
-      <ion-avatar>
-        <img alt="Silhouette van het hoofd van een persoon" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
+      <img class="profilePicture" src="@/assets/headshot-silhouette-clipart.png" alt="Profielfoto demo account">
       <h4>Gebruikersnaam</h4>
       <p>Demo Account</p>
       <h4>E-mailadres</h4>
@@ -19,7 +17,14 @@
         <ion-item>
           <ion-toggle :checked="paletteToggle" @ionChange="toggleChange($event)" justify="space-between">Donkere modus</ion-toggle>
         </ion-item>
-        <ion-item :button="true">Meldingen</ion-item>
+        <ion-item id="oopsAlert" button="true">Meldingen</ion-item>
+        <ion-alert
+          trigger="oopsAlert"
+          header="Meldingen"
+          sub-header="Oeps&excl;"
+          message="Deze functionaliteit is nog niet uitgewerkt."
+          :buttons="['OK']"
+      ></ion-alert>
       </ion-list>
       <hr>
       <h2>Uitloggen</h2>
@@ -32,7 +37,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { IonPage, IonContent, IonList, IonItem, IonToggle, IonButton, IonAvatar } from '@ionic/vue';
+  import { IonPage, IonContent, IonList, IonItem, IonToggle, IonButton, IonAlert } from '@ionic/vue';
   import type { ToggleCustomEvent } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
@@ -89,5 +94,10 @@
 
   h2 {
     color: var(--ion-color-firstcolor);
+  }
+
+  .profilePicture {
+    height: 3.75rem;
+    border-radius: 50%;
   }
 </style>

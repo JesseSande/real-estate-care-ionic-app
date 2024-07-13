@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
   import { settings } from 'ionicons/icons';
+  import { IonIcon, IonText } from '@ionic/vue';
 </script>
 
 <style scoped>
