@@ -23,13 +23,13 @@
                             <!-- Locatie (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Locatie</ion-label>
-                                <ion-input v-model="inspectionDetails.damageLocation" placeholder="Voer locatie in" required></ion-input>
+                                <ion-input v-model="inspectionDetails.damageLocation" placeholder="Voer locatie in"></ion-input>
                             </ion-item>
 
                             <!-- Nieuwe schade (radio ja/nee, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Nieuwe schade</ion-label>
-                                <ion-radio-group v-model="inspectionDetails.newDamage" required>
+                                <ion-radio-group v-model="inspectionDetails.newDamage">
                                     <ion-item lines="none">
                                         <ion-label>Ja</ion-label>
                                         <ion-radio slot="start" value="ja"></ion-radio>
@@ -44,7 +44,7 @@
                             <!-- Soort schade (keuzelijst, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Soort schade</ion-label>
-                                <ion-select interface="popover" v-model="inspectionDetails.damageType" placeholder="Selecteer soort schade" required>
+                                <ion-select interface="popover" v-model="inspectionDetails.damageType" placeholder="Selecteer soort schade">
                                     <ion-select-option value="moedwillig">Moedwillig</ion-select-option>
                                     <ion-select-option value="slijtage">Slijtage</ion-select-option>
                                     <ion-select-option value="geweld">Geweld</ion-select-option>
@@ -57,7 +57,7 @@
                             <!-- Datum (input met datum keuze, verplicht) --> 
                             <ion-item>
                                 <ion-label position="stacked">Datum</ion-label>
-                                <ion-datetime-button class="visibleDatetimeButton" datetime="datetime" required></ion-datetime-button>
+                                <ion-datetime-button class="visibleDatetimeButton" datetime="datetime"></ion-datetime-button>
                                 <ion-modal :keep-contents-mounted="true">
                                     <ion-datetime id="datetime"></ion-datetime>
                                 </ion-modal>
@@ -66,7 +66,7 @@
                             <!-- Acute actie vereist (radio ja/nee, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Acute actie vereist</ion-label>
-                                <ion-radio-group v-model="inspectionDetails.immediateActionRequired" required>
+                                <ion-radio-group v-model="inspectionDetails.immediateActionRequired">
                                     <ion-item lines="none">
                                         <ion-label>Ja</ion-label>
                                         <ion-radio slot="start" value="ja"></ion-radio>
@@ -81,7 +81,7 @@
                             <!-- Omschrijving (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Omschrijving</ion-label>
-                                <ion-textarea v-model="inspectionDetails.damageDescription" placeholder="Voer omschrijving in" required></ion-textarea>
+                                <ion-textarea v-model="inspectionDetails.damageDescription" placeholder="Voer omschrijving in"></ion-textarea>
                             </ion-item>
 
                             <!-- Bewijsmateriaal (foto) uploaden (button met keuze foto maken of uploaden, niet verplicht) -->
@@ -110,13 +110,13 @@
                             <!-- Locatie (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Locatie</ion-label>
-                                <ion-input v-model="inspectionDetails.maintenanceLocation" placeholder="Voer locatie in" required></ion-input>
+                                <ion-input v-model="inspectionDetails.maintenanceLocation" placeholder="Voer locatie in"></ion-input>
                             </ion-item>
 
                             <!-- Soort onderhoud (keuzelijst, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Soort onderhoud</ion-label>
-                                <ion-select interface="popover" v-model="inspectionDetails.maintenanceType" placeholder="Selecteer soort onderhoud" required>
+                                <ion-select interface="popover" v-model="inspectionDetails.maintenanceType" placeholder="Selecteer soort onderhoud">
                                     <ion-select-option value="schilderwerk">Schilderwerk</ion-select-option>
                                     <ion-select-option value="houtrot">Houtrot</ion-select-option>
                                     <ion-select-option value="elektra">Elektra</ion-select-option>
@@ -128,7 +128,7 @@
                             <!-- Acute actie vereist (radio ja/nee, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Acute actie vereist</ion-label>
-                                <ion-radio-group v-model="inspectionDetails.maintenanceImmediateActionRequired" required>
+                                <ion-radio-group v-model="inspectionDetails.maintenanceImmediateActionRequired">
                                     <ion-item lines="none">
                                         <ion-label>Ja</ion-label>
                                         <ion-radio slot="start" value="ja"></ion-radio>
@@ -143,7 +143,7 @@
                             <!-- Kostenindicatie (keuzelijst, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Kostenindicatie</ion-label>
-                                <ion-select interface="popover" v-model="inspectionDetails.maintenanceCostEstimate" placeholder="Selecteer kostenindicatie" required>
+                                <ion-select interface="popover" v-model="inspectionDetails.maintenanceCostEstimate" placeholder="Selecteer kostenindicatie">
                                     <ion-select-option value="0-500">0-500</ion-select-option>
                                     <ion-select-option value="500-1500">500-1500</ion-select-option>
                                     <ion-select-option value="1500+">1500+</ion-select-option>
@@ -176,13 +176,13 @@
                             <!-- Locatie (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Locatie</ion-label>
-                                <ion-input v-model="inspectionDetails.installationLocation" placeholder="Voer locatie in" required></ion-input>
+                                <ion-input v-model="inspectionDetails.installationLocation" placeholder="Voer locatie in"></ion-input>
                             </ion-item>
 
                             <!-- Soort installatie (keuzelijst, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Soort installatie</ion-label>
-                                <ion-select interface="popover" v-model="inspectionDetails.installationType" placeholder="Selecteer soort installatie" required>
+                                <ion-select interface="popover" v-model="inspectionDetails.installationType" placeholder="Selecteer soort installatie">
                                     <ion-select-option value="koeling">Koeling</ion-select-option>
                                     <ion-select-option value="verwarming">Verwarming</ion-select-option>
                                     <ion-select-option value="luchtverversing">Luchtverversing</ion-select-option>
@@ -194,7 +194,7 @@
                             <!-- Gemelde storingen (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Gemelde storingen</ion-label>
-                                <ion-textarea v-model="inspectionDetails.reportedMalfunction" placeholder="Voer gemelde storingen in" required></ion-textarea>
+                                <ion-textarea v-model="inspectionDetails.reportedMalfunction" placeholder="Voer gemelde storingen in"></ion-textarea>
                             </ion-item>
 
                             <!-- Testprocedure (link naar knowledgebase item) -->
@@ -206,7 +206,7 @@
                             <!-- Goedgekeurd (radio ja/nee, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Goedgekeurd</ion-label>
-                                <ion-radio-group v-model="inspectionDetails.approved" required>
+                                <ion-radio-group v-model="inspectionDetails.approved">
                                     <ion-item lines="none">
                                         <ion-label>Ja</ion-label>
                                         <ion-radio slot="start" value="ja"></ion-radio>
@@ -250,19 +250,19 @@
                             <!-- Huidige documentatie (link naar pdf) -->
                             <ion-item>
                                 <ion-label position="stacked">Bestaande situatie en gedocumenteerde modificaties</ion-label>
-                                <ion-button class="visibleButton" href="path/to/existingmodifications.pdf" target="_blank">Bekijk documentatie</ion-button>
+                                <ion-button class="visibleButton" href="/pdf/Documentatie_modificatie_Kennedylaan198.pdf" target="_blank">Bekijk documentatie</ion-button>
                             </ion-item>
 
                             <!-- Locatie (tekstveld, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Locatie aangetroffen modificatie</ion-label>
-                                <ion-input v-model="inspectionDetails.modificationLocation" placeholder="Voer locatie in" required></ion-input>
+                                <ion-input v-model="inspectionDetails.modificationLocation" placeholder="Voer locatie in"></ion-input>
                             </ion-item>
 
                             <!-- Uitgevoerd door (radio keuzeopties, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Uitgevoerd door</ion-label>
-                                <ion-radio-group v-model="inspectionDetails.performedBy" required>
+                                <ion-radio-group v-model="inspectionDetails.performedBy">
                                     <ion-item lines="none">
                                         <ion-label>Huurder</ion-label>
                                         <ion-radio slot="start" value="huurder"></ion-radio>
@@ -281,13 +281,13 @@
                             <!-- Beschrijving (tekstveld (area), verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Beschrijving modificatie</ion-label>
-                                <ion-textarea v-model="inspectionDetails.modificationDescription" placeholder="Voer beschrijving in" required></ion-textarea>
+                                <ion-textarea v-model="inspectionDetails.modificationDescription" placeholder="Voer beschrijving in"></ion-textarea>
                             </ion-item>
 
                             <!-- Te ondernemen actie (keuzelijst, verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Te ondernemen actie</ion-label>
-                                <ion-select interface="popover" v-model="inspectionDetails.actionRequired" placeholder="Selecteer actie" required>
+                                <ion-select interface="popover" v-model="inspectionDetails.actionRequired" placeholder="Selecteer actie">
                                     <ion-select-option value="accepteren">Accepteren</ion-select-option>
                                     <ion-select-option value="laten keuren">Laten keuren</ion-select-option>
                                     <ion-select-option value="laten verwijderen">Laten verwijderen</ion-select-option>

@@ -8,28 +8,30 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <img class="logoLogin" src="@/assets/logo REC-1.6.png" alt="logo-afbeelding" width=350px>
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <ion-item>
-                            <ion-input v-model="username" type="text" label="Gebruikersnaam" label-placement="stacked" placeholder="Vul gebruikersnaam in"></ion-input>
-                        </ion-item>                   
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <ion-item>
-                            <ion-input v-model="password" type="password" label="Wachtwoord" label-placement="stacked" placeholder="Vul wachtwoord in"></ion-input>
-                        </ion-item>                   
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <ion-button class="visibleButton" expand="block" @click="login">Inloggen</ion-button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <img class="logoLogin" src="@/assets/logo REC-1.6.png" alt="logo-afbeelding" width="350px">
+            <div class="centerContainer">
+                <ion-grid class="loginGrid" :fixed="true">
+                    <ion-row class="loginGridRow">
+                        <ion-col>
+                            <ion-item>
+                                <ion-input v-model="username" type="text" label="Gebruikersnaam" label-placement="stacked" placeholder="Vul gebruikersnaam in"></ion-input>
+                            </ion-item>                   
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="loginGridRow">
+                        <ion-col>
+                            <ion-item>
+                                <ion-input v-model="password" type="password" label="Wachtwoord" label-placement="stacked" placeholder="Vul wachtwoord in"></ion-input>
+                            </ion-item>                   
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="loginGridRow">
+                        <ion-col>
+                            <ion-button class="visibleButton" expand="block" @click="login">Inloggen</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
             <ion-alert 
                 :is-open="showAlert"
                 header="2FA Verificatie"
@@ -115,22 +117,16 @@
     @import '../theme/styles.css';
     @import '../theme/variables.css';
 
-    ion-page {
+    .loginGrid {
         display: flex;
+        width: 100%;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        height: 100%;
+        text-align: center;
     }
 
-    ion-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
+    .loginGridRow {
         width: 100%;
-        text-align: center;
     }
 
     .logoLogin {

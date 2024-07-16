@@ -5,7 +5,23 @@
     <IonHeaderComponent />
     <ion-content>
       <h1>Instellingen</h1>
-      <h2>Accountgegevens</h2>
+      <ion-grid class="settingsGrid" :fixed="true">
+        <ion-row class="centeredRow">
+          <ion-col class="firstColumn">
+            <h2>Accountgegevens</h2>
+          </ion-col>
+          <ion-col class="secondColumn">
+            <ion-button id="oopsAlertSettings" fill="clear" >Wijzigen</ion-button>
+            <ion-alert
+              trigger="oopsAlertSettings"
+              header="Accountgegevens wijzigen"
+              sub-header="Oeps&excl;"
+              message="Deze functionaliteit is nog niet uitgewerkt."
+              :buttons="['OK']"
+            ></ion-alert>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <img class="profilePicture" src="@/assets/headshot-silhouette-clipart.png" alt="Profielfoto demo account">
       <h4>Gebruikersnaam</h4>
       <p>Demo Account</p>
@@ -17,10 +33,10 @@
         <ion-item>
           <ion-toggle :checked="paletteToggle" @ionChange="toggleChange($event)" justify="space-between">Donkere modus</ion-toggle>
         </ion-item>
-        <ion-item id="oopsAlert" button="true">Meldingen</ion-item>
+        <ion-item id="oopsAlertNotifications" button="true">Meldingen</ion-item>
         <ion-alert
-          trigger="oopsAlert"
-          header="Meldingen"
+          trigger="oopsAlertNotifications"
+          header="Meldingen instellen"
           sub-header="Oeps&excl;"
           message="Deze functionaliteit is nog niet uitgewerkt."
           :buttons="['OK']"
@@ -37,7 +53,19 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { IonPage, IonContent, IonList, IonItem, IonToggle, IonButton, IonAlert } from '@ionic/vue';
+  import { 
+    IonPage, 
+    IonContent, 
+    IonGrid, 
+    IonRow, 
+    IonCol, 
+    IonList, 
+    IonItem, 
+    IonToggle, 
+    IonButton, 
+    IonIcon, 
+    IonAlert 
+  } from '@ionic/vue';
   import type { ToggleCustomEvent } from '@ionic/vue';
   import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
   import IonTabsComponent from '@/components/IonTabsComponent.vue';
@@ -83,21 +111,48 @@
   @import '../theme/styles.css';
   @import '../theme/variables.css';
   
+  h2 {
+    color: var(--ion-color-firstcolor);
+  }
+  
   ion-item {
     --margin: 0px;
     font-size: 1.25rem;
+  }
+
+  .profilePicture {
+    height: 3.75rem;
+    border-radius: 50%;
   }
 
   .visibleButton {
     margin: 1rem;
   }
 
-  h2 {
-    color: var(--ion-color-firstcolor);
+  /* Styling rij van h2 kop Accountgegevens */
+  .settingsGrid {
+    width: 100%;
+    padding: 0;
+    margin: -1.25rem 0 0 0;
   }
 
-  .profilePicture {
-    height: 3.75rem;
-    border-radius: 50%;
+  .centeredRow {
+    display: flex;
+    align-items: center;
+  }
+
+  .firstColumn {
+    text-align: left;
+    padding: 0;
+  }
+
+  .secondColumn {
+    text-align: right;
+    padding: 0;
+  }
+
+  #oopsAlertSettings {
+    text-decoration: underline;
+    color: var(--ion-color-firstcolor);
   }
 </style>
