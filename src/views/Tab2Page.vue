@@ -1,26 +1,28 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 2</ion-title>
-      </ion-toolbar>
+      <IonHeaderComponent />
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <!--<ExploreContainer name="Tab 2 page" />-->
-      <p>Hier komt straks een zoekfunctie</p>
+      <ion-searchbar class="searchBar" placeholder="Zoeken"></ion-searchbar>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar } from '@ionic/vue';
   import { notifications, settings } from 'ionicons/icons';
-  import ExploreContainer from '@/components/ExploreContainer.vue';
+  import { defineComponent } from 'vue';
+  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
 </script>
 
+<style scoped>
+  @import '../theme/styles.css';
+  @import '../theme/variables.css';
+
+  .searchBar {
+    --background: var(--ion-searchbar-background);
+    --color: var(--ion-searchbar-color);
+    margin: 0.75rem 0;
+}
+</style>
