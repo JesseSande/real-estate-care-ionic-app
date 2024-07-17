@@ -176,7 +176,7 @@
                             <!-- Locatie (tekstveld, niet verplicht) -->
                             <ion-item>
                                 <ion-label position="stacked">Locatie</ion-label>
-                                <ion-input v-model="inspectionDetails.installationLocation" " id="installationLocationInput" placeholder="Voer locatie in"></ion-input>
+                                <ion-input v-model="inspectionDetails.installationLocation" id="installationLocationInput" placeholder="Voer locatie in"></ion-input>
                             </ion-item>
 
                             <!-- Soort installatie (keuzelijst, niet verplicht) -->
