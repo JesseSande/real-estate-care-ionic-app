@@ -26,11 +26,16 @@ export const useInspectionStore = defineStore('inspection', {
         console.error('Error fetching completed inspections:', error);
       }
     },
-    completeInspection(inspectionId) {
+    completeInspection(inspectionId, details) {
       const index = this.assignedInspections.findIndex(inspection => inspection.id === inspectionId);
       if (index !== -1) {
-        const [completedInspection] = this.assignedInspections.splice(index, 1);
+        const completedInspection = {
+          ...this.assignedInspections[index],
+          details: details
+        };
+        this.assignedInspections.splice(index, 1);
         this.completedInspections.push(completedInspection);
+        console.log('Completed Inspections:', this.completedInspections);
       }
     },
     async resetData() {
@@ -46,5 +51,3 @@ export const useInspectionStore = defineStore('inspection', {
     }
   }
 });
-
-
