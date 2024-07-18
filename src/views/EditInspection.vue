@@ -63,7 +63,7 @@
                                 <ion-label position="stacked">Datum<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button class="visibleDatetimeButton" datetime="datetime"></ion-datetime-button>
                                 <ion-modal :keep-contents-mounted="true">
-                                    <ion-datetime id="datetime"></ion-datetime>
+                                    <ion-datetime v-model="inspectionDetails.damageDate" id="datetime"></ion-datetime>
                                 </ion-modal>
                             </ion-item>
                             <p v-if="errors.damageDate" class="error-message">Dit veld is verplicht.</p>
@@ -498,6 +498,11 @@
                 modificationComments: inspection.value.details.modificationInspection?.modificationComments || ''
             };
 
+            // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
+            if (!inspectionDetails.value.damageDate || !isValidISODateString(inspectionDetails.value.damageDate)) {
+                inspectionDetails.value.damageDate = new Date().toISOString(); // Standaard naar huidige datum en tijd in ISO 8601 formaat
+            }
+
             // Vul de bestaande foto's
             photos.value = {
                 damageInspection: inspection.value.details.damageInspection?.photos || [],
@@ -507,6 +512,12 @@
             };
         }
     });
+
+    // Functie om te controleren of een datum een geldige ISO 8601 string is
+    const isValidISODateString = (dateString) => {
+        const date = new Date(dateString);
+        return !isNaN(date.getTime());
+    }
 
     const takePhoto = async () => {
         try {
