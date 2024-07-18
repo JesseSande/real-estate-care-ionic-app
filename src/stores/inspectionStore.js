@@ -38,6 +38,13 @@ export const useInspectionStore = defineStore('inspection', {
         console.log('Completed Inspections:', this.completedInspections);
       }
     },
+    updateInspection(inspectionId, updatedDetails) {
+      const index = this.completedInspections.findIndex(inspection => inspection.id === inspectionId);
+      if (index !== -1) {
+        this.completedInspections[index].details = updatedDetails;
+        console.log('Updated Completed Inspection:', this.completedInspections[index]);
+      }
+    },
     async resetData() {
       try {
         const response = await fetch('/defaultInspections.json');

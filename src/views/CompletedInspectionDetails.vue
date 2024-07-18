@@ -77,6 +77,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Button om inspectie te bewerken -->
+                <ion-button class="visibleButton" @click="editInspection">Inspectie bewerken</ion-button>
             </div>
             <div v-else>
                 <p>Geen inspectie gevonden.</p>
@@ -88,13 +90,14 @@
 
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     import { useInspectionStore } from '@/stores/inspectionStore';
-    import { IonPage, IonContent } from '@ionic/vue';
+    import { IonPage, IonContent, IonButton } from '@ionic/vue';
     import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
     import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
 
     const route = useRoute();
+    const router = useRouter();
     const inspectionStore = useInspectionStore();
     const inspection = ref(null);
 
@@ -103,6 +106,10 @@
         inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
         console.log('Selected inspection:', inspection.value);
     });
+
+    const editInspection = () => {
+        router.push(`/edit-inspection/${inspection.value.id}`);
+    };
 </script>
 
 <style scoped>
