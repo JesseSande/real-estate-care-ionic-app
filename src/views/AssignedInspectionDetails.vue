@@ -63,7 +63,7 @@
                                 <ion-label position="stacked">Datum<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button class="visibleDatetimeButton" datetime="datetime"></ion-datetime-button>
                                 <ion-modal :keep-contents-mounted="true">
-                                    <ion-datetime id="datetime"></ion-datetime>
+                                    <ion-datetime v-model="inspectionDetails.damageDate" id="datetime"></ion-datetime>
                                 </ion-modal>
                             </ion-item>
                             <p v-if="errors.damageDate" class="error-message">Dit veld is verplicht.</p>
@@ -477,6 +477,11 @@
             default:
                 break;
         }
+
+        // Controleer en initialise damageDate als deze niet bestaat of niet geldig is
+        if (!inspectionDetails.value.damageDate) {
+            inspectionDetails.value.damageDate = new Date().toISOString(); // Standaard naar huidige datum en tijd in ISO 8601 formaat
+        }
     });
 
     const takePhoto = async () => {
@@ -555,6 +560,11 @@
 
     const validateInspectionDetails = () => {
         errors.value = {};
+
+        const isValidISODateString = (dateString) => {
+            const date = new Date(dateString);
+            return !isNaN(date.getTime());
+        }
 
         if (options.value.damageInspection) {
             if (!inspectionDetails.value.damageLocation) errors.value.damageLocation = true;
