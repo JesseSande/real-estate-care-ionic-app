@@ -1,6 +1,6 @@
 <template>
     <ion-page>
-        <IonHeaderComponent />
+        <TheHeader />
         <ion-content>
             <h1>Inspectie Details</h1>
             <div v-if="inspection">
@@ -19,9 +19,16 @@
                         <p><strong>Omschrijving:</strong> {{ inspection.details.damageInspection.damageDescription }}</p>
                         <div v-if="inspection.details.damageInspection.photos && inspection.details.damageInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
-                            <ul>
-                                <li v-for="(photo, index) in inspection.details.damageInspection.photos" :key="index">
-                                    <img :src="photo.webPath" :alt="photo.fileName" style="max-width: 100%; height: auto;" />
+                            <ul class="photoList">
+                                <li 
+                                    class="photoListItem"
+                                    v-for="(photo, index) in inspection.details.damageInspection.photos" 
+                                    :key="index">
+                                        <img 
+                                            :src="photo.webPath" 
+                                            :alt="photo.fileName" 
+                                            style="max-width: 100%; height: auto;" 
+                                        />
                                 </li>
                             </ul>
                         </div>
@@ -35,9 +42,16 @@
                         <p><strong>Kostenindicatie:</strong> {{ inspection.details.maintenanceInspection.costEstimate }}</p>
                         <div v-if="inspection.details.maintenanceInspection.photos && inspection.details.maintenanceInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
-                            <ul>
-                                <li v-for="(photo, index) in inspection.details.maintenanceInspection.photos" :key="index">
-                                    <img :src="photo.webPath" :alt="photo.fileName" style="max-width: 100%; height: auto;" />
+                            <ul class="photoList">
+                                <li 
+                                    class="photoListItem"
+                                    v-for="(photo, index) in inspection.details.maintenanceInspection.photos" 
+                                    :key="index">
+                                        <img 
+                                            :src="photo.webPath" 
+                                            :alt="photo.fileName" 
+                                            style="max-width: 100%; height: auto;" 
+                                        />
                                 </li>
                             </ul>
                         </div>
@@ -52,9 +66,16 @@
                         <p><strong>Opmerkingen:</strong> {{ inspection.details.installationInspection.comments }}</p>
                         <div v-if="inspection.details.installationInspection.photos && inspection.details.installationInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
-                            <ul>
-                                <li v-for="(photo, index) in inspection.details.installationInspection.photos" :key="index">
-                                    <img :src="photo.webPath" :alt="photo.fileName" style="max-width: 100%; height: auto;" />
+                            <ul class="photoList">
+                                <li 
+                                    class="photoListItem"
+                                    v-for="(photo, index) in inspection.details.installationInspection.photos" 
+                                    :key="index">
+                                        <img 
+                                            :src="photo.webPath" 
+                                            :alt="photo.fileName" 
+                                            style="max-width: 100%; height: auto;" 
+                                        />
                                 </li>
                             </ul>
                         </div>
@@ -69,32 +90,52 @@
                         <p><strong>Opmerkingen:</strong> {{ inspection.details.modificationInspection.modificationComments }}</p>
                         <div v-if="inspection.details.modificationInspection.photos && inspection.details.modificationInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
-                            <ul>
-                                <li v-for="(photo, index) in inspection.details.modificationInspection.photos" :key="index">
-                                    <img :src="photo.webPath" :alt="photo.fileName" style="max-width: 100%; height: auto;" />
+                            <ul class="photoList">
+                                <li 
+                                    class="photoListItem"
+                                    v-for="(photo, index) in inspection.details.modificationInspection.photos" 
+                                    :key="index">
+                                        <img 
+                                            :src="photo.webPath" 
+                                            :alt="photo.fileName" 
+                                            style="max-width: 100%; height: auto;" 
+                                        />
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- Button om inspectie te bewerken -->
-                <ion-button class="visibleButton" @click="editInspection">Inspectie bewerken</ion-button>
+                <ion-button 
+                    class="visibleButton" 
+                    @click="editInspection"
+                >Inspectie bewerken</ion-button>
             </div>
             <div v-else>
                 <p>Geen inspectie gevonden.</p>
             </div>
         </ion-content>
-        <IonTabBarComponent />
+        <TheTabBar />
     </ion-page>
 </template>
 
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue';
-    import { useRoute, useRouter } from 'vue-router';
+    import { 
+        ref, 
+        onMounted 
+    } from 'vue';
+    import { 
+        useRoute, 
+        useRouter 
+    } from 'vue-router';
     import { useInspectionStore } from '@/stores/inspectionStore';
-    import { IonPage, IonContent, IonButton } from '@ionic/vue';
-    import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-    import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
+    import { 
+        IonPage, 
+        IonContent, 
+        IonButton 
+    } from '@ionic/vue';
+    import TheHeader from '@/components/TheHeader.vue';
+    import TheTabBar from '@/components/TheTabBar.vue';
 
     const route = useRoute();
     const router = useRouter();
@@ -113,24 +154,19 @@
 </script>
 
 <style scoped>
-    @import '../theme/styles.css';
-    @import '../theme/variables.css';
+    @import "../theme/styles.css";
+    @import "../theme/variables.css";
 
-    h1, p {
+    p {
         margin: 20px 0;
     }
 
-    h2 {
-        margin-top: 20px;
-        color: var(--ion-color-firstcolor);
-    }
-
-    ul {
+    .photoList {
         list-style-type: none;
         padding: 0;
     }
 
-    li {
+    .photoListItem {
         margin: 5px 0;
     }
 </style>

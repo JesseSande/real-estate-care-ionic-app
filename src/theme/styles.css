@@ -13,7 +13,7 @@ h1 {
 
 h2 {
   margin: 1.25rem 0;
-  color: var(--ion-color-myteal);
+  color: var(--ion-color-firstcolor);
 }
 
 hr {
@@ -55,4 +55,8 @@ ion-toggle {
   --background: var(--ion-color-firstcolor);
   --background-activated: var(--ion-color-firstcolor);
   --background-focused: var(--ion-color-firstcolor);
+}
+
+.cardHeader {
+  color: var(--ion-text-color);
 }

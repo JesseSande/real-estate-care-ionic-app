@@ -2,27 +2,36 @@
 
 <template>
   <ion-page>
-    <IonHeaderComponent />
+    <TheHeader />
     <ion-content>
       <h1>Instellingen</h1>
-      <ion-grid class="settingsGrid" :fixed="true">
-        <ion-row class="centeredRow">
-          <ion-col class="firstColumn">
-            <h2>Accountgegevens</h2>
-          </ion-col>
-          <ion-col class="secondColumn">
-            <ion-button id="oopsAlertSettings" fill="clear" >Wijzigen</ion-button>
-            <ion-alert
-              trigger="oopsAlertSettings"
-              header="Accountgegevens wijzigen"
-              sub-header="Oeps&excl;"
-              message="Deze functionaliteit is nog niet uitgewerkt."
-              :buttons="['OK']"
-            ></ion-alert>
-          </ion-col>
-        </ion-row>
+      <ion-grid 
+        class="settingsGrid" 
+        :fixed="true">
+          <ion-row class="centeredRow">
+            <ion-col class="firstColumn">
+              <h2>Accountgegevens</h2>
+            </ion-col>
+            <ion-col class="secondColumn">
+              <ion-button 
+                id="oopsAlertSettings" 
+                fill="clear"
+              >Wijzigen</ion-button>
+              <ion-alert
+                trigger="oopsAlertSettings"
+                header="Accountgegevens wijzigen"
+                sub-header="Oeps&excl;"
+                message="Deze functionaliteit is nog niet uitgewerkt."
+                :buttons="['OK']"
+              ></ion-alert>
+            </ion-col>
+          </ion-row>
       </ion-grid>
-      <img class="profilePicture" src="@/assets/headshot-silhouette-clipart.png" alt="Profielfoto demo account">
+      <img 
+        class="profilePicture" 
+        src="@/assets/headshot-silhouette-clipart.png" 
+        alt="Profielfoto demo account"
+      >
       <h4>Gebruikersnaam</h4>
       <p>Demo Account</p>
       <h4>E-mailadres</h4>
@@ -30,23 +39,34 @@
       <hr>
       <h2>Accountinstellingen</h2>
       <ion-list :inset="true">
-        <ion-item>
-          <ion-toggle :checked="paletteToggle" @ionChange="toggleChange($event)" justify="space-between">Donkere modus</ion-toggle>
+        <ion-item class="settingsListItem">
+          <ion-toggle 
+            :checked="paletteToggle" 
+            @ionChange="toggleChange($event)" 
+            justify="space-between"
+          >Donkere modus</ion-toggle>
         </ion-item>
-        <ion-item id="oopsAlertNotifications" button="true">Meldingen</ion-item>
+        <ion-item class="settingsListItem" 
+          id="oopsAlertNotifications" 
+          button="true"
+        >Meldingen</ion-item>
         <ion-alert
           trigger="oopsAlertNotifications"
           header="Meldingen instellen"
           sub-header="Oeps&excl;"
           message="Deze functionaliteit is nog niet uitgewerkt."
           :buttons="['OK']"
-      ></ion-alert>
+        ></ion-alert>
       </ion-list>
       <hr>
       <h2>Uitloggen</h2>
-      <ion-button class="visibleButton" expand="block" @click="logout">Uitloggen</ion-button>
+      <ion-button 
+        class="visibleButton" 
+        expand="block" 
+        @click="logout"
+      >Uitloggen</ion-button>
     </ion-content>
-    <IonTabBarComponent />
+    <TheTabBar />
   </ion-page>
 </template>
 
@@ -58,18 +78,16 @@
     IonContent, 
     IonGrid, 
     IonRow, 
-    IonCol, 
+    IonCol,
+    IonButton,
+    IonAlert,   
     IonList, 
     IonItem, 
-    IonToggle, 
-    IonButton, 
-    IonIcon, 
-    IonAlert 
+    IonToggle 
   } from '@ionic/vue';
   import type { ToggleCustomEvent } from '@ionic/vue';
-  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import IonTabsComponent from '@/components/IonTabsComponent.vue';
-  import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
+  import TheHeader from '@/components/TheHeader.vue';
+  import TheTabBar from '@/components/TheTabBar.vue';
 
   const router = useRouter();
 
@@ -108,14 +126,10 @@
 </script>
 
 <style scoped>
-  @import '../theme/styles.css';
-  @import '../theme/variables.css';
+  @import "../theme/styles.css";
+  @import "../theme/variables.css";
   
-  h2 {
-    color: var(--ion-color-firstcolor);
-  }
-  
-  ion-item {
+  .settingsListItem {
     --margin: 0px;
     font-size: 1.25rem;
   }

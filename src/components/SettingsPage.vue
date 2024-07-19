@@ -2,21 +2,20 @@
   <router-link to="/settings-details" class="card">
     <ion-icon :icon="settings" class="icon"></ion-icon>
     <ion-text>
-      <h2>Instellingen</h2>
+      <h2 class="cardHeader">Instellingen</h2>
     </ion-text>
   </router-link>
 </template>
 
 <script setup lang="ts">
-  import { settings } from 'ionicons/icons';
-  import { IonIcon, IonText } from '@ionic/vue';
+  import { settings } from "ionicons/icons";
+  import { 
+    IonIcon, 
+    IonText 
+  } from "@ionic/vue";
 </script>
 
 <style scoped>
-  @import '../theme/styles.css';
-  @import '../theme/variables.css';
-
-  h2 {
-    color: var(--ion-text-color);
-  }
+  @import "../theme/styles.css";
+  @import "../theme/variables.css";
 </style>

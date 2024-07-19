@@ -1,24 +1,25 @@
 <template>
   <ion-page>
     <ion-header>
-      <IonHeaderComponent />
+      <TheHeader />
     </ion-header>
     <ion-content :fullscreen="true">
-      
       <ExploreContainer name="Tab 1 page" />
-      
     </ion-content>
   </ion-page>
 </template>
 
-<script setup lang="ts">
-  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-  import { notifications, settings } from 'ionicons/icons';
+<script setup lang="ts"> 
+  import { 
+    IonPage, 
+    IonHeader,  
+    IonContent 
+  } from '@ionic/vue';
   import ExploreContainer from '@/components/ExploreContainer.vue';
-  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
+  import TheHeader from '@/components/TheHeader.vue';
 </script>
 
 <style scoped>
-  @import '../theme/styles.css';
-  @import '../theme/variables.css';
+  @import "../theme/styles.css";
+  @import "../theme/variables.css";
 </style>
