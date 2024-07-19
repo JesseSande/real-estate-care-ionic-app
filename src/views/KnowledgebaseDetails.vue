@@ -1,31 +1,49 @@
+<!-- Via deze component wordt het overzicht van de kennisbase zichtbaar -->
+
 <template>
   <ion-page>
-    <IonHeaderComponent />
+    <TheHeader />
     <ion-content :fullscreen="true">
       <h1>Kennisbase</h1>
       <ion-list lines="none">
-        <ion-item detail="true" v-for="item in knowledgebaseItems" :key="item.id" @click="selectItem(item)">
-          <ion-label>
-            <h2>{{ item.title }}</h2>
-          </ion-label>
+        <ion-item
+          class="knowledgebaseItemOverview" 
+          detail="true" 
+          v-for="item in knowledgebaseItems" 
+          :key="item.id" 
+          @click="selectItem(item)">
+            <ion-label>
+              <h2 class="knowledgebaseItemTitle">{{ item.title }}</h2>
+            </ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
-    <IonTabBarComponent />
+    <TheTabBar />
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted } from 'vue';
+  import { 
+    ref, 
+    computed, 
+    onMounted 
+  } from 'vue';
   import { useKnowledgebaseStore } from '@/stores/knowledgebaseStore';
   import { useRouter } from 'vue-router';
-  import { IonPage, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
-  import IonHeaderComponent from '@/components/IonHeaderComponent.vue';
-  import IonTabBarComponent from '@/components/IonTabBarComponent.vue';
+  import { 
+    IonPage, 
+    IonContent, 
+    IonList, 
+    IonItem, 
+    IonLabel 
+  } from '@ionic/vue';
+  import TheHeader from '@/components/TheHeader.vue';
+  import TheTabBar from '@/components/TheTabBar.vue';
 
   const knowledgebaseStore = useKnowledgebaseStore();
   const router = useRouter();
 
+  // Haalt alle kennisbase artikelen op zodra de component is gemounted 
   onMounted(async () => {
     await knowledgebaseStore.fetchKnowledgebaseItems();
   });
@@ -38,21 +56,17 @@
 </script>
 
 <style scoped>
-  @import '../theme/styles.css';
-  @import '../theme/variables.css';
+  @import "../theme/styles.css";
+  @import "../theme/variables.css";
 
-  h1 {
-    margin: 20px 0;
-  }
-
-  ion-item {
+  .knowledgebaseItemOverview {
     margin: 0.625rem 0;
     padding: 0.625rem;
     border: 1px solid var(--ion-color-firstcolor);
     border-radius: 4px; 
   }
   
-  ion-label h2 {
+  .knowledgebaseItemTitle {
     color: var(--ion-color-secondcolor);
     margin: 0;
   }

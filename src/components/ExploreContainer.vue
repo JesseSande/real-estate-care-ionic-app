@@ -1,10 +1,11 @@
-ExploreContainer.vue:
+<!-- Container in de actieve taak tab (Tab1) waarin doorgeklikt kan worden naar de hoofdfuncties van de applicatie -->
+
 <template>
   <div class="grid-container">
-    <Assigned />
-    <Completed />
-    <Knowledgebase />
-    <Settings />
+    <AssignedPage />
+    <CompletedPage />
+    <KnowledgebasePage />
+    <SettingsPage />
   </div>
 </template>
 
@@ -13,15 +14,15 @@ ExploreContainer.vue:
     name: String,
   });
 
-  import Assigned from '@/components/Assigned.vue';
-  import Completed from '@/components/Completed.vue';
-  import Knowledgebase from '@/components/Knowledgebase.vue';
-  import Settings from '@/components/Settings.vue';
+  import AssignedPage from "@/components/AssignedPage.vue";
+  import CompletedPage from "@/components/CompletedPage.vue";
+  import KnowledgebasePage from "@/components/KnowledgebasePage.vue";
+  import SettingsPage from "@/components/SettingsPage.vue";
 </script>
 
 <style scoped>
-  @import '../theme/styles.css';
-  @import '../theme/variables.css';
+  @import "../theme/styles.css";
+  @import "../theme/variables.css";
 
   .grid-container {
     display: grid;

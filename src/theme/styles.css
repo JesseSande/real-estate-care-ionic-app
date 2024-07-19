@@ -1,6 +1,4 @@
-/*Opmaak cards, gebruikt in de 4 componenten Afgerond.vue, Instellingen.vue, Kennisbase.vue en Toegewezen.vue.*/
-
-/*HTML elements*/
+/* HTML elements */
 p {
   margin: 0 0 20px 0;
   font-size: 1.25rem;
@@ -13,7 +11,7 @@ h1 {
 
 h2 {
   margin: 1.25rem 0;
-  color: var(--ion-color-myteal);
+  color: var(--ion-color-firstcolor);
 }
 
 hr {
@@ -21,7 +19,7 @@ hr {
   border-top: 1px solid var(--ion-color-firstcolor);
 }
 
-/*Ionic elements*/
+/* Ionic elements */
 ion-content {
   --padding-start: 1.25rem;
   --padding-end: 1.25rem;
@@ -31,7 +29,7 @@ ion-toggle {
   --track-background-checked: var(--ion-color-firstcolor);
 }
 
-/*Classes*/
+/* Classes */
 .card {
   display: flex;
   flex-direction: column;
@@ -55,4 +53,8 @@ ion-toggle {
   --background: var(--ion-color-firstcolor);
   --background-activated: var(--ion-color-firstcolor);
   --background-focused: var(--ion-color-firstcolor);
+}
+
+.cardHeader {
+  color: var(--ion-text-color);
 }

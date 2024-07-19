@@ -1,5 +1,4 @@
-<!-- Via deze component worden de details zichtbaar van de toegewezen inspectie die is aangeklikt.
-Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
+<!-- Via deze component worden de afgeronde inspectie die is aangeklikt geopend om te bewerken -->
 
 <template>
     <ion-page>
@@ -12,7 +11,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 <p><strong>Datum:</strong> {{ inspection.date }}</p>
                 <p><strong>Type:</strong> {{ inspection.type }}</p>
 
-                <h2>Inspectie uitvoeren:</h2>
+                <h2>Inspectie aanpassen:</h2>
                 <!-- Controleer of options beschikbaar zijn voordat ze worden gerenderd -->
                 <div v-if="options">
                     <!-- Opties voor inspectie -->
@@ -46,30 +45,31 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 <ion-radio-group 
                                     v-model="inspectionDetails.newDamage" 
                                     id="newDamageRadioGroup">
-                                    <ion-item lines="none">
-                                        <ion-label>Ja</ion-label>
-                                        <ion-radio 
-                                            slot="start" 
-                                            id="newDamageYes" 
-                                            value="ja"
-                                        ></ion-radio>
-                                    </ion-item>
-                                    <ion-item lines="none">
-                                        <ion-label>Nee</ion-label>
-                                        <ion-radio 
-                                            slot="start" 
-                                            id="newDamageNo" 
-                                            value="nee"
-                                        ></ion-radio>
-                                    </ion-item>
-                                </ion-radio-group>
+                                        <ion-item lines="none">
+                                            <ion-label>Ja</ion-label>
+                                            <ion-radio 
+                                                slot="start" 
+                                                id="newDamageYes" 
+                                                value="ja"
+                                            ></ion-radio>
+                                        </ion-item>
+                                        <ion-item lines="none">
+                                            <ion-label>Nee</ion-label>
+                                            <ion-radio 
+                                                slot="start" 
+                                                id="newDamageNo" 
+                                                value="nee"
+                                            ></ion-radio>
+                                        </ion-item>
+                                    </ion-radio-group>
                             </ion-item>
                             <p v-if="errors.newDamage" class="error-message">Dit veld is verplicht.</p>
 
                             <!-- Soort schade (keuzelijst, verplicht) -->
                             <ion-item :class="{'input-error': errors.damageType}">
                                 <ion-label position="stacked">Soort schade<span class="required"> (verplicht)</span></ion-label>
-                                <ion-select interface="popover" 
+                                <ion-select 
+                                    interface="popover" 
                                     v-model="inspectionDetails.damageType" 
                                     id="damageTypeSelect" 
                                     placeholder="Selecteer soort schade">
@@ -85,7 +85,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
                             <!-- Datum (input met datum keuze, verplicht) --> 
                             <ion-item :class="{'input-error': errors.damageDate}">
-                                <ion-label position="stacked">Datum uitgevoerd<span class="required"> (verplicht)</span></ion-label>
+                                <ion-label position="stacked">Datum<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button 
                                     class="visibleDatetimeButton" 
                                     datetime="damageDatetime"
@@ -120,7 +120,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                 id="damageImmediateActionNo" 
                                                 value="nee"
                                             ></ion-radio>
-                                        </ion-item>
+                                    </ion-item>
                                 </ion-radio-group>
                             </ion-item>
                             <p v-if="errors.immediateActionRequired" class="error-message">Dit veld is verplicht.</p>
@@ -146,9 +146,9 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 >Maak of upload een foto</ion-button>
                                 <ul class="photoList">
                                     <li 
+                                        class="photoListItem"
                                         v-for="(photo, index) in photos.damageInspection" 
-                                        :key="index"
-                                        class="photoListItem">
+                                        :key="index">
                                             {{ photo.fileName }}
                                             <ion-button 
                                                 fill="clear" 
@@ -225,7 +225,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                 id="maintenanceImmediateActionNo" 
                                                 value="nee"
                                             ></ion-radio>
-                                    </ion-item>
+                                        </ion-item>
                                 </ion-radio-group>
                             </ion-item>
                             <p v-if="errors.maintenanceImmediateActionRequired" class="error-message">Dit veld is verplicht.</p>
@@ -255,12 +255,12 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 >Maak of upload een foto</ion-button>
                                 <ul class="photoList">
                                     <li 
+                                        class="photoListItem"
                                         v-for="(photo, index) in photos.maintenanceInspection" 
-                                        :key="index"
-                                        class="photoListItem">
+                                        :key="index">
                                             {{ photo.fileName }}
                                             <ion-button 
-                                                fill="clear" 
+                                                fill="clear"
                                                 @click="confirmDeletePhoto('maintenanceInspection', index)" 
                                                 id="maintenancePhotoDelete">
                                                     <ion-icon 
@@ -380,9 +380,9 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 >Maak of upload een foto</ion-button>
                                 <ul class="photoList">
                                     <li 
+                                        class="photoListItem"
                                         v-for="(photo, index) in photos.installationInspection" 
-                                        :key="index"
-                                        class="photoListItem">
+                                        :key="index">
                                             {{ photo.fileName }}
                                             <ion-button 
                                                 fill="clear" 
@@ -416,8 +416,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 <ion-button 
                                     class="visibleButton" 
                                     href="/pdf/Documentatie_modificatie_Kennedylaan198.pdf" 
-                                    target="_blank" 
-                                    id="modificationDocumentationLink"
+                                    target="_blank" id="modificationDocumentationLink"
                                 >Bekijk documentatie</ion-button>
                             </ion-item>
 
@@ -513,9 +512,9 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 >Maak of upload een foto</ion-button>
                                 <ul class="photoList">
                                     <li 
+                                        class="photoListItem"
                                         v-for="(photo, index) in photos.modificationInspection" 
-                                        :key="index"
-                                        class="photoListItem">
+                                        :key="index">
                                             {{ photo.fileName }}
                                             <ion-button 
                                                 fill="clear" 
@@ -535,8 +534,8 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 </div>
                 <ion-button 
                     class="visibleButton" 
-                    @click="confirmCompleteInspection"
-                >Inspectie afronden</ion-button>
+                    @click="saveInspectionUpdates"
+                >Wijzigingen opslaan</ion-button>
             </div>
 
             <!-- Bevestigingspopup voor het verwijderen van fotos -->
@@ -547,11 +546,11 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 :buttons="alertCancelConfirmButtons"
             ></ion-alert>
 
-            <!-- Bevestigingspopup voor het afronden van de inspectie -->
+            <!-- Bevestigingspopup voor het opslaan van de wijzigingen -->
             <ion-alert
                 :is-open="showCompleteAlert"
-                header="Inspectie afgerond"
-                message="De inspectie is succesvol afgerond."
+                header="Wijzigingen opgeslagen"
+                message="De wijzigingen zijn succesvol opgeslagen."
                 :buttons="alertOkButton"
             ></ion-alert>
 
@@ -572,44 +571,44 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     import { 
         ref, 
         onMounted 
-    } from "vue";
+    } from 'vue';
     import { 
         useRoute, 
         useRouter 
-    } from "vue-router";
-    import { useInspectionStore } from "@/stores/inspectionStore";
+    } from 'vue-router';
+    import { useInspectionStore } from '@/stores/inspectionStore';
     import { 
         ImageOutline, 
         trash 
-    } from "ionicons/icons";
+    } from 'ionicons/icons';
     import { 
         IonPage, 
         IonContent, 
         IonList, 
-        IonItem, 
-        IonCheckbox,
-        IonLabel,  
-        IonInput,
+        IonItem,
+        IonCheckbox,  
+        IonLabel,
+        IonInput, 
         IonRadioGroup, 
-        IonRadio, 
+        IonRadio,
         IonSelect, 
         IonSelectOption, 
-        IonDatetimeButton,
+        IonDatetimeButton, 
         IonModal,
-        IonDatetime, 
-        IonTextarea,
+        IonDatetime,
+        IonTextarea,  
         IonButton, 
-        IonIcon, 
+        IonIcon,
         IonAlert,
         IonToast 
-    } from "@ionic/vue";
-    import TheHeader from "@/components/TheHeader.vue";
-    import TheTabBar from "@/components/TheTabBar.vue";
+    } from '@ionic/vue';
+    import TheHeader from '@/components/TheHeader.vue';
+    import TheTabBar from '@/components/TheTabBar.vue';
     import { 
         Camera, 
         CameraResultType, 
         CameraSource 
-    } from "@capacitor/camera";
+    } from '@capacitor/camera';
 
     const route = useRoute();
     const router = useRouter();
@@ -639,33 +638,39 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     const options = ref(null);
     const inspectionDetails = ref({
-        damageLocation: "",
+        damageLocation: '',
         newDamage: false,
-        damageType: "",
-        damageDate: "",
+        damageType: '',
+        damageDate: '',
         immediateActionRequired: false,
-        damageDescription: "",
-        maintenanceLocation: "",
-        maintenanceType: "",
+        damageDescription: '',
+        maintenanceLocation: '',
+        maintenanceType: '',
         maintenanceImmediateActionRequired: false,
-        maintenanceCostEstimate: "",
-        installationLocation: "",
-        installationType: "",
-        reportedMalfunction: "",
+        maintenanceCostEstimate: '',
+        installationLocation: '',
+        installationType: '',
+        reportedMalfunction: '',
         approved: false,
-        installationComments: "",
-        modificationLocation: "",
-        performedBy: "",
-        modificationDescription: "",
-        actionRequired: "",
-        modificationComments: ""
+        installationComments: '',
+        modificationLocation: '',
+        performedBy: '',
+        modificationDescription: '',
+        actionRequired: '',
+        modificationComments: ''
     });
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
         const id = route.params.id;
-        inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
-        console.log("Selected inspection:", inspection.value);
+        console.log('Route ID:', id); // Log de route ID
+        inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
+        console.log('Selected inspection for editing:', inspection.value); // Log de geselecteerde inspectie
+
+        if (!inspection.value) {
+            console.error('Inspectie niet gevonden');
+            return;
+        }
 
         // Stel de opties in op basis van de bestaande inspectiegegevens
         options.value = {
@@ -675,28 +680,56 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             modificationInspection: false
         };
 
-        switch (inspection.value.type) {
-            case "schade":
-                options.value.damageInspection = true;
-                break;
-            case "onderhoud":
-                options.value.maintenanceInspection = true;
-                break;
-            case "installatie":
-                options.value.installationInspection = true;
-                break;
-            case "modificatie":
-                options.value.modificationInspection = true;
-                break;
-            default:
-                break;
-        }
+        if (inspection.value) {
+            options.value.damageInspection = !!inspection.value.details.damageInspection;
+            options.value.maintenanceInspection = !!inspection.value.details.maintenanceInspection;
+            options.value.installationInspection = !!inspection.value.details.installationInspection;
+            options.value.modificationInspection = !!inspection.value.details.modificationInspection;
 
-        // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
-        if (!inspectionDetails.value.damageDate) {
-            inspectionDetails.value.damageDate = new Date().toISOString(); // Standaard naar huidige datum en tijd in ISO 8601 formaat
+            // Vul de inspectieDetails met de bestaande gegevens
+            inspectionDetails.value = {
+                damageLocation: inspection.value.details.damageInspection?.location || '',
+                newDamage: inspection.value.details.damageInspection?.newDamage || false,
+                damageType: inspection.value.details.damageInspection?.damageType || '',
+                damageDate: inspection.value.details.damageInspection?.damageDate || '',
+                immediateActionRequired: inspection.value.details.damageInspection?.immediateActionRequired || false,
+                damageDescription: inspection.value.details.damageInspection?.damageDescription || '',
+                maintenanceLocation: inspection.value.details.maintenanceInspection?.location || '',
+                maintenanceType: inspection.value.details.maintenanceInspection?.maintenanceType || '',
+                maintenanceImmediateActionRequired: inspection.value.details.maintenanceInspection?.immediateActionRequired || false,
+                maintenanceCostEstimate: inspection.value.details.maintenanceInspection?.costEstimate || '',
+                installationLocation: inspection.value.details.installationInspection?.location || '',
+                installationType: inspection.value.details.installationInspection?.installationType || '',
+                reportedMalfunction: inspection.value.details.installationInspection?.reportedMalfunction || '',
+                approved: inspection.value.details.installationInspection?.approved || false,
+                installationComments: inspection.value.details.installationInspection?.comments || '',
+                modificationLocation: inspection.value.details.modificationInspection?.modificationLocation || '',
+                performedBy: inspection.value.details.modificationInspection?.performedBy || '',
+                modificationDescription: inspection.value.details.modificationInspection?.modificationDescription || '',
+                actionRequired: inspection.value.details.modificationInspection?.actionRequired || '',
+                modificationComments: inspection.value.details.modificationInspection?.modificationComments || ''
+            };
+
+            // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
+            if (!inspectionDetails.value.damageDate || !isValidISODateString(inspectionDetails.value.damageDate)) {
+                inspectionDetails.value.damageDate = new Date().toISOString(); // Standaard naar huidige datum en tijd in ISO 8601 formaat
+            }
+
+            // Vul de bestaande fotos
+            photos.value = {
+                damageInspection: inspection.value.details.damageInspection?.photos || [],
+                maintenanceInspection: inspection.value.details.maintenanceInspection?.photos || [],
+                installationInspection: inspection.value.details.installationInspection?.photos || [],
+                modificationInspection: inspection.value.details.modificationInspection?.photos || []
+            };
         }
     });
+
+    // Controleren of een datum een geldige ISO 8601 string is
+    const isValidISODateString = (dateString) => {
+        const date = new Date(dateString);
+        return !isNaN(date.getTime());
+    }
 
     // Foto maken met de camera
     const takePhoto = async () => {
@@ -708,10 +741,10 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             });
             const fileName = `photo_${Date.now()}.jpeg`;
             photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
-            console.log("Photo taken:", image);
+            console.log('Photo taken:', image);
         } catch (error) {
-            if (error.message !== "User cancelled photos app") {
-                console.error("Error taking photo:", error);
+            if (error.message !== 'User cancelled photos app') {
+                console.error('Error taking photo:', error);
             }
         }
     };
@@ -736,26 +769,26 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     // Configuratie van alert knoppen
     const alertOkButton = [
         {
-            text: "OK",
-            role: "confirm",
+            text: 'OK',
+            role: 'confirm',
             handler: () => {
-                console.log("OK clicked");
-                router.push("/completed-details");
+                console.log('OK clicked');
+                router.push('/completed-details');
             }
         }
     ];
 
     const alertCancelConfirmButtons = [
         {
-            text: "Annuleer",
-            role: "cancel",
+            text: 'Annuleer',
+            role: 'cancel',
             handler: () => {
-                console.log("Geannuleerd");
+                console.log('Geannuleerd');
             },
         },
         {
-            text: "Verwijder",
-            role: "confirm",
+            text: 'Verwijder',
+            role: 'confirm',
             handler: () => {
                 deletePhoto();
             },
@@ -781,11 +814,6 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     // Inspectiegegevens valideren
     const validateInspectionDetails = () => {
         errors.value = {};
-
-        const isValidISODateString = (dateString) => {
-            const date = new Date(dateString);
-            return !isNaN(date.getTime());
-        }
 
         if (options.value.damageInspection) {
             if (!inspectionDetails.value.damageLocation) errors.value.damageLocation = true;
@@ -820,14 +848,14 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         return Object.keys(errors.value).length === 0;
     };
 
-    // Afronding inspectie bevestigen en gegevens opslaan
-    const confirmCompleteInspection = () => {
+    // Inspectiewijzigingen opslaan
+    const saveInspectionUpdates = () => {
         if (!validateInspectionDetails()) {
             showValidationError.value = true;
             return;
         }
-    
-        const inspectionDetailsToStore = {
+
+        const updatedDetails = {
             damageInspection: options.value.damageInspection ? {
                 location: inspectionDetails.value.damageLocation,
                 newDamage: inspectionDetails.value.newDamage,
@@ -862,11 +890,10 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             } : null
         };
 
-        inspectionStore.completeInspection(inspection.value.id, inspectionDetailsToStore);
+        inspectionStore.updateInspection(inspection.value.id, updatedDetails);
         showCompleteAlert.value = true;
     };
 
-    // Doorverwijzing naar kennisbase item
     const goToKnowledgebaseItem = (id) => {
         router.push(`/knowledgebase-details/${id}`);
     };
