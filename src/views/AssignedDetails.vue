@@ -5,7 +5,10 @@
     <TheHeader />
     <ion-content :fullscreen="true">
       <h1>Toegewezen inspecties</h1>
-      <ion-list lines="none">
+      <div v-if="assignedInspections.length === 0">
+        <p>Er zijn geen toegewezen inspecties.</p>
+      </div>
+      <ion-list lines="none" v-else>
         <ion-item
           class="basicIonItem" 
           detail="true" 
