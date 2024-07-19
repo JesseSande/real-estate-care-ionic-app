@@ -85,7 +85,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
                             <!-- Datum (input met datum keuze, verplicht) --> 
                             <ion-item :class="{'input-error': errors.damageDate}">
-                                <ion-label position="stacked">Datum<span class="required"> (verplicht)</span></ion-label>
+                                <ion-label position="stacked">Datum uitgevoerd<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button 
                                     class="visibleDatetimeButton" 
                                     datetime="damageDatetime"

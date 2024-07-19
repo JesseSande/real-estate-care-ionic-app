@@ -18,7 +18,7 @@
                         <p><strong>Locatie:</strong> {{ inspection.details.damageInspection.location }}</p>
                         <p><strong>Nieuwe schade:</strong> {{ inspection.details.damageInspection.newDamage ? 'Ja' : 'Nee' }}</p>
                         <p><strong>Soort schade:</strong> {{ inspection.details.damageInspection.damageType }}</p>
-                        <p><strong>Datum:</strong> {{ inspection.details.damageInspection.damageDate }}</p>
+                        <p><strong>Datum uitgevoerd:</strong> {{ inspection.details.damageInspection.damageDate }}</p>
                         <p><strong>Acute actie vereist:</strong> {{ inspection.details.damageInspection.immediateActionRequired ? 'Ja' : 'Nee' }}</p>
                         <p><strong>Omschrijving:</strong> {{ inspection.details.damageInspection.damageDescription }}</p>
                         <div v-if="inspection.details.damageInspection.photos && inspection.details.damageInspection.photos.length">
@@ -112,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Button om inspectie te bewerken -->
                 <ion-button 
                     class="visibleButton" 
