@@ -22,8 +22,8 @@
     IonPage, 
     IonHeader, 
     IonContent 
-  } from '@ionic/vue';
-  import TheHeader from '@/components/TheHeader.vue';
+  } from "@ionic/vue";
+  import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <style scoped>

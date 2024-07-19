@@ -88,12 +88,12 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 <ion-label position="stacked">Datum uitgevoerd<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button 
                                     class="visibleDatetimeButton" 
-                                    datetime="damageDatetime"
+                                    datetime="damageDate"
                                 ></ion-datetime-button>
                                 <ion-modal :keep-contents-mounted="true">
                                     <ion-datetime 
                                         v-model="inspectionDetails.damageDate" 
-                                        id="damageDatetime"
+                                        id="damageDate"
                                     ></ion-datetime>
                                 </ion-modal>
                             </ion-item>
@@ -568,7 +568,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 @did-dismiss="showValidationError = false"
             ></ion-toast>
         </ion-content>
-    <TheTabBar />
+    <!--<TheTabBar />-->
     </ion-page>
 </template>
 
@@ -608,7 +608,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         IonToast 
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
-    import TheTabBar from "@/components/TheTabBar.vue";
+    //import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
@@ -667,6 +667,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
+        
         const id = route.params.id;
         inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
         console.log("Selected inspection:", inspection.value);
@@ -946,7 +947,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         padding: 0.5rem;
         border: 1px solid var(--ion-color-firstcolor);
         border-radius: 4px;
-        background-color: #f9f9f9;
+        background-color: var(--ion-background-color);
     }
 
     .trashIcon {

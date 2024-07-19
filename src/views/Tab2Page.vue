@@ -20,9 +20,9 @@
     IonHeader,  
     IonContent, 
     IonSearchbar 
-  } from '@ionic/vue';
-  import { defineComponent } from 'vue';
-  import TheHeader from '@/components/TheHeader.vue';
+  } from "@ionic/vue";
+  import { defineComponent } from "vue";
+  import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <style scoped>
