@@ -1,4 +1,5 @@
-<!--Code m.b.t. de dark mode toggle is afkomstig van: https://ionicframework.com/docs/theming/dark-mode --> 
+<!-- Via deze component worden de instellingen zichtbaar. Code m.b.t. de dark mode toggle is 
+afkomstig van: https://ionicframework.com/docs/theming/dark-mode --> 
 
 <template>
   <ion-page>
@@ -98,28 +99,27 @@
 
   const paletteToggle = ref(false);
 
-  // Use matchMedia to check the user preference
+  // Gebruik matchMedia om de gebruikersvoorkeur te checken
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  // Add or remove the "ion-palette-dark" class on the html element
+  // Toevoegen of verwijderen van de "ion-palette-dark" class op het html element
   const toggleDarkPalette = (shouldAdd) => {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
   };
 
-  // Check/uncheck the toggle and update the palette based on isDark
+  // Aan- of uitzetten van de toggle en de palet updaten gebaseerd op isDark
   const initializeDarkPalette = (isDark) => {
     paletteToggle.value = isDark;
     toggleDarkPalette(isDark);
   };
 
-  // Initialize the dark palette based on the initial
-  // value of the prefers-color-scheme media query
+  // Initialiseer het donkere palet gebaseerd op de initiële waarde van de prefers-color-scheme media query
   initializeDarkPalette(prefersDark.matches);
 
-  // Listen for changes to the prefers-color-scheme media query
+  // Event listener voor veranderingen aan de prefers-color-scheme media query
   prefersDark.addEventListener('change', (mediaQuery) => initializeDarkPalette(mediaQuery.matches));
 
-  // Listen for the toggle check/uncheck to toggle the dark palette
+  // Event listener voor het aan- of uitzetten van de toggle voor het donkere palet
   const toggleChange = (ev: ToggleCustomEvent) => {
     toggleDarkPalette(ev.detail.checked);
   };
@@ -142,6 +142,11 @@
   .visibleButton {
     margin: 1rem;
   }
+  
+  #oopsAlertSettings {
+    text-decoration: underline;
+    color: var(--ion-color-firstcolor);
+  }
 
   /* Styling rij van h2 kop Accountgegevens */
   .settingsGrid {
@@ -163,10 +168,5 @@
   .secondColumn {
     text-align: right;
     padding: 0;
-  }
-
-  #oopsAlertSettings {
-    text-decoration: underline;
-    color: var(--ion-color-firstcolor);
   }
 </style>

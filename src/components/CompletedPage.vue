@@ -1,3 +1,6 @@
+<!-- Deze component is ingevoegd in de ExploreContainer zodat er middels een card 
+doorgeklikt kan worden naar de afgeronde inspecties -->
+
 <template>
   <router-link to="/completed-details" class="card">
     <ion-icon :icon="checkmarkCircle" class="icon"></ion-icon>

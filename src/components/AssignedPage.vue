@@ -1,3 +1,6 @@
+<!-- Deze component is ingevoegd in de ExploreContainer zodat er middels een card 
+doorgeklikt kan worden naar de toegewezen inspecties -->
+
 <template>
   <router-link to="/assigned-details" class="card">
     <ion-icon :icon="clipboard" class="icon"></ion-icon>

@@ -1,3 +1,5 @@
+<!-- Derde tab in de opbouw van de applicatie, ofwel Informatie -->
+
 <template>
   <ion-page>
     <ion-header>

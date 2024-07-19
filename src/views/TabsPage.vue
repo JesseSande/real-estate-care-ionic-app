@@ -1,3 +1,5 @@
+<!-- Basis voor de tab opbouw van de applicatie -->
+
 <template>
   <ion-page>
     <TheTabs />

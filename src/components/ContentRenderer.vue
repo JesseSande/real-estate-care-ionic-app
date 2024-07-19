@@ -1,4 +1,5 @@
-<!-- Code m.b.v. ChatGPT4o. Doel van het component is het gebruik van v-html vermijden. -->
+<!-- Code m.b.v. ChatGPT4o. Doel van het component is het gebruik van v-html vermijden -->
+
 <template>
   <div>
     <component 

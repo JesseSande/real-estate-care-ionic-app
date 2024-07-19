@@ -1,3 +1,6 @@
+<!-- Deze component is ingevoegd in de ExploreContainer zodat er middels een card 
+doorgeklikt kan worden naar de kennisbase -->
+
 <template>
   <router-link to="/knowledgebase-details" class="card">
     <ion-icon :icon="folder" class="icon"></ion-icon>

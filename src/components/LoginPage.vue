@@ -1,4 +1,4 @@
-<!--Code van de alert, bij template en bij script, is gemaakt m.b.v. ChatGPT4o-->
+<!-- Login pagina. Code van de alert, bij zowel template als script, is gemaakt m.b.v. ChatGPT4o -->
 
 <template>
     <ion-page>
@@ -11,9 +11,10 @@
             <img 
                 class="logoLogin" 
                 src="@/assets/logo REC-1.6.png" 
-                alt="logo-afbeelding" 
+                alt="logo Real Estate Care" 
                 width="350px"
             >
+            <!-- Login simulatie -->
             <div class="centerContainer">
                 <ion-grid class="loginGrid" :fixed="true">
                     <form class="loginForm">
@@ -59,6 +60,7 @@
                     </ion-row>
                 </ion-grid>
             </div>
+            <!-- Simulatie 2 way authentication verificatiecode -->
             <ion-alert 
                 :is-open="showAlert"
                 header="2FA Verificatie"

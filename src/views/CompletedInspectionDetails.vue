@@ -1,14 +1,18 @@
+<!-- Via deze component worden de details zichtbaar van de afgeronde inspectie die is aangeklikt -->
+
 <template>
     <ion-page>
         <TheHeader />
         <ion-content>
             <h1>Inspectie Details</h1>
             <div v-if="inspection">
+                <!-- Algemene details die voor elk soort inspectie worden getoond. -->
                 <p><strong>Locatie:</strong> {{ inspection.location }}</p>
                 <p><strong>Datum:</strong> {{ inspection.date }}</p>
                 <p><strong>Type:</strong> {{ inspection.type }}</p>
         
                 <div v-if="inspection.details">
+                    <!-- Details voor de inspectie schade opnemen -->
                     <div v-if="inspection.details.damageInspection">
                         <h2>Schade informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.damageInspection.location }}</p>
@@ -34,6 +38,7 @@
                         </div>
                     </div>
 
+                    <!-- Details voor de inspectie achterstallig onderhoud opnemen -->
                     <div v-if="inspection.details.maintenanceInspection">
                         <h2>Onderhoud informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.maintenanceInspection.location }}</p>
@@ -57,6 +62,7 @@
                         </div>
                     </div>
 
+                    <!-- Details voor de inspectie technische installaties inspecteren -->
                     <div v-if="inspection.details.installationInspection">
                         <h2>Installatie informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.installationInspection.location }}</p>
@@ -81,6 +87,7 @@
                         </div>
                     </div>
 
+                    <!-- Details voor de inspectie modificaties inventariseren --> 
                     <div v-if="inspection.details.modificationInspection">
                         <h2>Modificatie informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.modificationInspection.modificationLocation }}</p>
@@ -105,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Button om inspectie te bewerken -->
                 <ion-button 
                     class="visibleButton" 

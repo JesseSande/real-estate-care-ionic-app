@@ -1,3 +1,5 @@
+<!-- Deze component is aan alle views toegevoegd zodat overal de header zichtbaar is -->
+
 <template>
   <ion-header>
     <ion-toolbar>
@@ -19,7 +21,7 @@
         <img 
           @click="goToHome" 
           src="@/assets/logo REC-1.7.png" 
-          alt="logo-afbeelding" 
+          alt="logo Real Estate Care" 
           width="275px"
         >
       </ion-buttons>

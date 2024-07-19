@@ -1,3 +1,5 @@
+<!-- Tweede tab in de opbouw van de applicatie, ofwel Zoeken -->
+
 <template>
   <ion-page>
     <ion-header>

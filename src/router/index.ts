@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
-  { //Eerste geschreven m.b.v. ChatGPT, de rest op dezelfde manier zelf toegevoegd.
+  { // Eerste geschreven m.b.v. ChatGPT, de rest op dezelfde manier zelf toegevoegd
     path: "/assigned-details",
     component: () => import("@/views/AssignedDetails.vue")
   },

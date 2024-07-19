@@ -1,3 +1,5 @@
+<!-- Deze component verzorgt de routering binnen de tabbar --> 
+
 <template>
     <ion-tabs>
         <ion-router-outlet></ion-router-outlet>

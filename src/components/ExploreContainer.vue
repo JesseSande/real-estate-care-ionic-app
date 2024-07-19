@@ -1,4 +1,5 @@
-ExploreContainer.vue:
+<!-- Container in de actieve taak tab (Tab1) waarin doorgeklikt kan worden naar de hoofdfuncties van de applicatie -->
+
 <template>
   <div class="grid-container">
     <AssignedPage />

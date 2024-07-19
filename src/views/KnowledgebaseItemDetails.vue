@@ -1,3 +1,5 @@
+<!-- Via deze component worden de details van het knowledgebase item waarop is geklikt zichtbaar --> 
+
 <template>
   <ion-page>
     <TheHeader />
@@ -27,10 +29,10 @@
     knowledgebaseItem.value = await knowledgebaseStore.fetchKnowledgebaseItem(id);
   });
 
-  // Parse the content into a structured format
+  // Content parsen in een gestructureerd format
   const parsedContent = computed(() => parseContent(knowledgebaseItem.value.content));
 
-  // Function to parse content into blocks
+  // Functie om content in blokken te parsen
   function parseContent(content) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, 'text/html');
@@ -41,7 +43,7 @@
     return blocks;
   }
 
-  // Function to parse individual nodes
+  // Functie om individuele nodes te parsen
   function parseNode(node) {
     const block = {
       tag: node.nodeName.toLowerCase(),
@@ -71,8 +73,4 @@
 <style scoped>
   @import "../theme/styles.css";
   @import "../theme/variables.css";
-
-  /*p {
-    white-space: pre-line;
-  }*/
 </style>

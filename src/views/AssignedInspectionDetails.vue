@@ -1,9 +1,13 @@
+<!-- Via deze component worden de details zichtbaar van de toegewezen inspectie die is aangeklikt.
+Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
+
 <template>
     <ion-page>
         <TheHeader />
         <ion-content>
             <h1>Inspectie Details</h1>
             <div v-if="inspection">
+                <!-- Algemene details van de inspectie -->
                 <p><strong>Locatie:</strong> {{ inspection.location }}</p>
                 <p><strong>Datum:</strong> {{ inspection.date }}</p>
                 <p><strong>Type:</strong> {{ inspection.type }}</p>
@@ -535,7 +539,7 @@
                 >Inspectie afronden</ion-button>
             </div>
 
-            <!-- Bevestigingspopup voor het verwijderen van foto's -->
+            <!-- Bevestigingspopup voor het verwijderen van fotos -->
             <ion-alert
                 :is-open="showDeleteAlert"
                 header="Foto verwijderen"
@@ -657,11 +661,13 @@
         modificationComments: ""
     });
 
+    // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
         const id = route.params.id;
         inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
         console.log("Selected inspection:", inspection.value);
 
+        // Stel de opties in op basis van de bestaande inspectiegegevens
         options.value = {
             damageInspection: false,
             maintenanceInspection: false,
@@ -686,12 +692,13 @@
                 break;
         }
 
-        // Controleer en initialise damageDate als deze niet bestaat of niet geldig is
+        // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
         if (!inspectionDetails.value.damageDate) {
             inspectionDetails.value.damageDate = new Date().toISOString(); // Standaard naar huidige datum en tijd in ISO 8601 formaat
         }
     });
 
+    // Foto maken met de camera
     const takePhoto = async () => {
         try {
             const image = await Camera.getPhoto({
@@ -709,6 +716,7 @@
         }
     };
 
+    // Bestand uploaden
     const handleFileUpload = (event, category) => {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -719,11 +727,13 @@
         reader.readAsDataURL(file);
     };
 
+    // Foto-opties presenteren
     const presentPhotoOptions = (category) => {
         currentCategory.value = category;
         takePhoto();
     };
 
+    // Configuratie van alert knoppen
     const alertOkButton = [
         {
             text: "OK",
@@ -752,12 +762,14 @@
         },
     ];
 
+    // Het verwijderen van een foto bevestigen
     const confirmDeletePhoto = (category, index) => {
         currentCategory.value = category;
         deleteIndex.value = index;
         showDeleteAlert.value = true;
     };
 
+    // Foto verwijderen
     const deletePhoto = () => {
         if (deleteIndex.value !== null) {
             photos.value[currentCategory.value].splice(deleteIndex.value, 1);
@@ -766,6 +778,7 @@
         }
     };
 
+    // Inspectiegegevens valideren
     const validateInspectionDetails = () => {
         errors.value = {};
 
@@ -807,6 +820,7 @@
         return Object.keys(errors.value).length === 0;
     };
 
+    // Afronding inspectie bevestigen en gegevens opslaan
     const confirmCompleteInspection = () => {
         if (!validateInspectionDetails()) {
             showValidationError.value = true;
@@ -852,6 +866,7 @@
         showCompleteAlert.value = true;
     };
 
+    // Doorverwijzing naar kennisbase item
     const goToKnowledgebaseItem = (id) => {
         router.push(`/knowledgebase-details/${id}`);
     };
@@ -869,7 +884,8 @@
         margin: 1rem 0;
     }
 
-    /*Checkbox stylen zodat het ook lijkt op een checkbox (vierkant) i.p.v. een radio button (rond). O.b.v. https://ionicframework.com/docs/api/checkbox */
+    /* Checkbox stylen zodat het ook lijkt op een checkbox (vierkant) i.p.v. een radio button (rond). 
+    O.b.v. https://ionicframework.com/docs/api/checkbox */
     ion-checkbox {
         --size: 1.5rem;
         --checkbox-background-checked: var(--ion-color-firstcolor);
@@ -880,7 +896,8 @@
         border: 2px solid var(--ion-color-firstcolor);
     }
 
-    /*Radio stijlen zodat het ook lijkt op een radio button. O.b.v. https://ionicframework.com/docs/api/radio */
+    /* Radio stylen zodat het ook lijkt op een radio button. 
+    O.b.v. https://ionicframework.com/docs/api/radio */
     ion-radio {
         --border-radius: 4px;
         --inner-border-radius: 4px;
@@ -901,7 +918,7 @@
         border-color: var(--ion-color-firstcolor);
     }
 
-    /*Datum invoer stijlen*/
+    /* Datum invoer stylen */
     .visibleDatetimeButton {
         padding: 1rem;
     }

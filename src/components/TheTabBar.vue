@@ -1,3 +1,5 @@
+<!-- Deze component is aan alle views toegevoegd zodat overal de tabbar zichtbaar is -->
+
 <template>
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="tab1" href="/tabs/tab1">
@@ -8,7 +10,6 @@
             />
             <ion-label>Actieve taak</ion-label>
         </ion-tab-button>
-
         <ion-tab-button tab="tab2" href="/tabs/tab2">
             <ion-icon 
                 class="tabIcon" 
@@ -17,7 +18,6 @@
             />
             <ion-label>Zoeken</ion-label>
         </ion-tab-button>
-
         <ion-tab-button tab="tab3" href="/tabs/tab3">
             <ion-icon 
                 class="tabIcon" 

@@ -1,7 +1,7 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
 
-/*Opmaak toolbar en tabbar, algemeen op alle pagina's.*/
+/* Opmaak toolbar, tabbar en algemeen op alle paginas */
 :root {
 	--ion-color-firstcolor: #00aaa2;
 	--ion-color-firstcolor-rgb: 0,170,162;
@@ -90,7 +90,8 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: var(--ion-color-b)
 }
 
-/* This sets a different item background when dark mode is enabled on ios and md */
+/* This sets a different item background when dark mode is enabled on ios and md. 
+O.b.v. https://ionicframework.com/docs/theming/dark-mode */
 .ion-palette-dark {
     --ion-background-color: var(--ion-background-color-dark);
     --ion-tab-bar-background: var(--ion-tab-bar-background-dark);

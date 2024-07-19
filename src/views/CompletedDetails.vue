@@ -1,3 +1,5 @@
+<!-- Via deze component wordt het overzicht aan afgeronde inspecties zichtbaar -->
+
 <template>
   <ion-page>
     <TheHeader />
@@ -42,6 +44,7 @@
   const router = useRouter();
   const inspectionStore = useInspectionStore();
 
+  // Afgeronde inspecties gesorteerd van nieuw naar oud
   const sortedCompletedInspections = computed(() => {
     return [...inspectionStore.completedInspections].sort((a, b) => new Date(b.date) - new Date(a.date));
   });

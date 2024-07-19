@@ -1,3 +1,5 @@
+<!-- Via deze component wordt het overzicht aan toegewezen inspecties zichtbaar -->
+
 <template>
   <ion-page>
     <TheHeader />

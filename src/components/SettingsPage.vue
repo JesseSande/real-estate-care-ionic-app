@@ -1,3 +1,6 @@
+<!-- Deze component is ingevoegd in de ExploreContainer zodat er middels een card 
+doorgeklikt kan worden naar de instellingen -->
+
 <template>
   <router-link to="/settings-details" class="card">
     <ion-icon :icon="settings" class="icon"></ion-icon>

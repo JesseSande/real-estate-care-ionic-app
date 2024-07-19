@@ -1,3 +1,5 @@
+<!-- Eerste tab in de opbouw van de applicatie, ofwel Actieve taak -->
+
 <template>
   <ion-page>
     <ion-header>

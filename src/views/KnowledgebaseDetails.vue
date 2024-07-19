@@ -1,3 +1,5 @@
+<!-- Via deze component wordt het overzicht van de kennisbase zichtbaar -->
+
 <template>
   <ion-page>
     <TheHeader />
@@ -41,6 +43,7 @@
   const knowledgebaseStore = useKnowledgebaseStore();
   const router = useRouter();
 
+  // Haalt alle kennisbase artikelen op zodra de component is gemounted 
   onMounted(async () => {
     await knowledgebaseStore.fetchKnowledgebaseItems();
   });

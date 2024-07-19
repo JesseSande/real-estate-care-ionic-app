@@ -1,5 +1,6 @@
-<!--Inhoud van ion-content, import ref en const notifications van deze meldingen pagina zijn uitgewerkt 
-met ChatGPT4o. Dit is een simulatie van inhoud en is intentioneel geen werkende inhoud.-->
+<!-- Via deze component worden de meldingen zichtbaar. Inhoud van ion-content, import ref en const 
+notifications van deze meldingen pagina zijn uitgewerkt m.b.v. ChatGPT4o. 
+Dit is een simulatie van inhoud en is intentioneel geen werkende inhoud.-->
 
 <template>
     <ion-page>
