@@ -157,7 +157,7 @@
     });
 
     const editInspection = () => {
-        router.push(`/edit-inspection/${inspection.value.id}`);
+        router.push(`/inspectie-bewerken/${inspection.value.id}`);
     };
 </script>
 

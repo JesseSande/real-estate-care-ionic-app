@@ -51,7 +51,7 @@
   const knowledgebaseItems = computed(() => knowledgebaseStore.items);
 
   const selectItem = (item) => {
-    router.push(`/knowledgebase-details/${item.id}`);
+    router.push(`/kennisbase/${item.id}`);
   };
 </script>
 
@@ -67,7 +67,7 @@
   }
   
   .knowledgebaseItemTitle {
-    color: var(--ion-color-secondcolor);
+    color: var(--ion-text-color);
     margin: 0;
   }
 </style>

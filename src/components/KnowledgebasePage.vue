@@ -2,8 +2,12 @@
 doorgeklikt kan worden naar de kennisbase -->
 
 <template>
-  <router-link to="/knowledgebase-details" class="card">
-    <ion-icon :icon="folder" class="icon"></ion-icon>
+  <router-link to="/kennisbase" class="card">
+    <ion-icon 
+      :icon="folder" 
+      class="icon" 
+      aria-hidden="true"
+    ></ion-icon>
     <ion-text>
       <h2 class="cardHeader">Kennisbase</h2>
     </ion-text>

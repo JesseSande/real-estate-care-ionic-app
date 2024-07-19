@@ -4,17 +4,21 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="primary">
-        <ion-button @click="goToNotifications">
-          <ion-icon 
-            slot="icon-only" 
-            :icon="notifications"
-          ></ion-icon>
+        <ion-button 
+          @click="goToNotifications"
+          aria-label="meldingen">
+            <ion-icon 
+              slot="icon-only" 
+              :icon="notifications"
+            ></ion-icon>
         </ion-button>
-        <ion-button @click="goToSettings">
-          <ion-icon 
-            slot="icon-only" 
-            :icon="settings"
-          ></ion-icon>
+        <ion-button 
+          @click="goToSettings"
+          aria-label="instellingen">
+            <ion-icon 
+              slot="icon-only" 
+              :icon="settings"
+            ></ion-icon>
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="secondary">
@@ -55,15 +59,15 @@
   const router = useRouter();
 
   const goToHome = () => {
-    router.push("/tabs/tab1");
+    router.push("/tabs/actieve-taak");
   };
 
   const goToNotifications = () => {
-    router.push("/notifications-details");
+    router.push("/meldingen");
   };
 
   const goToSettings = () => {
-    router.push("/settings-details");
+    router.push("/instellingen");
   };
 </script>
 

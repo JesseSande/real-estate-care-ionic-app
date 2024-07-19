@@ -157,6 +157,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -266,6 +267,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -331,7 +333,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                     class="visibleButton" 
                                     @click="goToKnowledgebaseItem('testProcedure')" 
                                     id="testProcedureLink"
-                                >Bekijk testprocedure</ion-button>
+                                >Bekijk testprocedures</ion-button>
                             </ion-item>
 
                             <!-- Goedgekeurd (radio ja/nee, verplicht) -->
@@ -391,6 +393,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -524,6 +527,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -740,7 +744,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             role: "confirm",
             handler: () => {
                 console.log("OK clicked");
-                router.push("/completed-details");
+                router.push("/afgeronde-inspecties");
             }
         }
     ];
@@ -868,7 +872,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Doorverwijzing naar kennisbase item
     const goToKnowledgebaseItem = (id) => {
-        router.push(`/knowledgebase-details/${id}`);
+        router.push(`/kennisbase/${id}`);
     };
 </script>
 

@@ -50,7 +50,7 @@
   });
 
   const selectInspection = (inspection) => {
-    router.push(`/completed-details/${inspection.id}`);
+    router.push(`/afgeronde-inspecties/${inspection.id}`);
   };
 </script>
 

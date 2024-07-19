@@ -18,56 +18,56 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "",
-        redirect: "/tabs/tab1"
+        redirect: "/tabs/actieve-taak"
       },
       {
-        path: "tab1",
+        path: "actieve-taak",
         component: () => import("@/views/Tab1Page.vue")
       },
       {
-        path: "tab2",
+        path: "zoeken",
         component: () => import("@/views/Tab2Page.vue")
       },
       {
-        path: "tab3",
+        path: "informatie",
         component: () => import("@/views/Tab3Page.vue")
       }
     ]
   },
   { // Eerste geschreven m.b.v. ChatGPT, de rest op dezelfde manier zelf toegevoegd
-    path: "/assigned-details",
+    path: "/toegewezen-inspecties",
     component: () => import("@/views/AssignedDetails.vue")
   },
   {
-    path: "/assigned-details/:id",
+    path: "/toegewezen-inspecties/:id",
     component: () => import("@/views/AssignedInspectionDetails.vue")
   },
   {
-    path: "/completed-details",
+    path: "/afgeronde-inspecties",
     component: () => import("@/views/CompletedDetails.vue")
   },
   {
-    path: "/completed-details/:id",
+    path: "/afgeronde-inspecties/:id",
     component: () => import("@/views/CompletedInspectionDetails.vue")
   },
   {
-    path: "/notifications-details",
+    path: "/meldingen",
     component: () => import("@/views/NotificationsDetails.vue")
   },
   {
-    path: "/settings-details",
+    path: "/instellingen",
     component: () => import("@/views/SettingsDetails.vue")
   },
   {
-    path: "/knowledgebase-details",
+    path: "/kennisbase",
     component: () => import("@/views/KnowledgebaseDetails.vue")
   }, 
   {
-    path: "/knowledgebase-details/:id",
+    path: "/kennisbase/:id",
     component: () => import("@/views/KnowledgebaseItemDetails.vue")
   },
   {
-    path: "/edit-inspection/:id",
+    path: "/inspectie-bewerken/:id",
     component: () => import("@/views/EditInspection.vue")
   }
 ];

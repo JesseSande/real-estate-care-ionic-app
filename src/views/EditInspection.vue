@@ -157,6 +157,7 @@
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -266,6 +267,7 @@
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -391,6 +393,7 @@
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -523,6 +526,7 @@
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -773,7 +777,7 @@
             role: 'confirm',
             handler: () => {
                 console.log('OK clicked');
-                router.push('/completed-details');
+                router.push('/afgeronde-inspecties');
             }
         }
     ];
@@ -895,7 +899,7 @@
     };
 
     const goToKnowledgebaseItem = (id) => {
-        router.push(`/knowledgebase-details/${id}`);
+        router.push(`/kennisbase/${id}`);
     };
 </script>
 

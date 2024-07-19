@@ -2,8 +2,12 @@
 doorgeklikt kan worden naar de toegewezen inspecties -->
 
 <template>
-  <router-link to="/assigned-details" class="card">
-    <ion-icon :icon="clipboard" class="icon"></ion-icon>
+  <router-link to="/toegewezen-inspecties" class="card">
+    <ion-icon 
+      :icon="clipboard" 
+      class="icon" 
+      aria-hidden="true"
+    ></ion-icon>
     <ion-text>
       <h2 class="cardHeader">Toegewezen</h2>
     </ion-text>

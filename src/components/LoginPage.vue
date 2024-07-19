@@ -51,7 +51,7 @@
                     </form>
                     <ion-row class="loginGridRow">
                         <ion-col>
-                            <ion-button 
+                            <ion-button
                                 class="visibleButton" 
                                 expand="block" 
                                 @click="login"
@@ -135,7 +135,7 @@
         if (code === "123456") { //Simuleer verificatiecode
             localStorage.setItem("user", JSON.stringify({ username: username.value }));
             dismissAlert();
-            router.push("/tabs/tab1");
+            router.push("/tabs/actieve-taak");
         } else {
             alert("Ongeldige verificatiecode");
         }

@@ -54,7 +54,7 @@
   });
 
   const selectInspection = (inspection) => {
-    router.push(`/assigned-details/${inspection.id}`);
+    router.push(`/toegewezen-inspecties/${inspection.id}`);
   };
 </script>
 
@@ -74,7 +74,7 @@
   }
 
   .basicIonLabel h2, p {
-    color: var(--ion-color-secondcolor);
+    color: var(--ion-text-color);
     margin: 0;
   }
 

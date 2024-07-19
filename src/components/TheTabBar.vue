@@ -2,7 +2,7 @@
 
 <template>
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
+        <ion-tab-button tab="tab1" href="/tabs/actieve-taak">
             <ion-icon 
                 class="tabIcon" 
                 aria-hidden="true" 
@@ -10,7 +10,7 @@
             />
             <ion-label>Actieve taak</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="tab2" href="/tabs/tab2">
+        <ion-tab-button tab="tab2" href="/tabs/zoeken">
             <ion-icon 
                 class="tabIcon" 
                 aria-hidden="true" 
@@ -18,7 +18,7 @@
             />
             <ion-label>Zoeken</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="tab3" href="/tabs/tab3">
+        <ion-tab-button tab="tab3" href="/tabs/informatie">
             <ion-icon 
                 class="tabIcon" 
                 aria-hidden="true" 
