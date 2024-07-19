@@ -2,8 +2,12 @@
 doorgeklikt kan worden naar de instellingen -->
 
 <template>
-  <router-link to="/settings-details" class="card">
-    <ion-icon :icon="settings" class="icon"></ion-icon>
+  <router-link to="/instellingen" class="card">
+    <ion-icon 
+      :icon="settings" 
+      class="icon" 
+      aria-hidden="true"
+    ></ion-icon>
     <ion-text>
       <h2 class="cardHeader">Instellingen</h2>
     </ion-text>

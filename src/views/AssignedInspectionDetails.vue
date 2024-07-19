@@ -88,12 +88,12 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                 <ion-label position="stacked">Datum uitgevoerd<span class="required"> (verplicht)</span></ion-label>
                                 <ion-datetime-button 
                                     class="visibleDatetimeButton" 
-                                    datetime="damageDatetime"
+                                    datetime="damageDate"
                                 ></ion-datetime-button>
                                 <ion-modal :keep-contents-mounted="true">
                                     <ion-datetime 
                                         v-model="inspectionDetails.damageDate" 
-                                        id="damageDatetime"
+                                        id="damageDate"
                                     ></ion-datetime>
                                 </ion-modal>
                             </ion-item>
@@ -157,6 +157,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -266,6 +267,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -331,7 +333,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                     class="visibleButton" 
                                     @click="goToKnowledgebaseItem('testProcedure')" 
                                     id="testProcedureLink"
-                                >Bekijk testprocedure</ion-button>
+                                >Bekijk testprocedures</ion-button>
                             </ion-item>
 
                             <!-- Goedgekeurd (radio ja/nee, verplicht) -->
@@ -391,6 +393,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -524,6 +527,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                                                     <ion-icon 
                                                         class="trashIcon"
                                                         :icon="trash"
+                                                        aria-label="verwijderen"
                                                     ></ion-icon>
                                             </ion-button>
                                     </li>
@@ -564,7 +568,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 @did-dismiss="showValidationError = false"
             ></ion-toast>
         </ion-content>
-    <TheTabBar />
+    <!--<TheTabBar />-->
     </ion-page>
 </template>
 
@@ -604,7 +608,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         IonToast 
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
-    import TheTabBar from "@/components/TheTabBar.vue";
+    //import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
@@ -663,6 +667,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
+        
         const id = route.params.id;
         inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
         console.log("Selected inspection:", inspection.value);
@@ -740,7 +745,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             role: "confirm",
             handler: () => {
                 console.log("OK clicked");
-                router.push("/completed-details");
+                router.push("/afgeronde-inspecties");
             }
         }
     ];
@@ -868,7 +873,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Doorverwijzing naar kennisbase item
     const goToKnowledgebaseItem = (id) => {
-        router.push(`/knowledgebase-details/${id}`);
+        router.push(`/kennisbase/${id}`);
     };
 </script>
 
@@ -942,7 +947,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         padding: 0.5rem;
         border: 1px solid var(--ion-color-firstcolor);
         border-radius: 4px;
-        background-color: #f9f9f9;
+        background-color: var(--ion-background-color);
     }
 
     .trashIcon {

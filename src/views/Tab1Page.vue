@@ -17,8 +17,8 @@
     IonHeader,  
     IonContent 
   } from '@ionic/vue';
-  import ExploreContainer from '@/components/ExploreContainer.vue';
-  import TheHeader from '@/components/TheHeader.vue';
+  import ExploreContainer from "@/components/ExploreContainer.vue";
+  import TheHeader from "@/components/TheHeader.vue";
 </script>
 
 <style scoped>

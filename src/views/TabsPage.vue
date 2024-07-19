@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-  import { IonPage } from '@ionic/vue';
-  import TheTabs from '@/components/TheTabs.vue';
+  import { IonPage } from "@ionic/vue";
+  import TheTabs from "@/components/TheTabs.vue";
 </script>
 
 <style scoped>

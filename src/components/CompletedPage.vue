@@ -2,8 +2,12 @@
 doorgeklikt kan worden naar de afgeronde inspecties -->
 
 <template>
-  <router-link to="/completed-details" class="card">
-    <ion-icon :icon="checkmarkCircle" class="icon"></ion-icon>
+  <router-link to="/afgeronde-inspecties" class="card">
+    <ion-icon 
+      :icon="checkmarkCircle" 
+      class="icon" 
+      aria-hidden="true"
+    ></ion-icon>
     <ion-text>
       <h2 class="cardHeader">Afgerond</h2>
     </ion-text>
