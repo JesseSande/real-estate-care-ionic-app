@@ -8,5 +8,5 @@
 import { 
   IonApp, 
   IonRouterOutlet 
-} from '@ionic/vue';
+} from "@ionic/vue";
 </script>

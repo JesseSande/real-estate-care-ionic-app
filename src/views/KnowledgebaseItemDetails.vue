@@ -12,17 +12,17 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, computed } from 'vue';
-  import { useRoute } from 'vue-router';
-  import { useKnowledgebaseStore } from '@/stores/knowledgebaseStore';
-  import { IonPage, IonContent } from '@ionic/vue';
-  import TheHeader from '@/components/TheHeader.vue';
-  import TheTabBar from '@/components/TheTabBar.vue';
-  import ContentRenderer from '@/components/ContentRenderer.vue';
+  import { ref, onMounted, computed } from "vue";
+  import { useRoute } from "vue-router";
+  import { useKnowledgebaseStore } from "@/stores/knowledgebaseStore";
+  import { IonPage, IonContent } from "@ionic/vue";
+  import TheHeader from "@/components/TheHeader.vue";
+  import TheTabBar from "@/components/TheTabBar.vue";
+  import ContentRenderer from "@/components/ContentRenderer.vue";
 
   const route = useRoute();
   const knowledgebaseStore = useKnowledgebaseStore();
-  const knowledgebaseItem = ref({ title: '', content: '' });
+  const knowledgebaseItem = ref({ title: "", content: "" });
 
   onMounted(async () => {
     const id = route.params.id;
@@ -35,7 +35,7 @@
   // Functie om content in blokken te parsen
   function parseContent(content) {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
+    const doc = parser.parseFromString(content, "text/html");
     const blocks = [];
     doc.body.childNodes.forEach((node) => {
       blocks.push(parseNode(node));

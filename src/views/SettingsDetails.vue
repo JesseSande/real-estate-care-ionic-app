@@ -23,7 +23,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
                 header="Accountgegevens wijzigen"
                 sub-header="Oeps&excl;"
                 message="Deze functionaliteit is nog niet uitgewerkt."
-                :buttons="['OK']"
+                :buttons="["OK"]"
               ></ion-alert>
             </ion-col>
           </ion-row>
@@ -56,7 +56,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
           header="Meldingen instellen"
           sub-header="Oeps&excl;"
           message="Deze functionaliteit is nog niet uitgewerkt."
-          :buttons="['OK']"
+          :buttons="["OK"]"
         ></ion-alert>
       </ion-list>
       <hr>
@@ -72,8 +72,8 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref } from "vue";
+  import { useRouter } from "vue-router";
   import { 
     IonPage, 
     IonContent, 
@@ -85,26 +85,26 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
     IonList, 
     IonItem, 
     IonToggle 
-  } from '@ionic/vue';
-  import type { ToggleCustomEvent } from '@ionic/vue';
-  import TheHeader from '@/components/TheHeader.vue';
-  import TheTabBar from '@/components/TheTabBar.vue';
+  } from "@ionic/vue";
+  import type { ToggleCustomEvent } from "@ionic/vue";
+  import TheHeader from "@/components/TheHeader.vue";
+  import TheTabBar from "@/components/TheTabBar.vue";
 
   const router = useRouter();
 
   const logout = () => {
-    localStorage.removeItem('user');
-    router.push('/login');
+    localStorage.removeItem("user");
+    router.push("/login");
   };
 
   const paletteToggle = ref(false);
 
   // Gebruik matchMedia om de gebruikersvoorkeur te checken
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
   // Toevoegen of verwijderen van de "ion-palette-dark" class op het html element
   const toggleDarkPalette = (shouldAdd) => {
-    document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+    document.documentElement.classList.toggle("ion-palette-dark", shouldAdd);
   };
 
   // Aan- of uitzetten van de toggle en de palet updaten gebaseerd op isDark
@@ -117,7 +117,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
   initializeDarkPalette(prefersDark.matches);
 
   // Event listener voor veranderingen aan de prefers-color-scheme media query
-  prefersDark.addEventListener('change', (mediaQuery) => initializeDarkPalette(mediaQuery.matches));
+  prefersDark.addEventListener("change", (mediaQuery) => initializeDarkPalette(mediaQuery.matches));
 
   // Event listener voor het aan- of uitzetten van de toggle voor het donkere palet
   const toggleChange = (ev: ToggleCustomEvent) => {

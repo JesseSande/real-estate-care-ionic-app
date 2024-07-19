@@ -28,18 +28,18 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { useInspectionStore } from '@/stores/inspectionStore';
+  import { computed } from "vue";
+  import { useRouter } from "vue-router";
+  import { useInspectionStore } from "@/stores/inspectionStore";
   import { 
     IonPage, 
     IonContent, 
     IonList, 
     IonItem, 
     IonLabel 
-  } from '@ionic/vue';
-  import TheHeader from '@/components/TheHeader.vue';
-  import TheTabBar from '@/components/TheTabBar.vue';
+  } from "@ionic/vue";
+  import TheHeader from "@/components/TheHeader.vue";
+  import TheTabBar from "@/components/TheTabBar.vue";
 
   const router = useRouter();
   const inspectionStore = useInspectionStore();
