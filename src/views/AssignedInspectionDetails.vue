@@ -568,7 +568,6 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 @did-dismiss="showValidationError = false"
             ></ion-toast>
         </ion-content>
-    <!--<TheTabBar />-->
     </ion-page>
 </template>
 
@@ -608,7 +607,6 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         IonToast 
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
-    //import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
