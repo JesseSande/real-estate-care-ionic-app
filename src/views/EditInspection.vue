@@ -575,16 +575,16 @@
     import { 
         ref, 
         onMounted 
-    } from "vue";
+    } from 'vue';
     import { 
         useRoute, 
         useRouter 
-    } from "vue-router";
-    import { useInspectionStore } from "@/stores/inspectionStore";
+    } from 'vue-router';
+    import { useInspectionStore } from '@/stores/inspectionStore';
     import { 
         ImageOutline, 
         trash 
-    } from "ionicons/icons";
+    } from 'ionicons/icons';
     import { 
         IonPage, 
         IonContent, 
@@ -605,14 +605,14 @@
         IonIcon,
         IonAlert,
         IonToast 
-    } from "@ionic/vue";
-    import TheHeader from "@/components/TheHeader.vue";
-    import TheTabBar from "@/components/TheTabBar.vue";
+    } from '@ionic/vue';
+    import TheHeader from '@/components/TheHeader.vue';
+    import TheTabBar from '@/components/TheTabBar.vue';
     import { 
         Camera, 
         CameraResultType, 
         CameraSource 
-    } from "@capacitor/camera";
+    } from '@capacitor/camera';
 
     const route = useRoute();
     const router = useRouter();
@@ -642,37 +642,37 @@
 
     const options = ref(null);
     const inspectionDetails = ref({
-        damageLocation: "",
+        damageLocation: '',
         newDamage: false,
-        damageType: "",
-        damageDate: "",
+        damageType: '',
+        damageDate: '',
         immediateActionRequired: false,
-        damageDescription: "",
-        maintenanceLocation: "",
-        maintenanceType: "",
+        damageDescription: '',
+        maintenanceLocation: '',
+        maintenanceType: '',
         maintenanceImmediateActionRequired: false,
-        maintenanceCostEstimate: "",
-        installationLocation: "",
-        installationType: "",
-        reportedMalfunction: "",
+        maintenanceCostEstimate: '',
+        installationLocation: '',
+        installationType: '',
+        reportedMalfunction: '',
         approved: false,
-        installationComments: "",
-        modificationLocation: "",
-        performedBy: "",
-        modificationDescription: "",
-        actionRequired: "",
-        modificationComments: ""
+        installationComments: '',
+        modificationLocation: '',
+        performedBy: '',
+        modificationDescription: '',
+        actionRequired: '',
+        modificationComments: ''
     });
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
         const id = route.params.id;
-        console.log("Route ID:", id); // Log de route ID
+        console.log('Route ID:', id); // Log de route ID
         inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
-        console.log("Selected inspection for editing:", inspection.value); // Log de geselecteerde inspectie
+        console.log('Selected inspection for editing:', inspection.value); // Log de geselecteerde inspectie
 
         if (!inspection.value) {
-            console.error("Inspectie niet gevonden");
+            console.error('Inspectie niet gevonden');
             return;
         }
 
@@ -692,26 +692,26 @@
 
             // Vul de inspectieDetails met de bestaande gegevens
             inspectionDetails.value = {
-                damageLocation: inspection.value.details.damageInspection?.location || "",
+                damageLocation: inspection.value.details.damageInspection?.location || '',
                 newDamage: inspection.value.details.damageInspection?.newDamage || false,
-                damageType: inspection.value.details.damageInspection?.damageType || "",
-                damageDate: inspection.value.details.damageInspection?.damageDate || "",
+                damageType: inspection.value.details.damageInspection?.damageType || '',
+                damageDate: inspection.value.details.damageInspection?.damageDate || '',
                 immediateActionRequired: inspection.value.details.damageInspection?.immediateActionRequired || false,
-                damageDescription: inspection.value.details.damageInspection?.damageDescription || "",
-                maintenanceLocation: inspection.value.details.maintenanceInspection?.location || "",
-                maintenanceType: inspection.value.details.maintenanceInspection?.maintenanceType || "",
+                damageDescription: inspection.value.details.damageInspection?.damageDescription || '',
+                maintenanceLocation: inspection.value.details.maintenanceInspection?.location || '',
+                maintenanceType: inspection.value.details.maintenanceInspection?.maintenanceType || '',
                 maintenanceImmediateActionRequired: inspection.value.details.maintenanceInspection?.immediateActionRequired || false,
-                maintenanceCostEstimate: inspection.value.details.maintenanceInspection?.costEstimate || "",
-                installationLocation: inspection.value.details.installationInspection?.location || "",
-                installationType: inspection.value.details.installationInspection?.installationType || "",
-                reportedMalfunction: inspection.value.details.installationInspection?.reportedMalfunction || "",
+                maintenanceCostEstimate: inspection.value.details.maintenanceInspection?.costEstimate || '',
+                installationLocation: inspection.value.details.installationInspection?.location || '',
+                installationType: inspection.value.details.installationInspection?.installationType || '',
+                reportedMalfunction: inspection.value.details.installationInspection?.reportedMalfunction || '',
                 approved: inspection.value.details.installationInspection?.approved || false,
-                installationComments: inspection.value.details.installationInspection?.comments || "",
-                modificationLocation: inspection.value.details.modificationInspection?.modificationLocation || "",
-                performedBy: inspection.value.details.modificationInspection?.performedBy || "",
+                installationComments: inspection.value.details.installationInspection?.comments || '',
+                modificationLocation: inspection.value.details.modificationInspection?.modificationLocation || '',
+                performedBy: inspection.value.details.modificationInspection?.performedBy || '',
                 modificationDescription: inspection.value.details.modificationInspection?.modificationDescription || '',
-                actionRequired: inspection.value.details.modificationInspection?.actionRequired || "",
-                modificationComments: inspection.value.details.modificationInspection?.modificationComments || ""
+                actionRequired: inspection.value.details.modificationInspection?.actionRequired || '',
+                modificationComments: inspection.value.details.modificationInspection?.modificationComments || ''
             };
 
             // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
@@ -745,10 +745,10 @@
             });
             const fileName = `photo_${Date.now()}.jpeg`;
             photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
-            console.log("Photo taken:", image);
+            console.log('Photo taken:', image);
         } catch (error) {
-            if (error.message !== "User cancelled photos app") {
-                console.error("Error taking photo:", error);
+            if (error.message !== 'User cancelled photos app') {
+                console.error('Error taking photo:', error);
             }
         }
     };
@@ -773,26 +773,26 @@
     // Configuratie van alert knoppen
     const alertOkButton = [
         {
-            text: "OK",
-            role: "confirm",
+            text: 'OK',
+            role: 'confirm',
             handler: () => {
-                console.log("OK clicked");
-                router.push("/afgeronde-inspecties");
+                console.log('OK clicked');
+                router.push('/afgeronde-inspecties');
             }
         }
     ];
 
     const alertCancelConfirmButtons = [
         {
-            text: "Annuleer",
-            role: "cancel",
+            text: 'Annuleer',
+            role: 'cancel',
             handler: () => {
-                console.log("Geannuleerd");
+                console.log('Geannuleerd');
             },
         },
         {
-            text: "Verwijder",
-            role: "confirm",
+            text: 'Verwijder',
+            role: 'confirm',
             handler: () => {
                 deletePhoto();
             },
@@ -973,7 +973,7 @@
         padding: 0.5rem;
         border: 1px solid var(--ion-color-firstcolor);
         border-radius: 4px;
-        background-color: #f9f9f9;
+        background-color: var(--ion-background-color);
     }
 
     .trashIcon {

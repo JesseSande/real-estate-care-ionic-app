@@ -23,7 +23,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
                 header="Accountgegevens wijzigen"
                 sub-header="Oeps&excl;"
                 message="Deze functionaliteit is nog niet uitgewerkt."
-                :buttons="["OK"]"
+                :buttons="['OK']"
               ></ion-alert>
             </ion-col>
           </ion-row>
@@ -56,7 +56,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
           header="Meldingen instellen"
           sub-header="Oeps&excl;"
           message="Deze functionaliteit is nog niet uitgewerkt."
-          :buttons="["OK"]"
+          :buttons="['OK']"
         ></ion-alert>
       </ion-list>
       <hr>

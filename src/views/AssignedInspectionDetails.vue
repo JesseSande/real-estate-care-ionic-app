@@ -568,7 +568,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 @did-dismiss="showValidationError = false"
             ></ion-toast>
         </ion-content>
-    <TheTabBar />
+    <!--<TheTabBar />-->
     </ion-page>
 </template>
 
@@ -608,7 +608,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         IonToast 
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
-    import TheTabBar from "@/components/TheTabBar.vue";
+    //import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
@@ -667,6 +667,8 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
+
+        console.log('Component Mounted')
         
         const id = route.params.id;
         inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
