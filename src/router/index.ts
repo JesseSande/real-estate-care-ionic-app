@@ -18,7 +18,7 @@ import EditInspection from "../views/EditInspection.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Login",
+    name: "FirstPage",
     redirect: "/login"
   },
   {
