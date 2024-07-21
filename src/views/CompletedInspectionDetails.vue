@@ -16,10 +16,10 @@
                     <div v-if="inspection.details.damageInspection">
                         <h2>Schade informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.damageInspection.location }}</p>
-                        <p><strong>Nieuwe schade:</strong> {{ inspection.details.damageInspection.newDamage ? 'Ja' : 'Nee' }}</p>
+                        <p><strong>Nieuwe schade:</strong> {{ inspection.details.damageInspection.newDamage ? "Ja" : "Nee" }}</p>
                         <p><strong>Soort schade:</strong> {{ inspection.details.damageInspection.damageType }}</p>
                         <p><strong>Datum uitgevoerd:</strong> {{ inspection.details.damageInspection.damageDate }}</p>
-                        <p><strong>Acute actie vereist:</strong> {{ inspection.details.damageInspection.immediateActionRequired ? 'Ja' : 'Nee' }}</p>
+                        <p><strong>Acute actie vereist:</strong> {{ inspection.details.damageInspection.immediateActionRequired ? "Ja" : "Nee" }}</p>
                         <p><strong>Omschrijving:</strong> {{ inspection.details.damageInspection.damageDescription }}</p>
                         <div v-if="inspection.details.damageInspection.photos && inspection.details.damageInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
@@ -43,7 +43,7 @@
                         <h2>Onderhoud informatie:</h2>
                         <p><strong>Locatie:</strong> {{ inspection.details.maintenanceInspection.location }}</p>
                         <p><strong>Soort onderhoud:</strong> {{ inspection.details.maintenanceInspection.maintenanceType }}</p>
-                        <p><strong>Acute actie vereist:</strong> {{ inspection.details.maintenanceInspection.immediateActionRequired ? 'Ja' : 'Nee' }}</p>
+                        <p><strong>Acute actie vereist:</strong> {{ inspection.details.maintenanceInspection.immediateActionRequired ? "Ja" : "Nee" }}</p>
                         <p><strong>Kostenindicatie:</strong> {{ inspection.details.maintenanceInspection.costEstimate }}</p>
                         <div v-if="inspection.details.maintenanceInspection.photos && inspection.details.maintenanceInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
@@ -68,7 +68,7 @@
                         <p><strong>Locatie:</strong> {{ inspection.details.installationInspection.location }}</p>
                         <p><strong>Soort installatie:</strong> {{ inspection.details.installationInspection.installationType }}</p>
                         <p><strong>Gemelde storingen:</strong> {{ inspection.details.installationInspection.reportedMalfunction }}</p>
-                        <p><strong>Goedgekeurd:</strong> {{ inspection.details.installationInspection.approved ? 'Ja' : 'Nee' }}</p>
+                        <p><strong>Goedgekeurd:</strong> {{ inspection.details.installationInspection.approved ? "Ja" : "Nee" }}</p>
                         <p><strong>Opmerkingen:</strong> {{ inspection.details.installationInspection.comments }}</p>
                         <div v-if="inspection.details.installationInspection.photos && inspection.details.installationInspection.photos.length">
                             <p><strong>Bewijsmateriaal:</strong></p>
@@ -131,19 +131,19 @@
     import { 
         ref, 
         onMounted 
-    } from 'vue';
+    } from "vue";
     import { 
         useRoute, 
         useRouter 
-    } from 'vue-router';
-    import { useInspectionStore } from '@/stores/inspectionStore';
+    } from "vue-router";
+    import { useInspectionStore } from "@/stores/inspectionStore";
     import { 
         IonPage, 
         IonContent, 
         IonButton 
-    } from '@ionic/vue';
-    import TheHeader from '@/components/TheHeader.vue';
-    import TheTabBar from '@/components/TheTabBar.vue';
+    } from "@ionic/vue";
+    import TheHeader from "@/components/TheHeader.vue";
+    import TheTabBar from "@/components/TheTabBar.vue";
 
     const route = useRoute();
     const router = useRouter();
@@ -153,7 +153,7 @@
     onMounted(() => {
         const id = route.params.id;
         inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
-        console.log('Selected inspection:', inspection.value);
+        console.log("Selected inspection:", inspection.value);
     });
 
     const editInspection = () => {

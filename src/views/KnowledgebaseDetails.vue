@@ -27,18 +27,18 @@
     ref, 
     computed, 
     onMounted 
-  } from 'vue';
-  import { useKnowledgebaseStore } from '@/stores/knowledgebaseStore';
-  import { useRouter } from 'vue-router';
+  } from "vue";
+  import { useKnowledgebaseStore } from "@/stores/knowledgebaseStore";
+  import { useRouter } from "vue-router";
   import { 
     IonPage, 
     IonContent, 
     IonList, 
     IonItem, 
     IonLabel 
-  } from '@ionic/vue';
-  import TheHeader from '@/components/TheHeader.vue';
-  import TheTabBar from '@/components/TheTabBar.vue';
+  } from "@ionic/vue";
+  import TheHeader from "@/components/TheHeader.vue";
+  import TheTabBar from "@/components/TheTabBar.vue";
 
   const knowledgebaseStore = useKnowledgebaseStore();
   const router = useRouter();

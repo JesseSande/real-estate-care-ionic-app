@@ -973,7 +973,7 @@
         padding: 0.5rem;
         border: 1px solid var(--ion-color-firstcolor);
         border-radius: 4px;
-        background-color: #f9f9f9;
+        background-color: var(--ion-background-color);
     }
 
     .trashIcon {

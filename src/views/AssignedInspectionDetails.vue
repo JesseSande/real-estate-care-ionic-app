@@ -667,6 +667,8 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
+
+        console.log('Component Mounted')
         
         const id = route.params.id;
         inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
