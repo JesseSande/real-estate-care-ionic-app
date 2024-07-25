@@ -92,10 +92,10 @@
         IonAlert,
     } from "@ionic/vue";
 
-    const username = ref("");
-    const password = ref("");
-    const showAlert = ref(false);
-    const verificationCode = ref("");
+    const username = ref<string>("");
+    const password = ref<string>("");
+    const showAlert = ref<boolean>(false);
+    const verificationCode = ref<string>("");
     const router = useRouter();
 
     const alertInputs = [
@@ -107,6 +107,10 @@
         }
     ];
 
+    type AlertData = {
+        verificationCode: string;
+    };
+
     const alertButtons = [
         {
             text: "Annuleren",
@@ -115,7 +119,7 @@
         },
         {
             text: "OK",
-            handler: (data) => verifyCode(data.verificationCode)
+            handler: (data: AlertData) => verifyCode(data.verificationCode)
         }
     ];
 

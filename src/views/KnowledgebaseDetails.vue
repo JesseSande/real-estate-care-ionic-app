@@ -8,7 +8,7 @@
       <ion-list lines="none">
         <ion-item
           class="knowledgebaseItemOverview" 
-          detail="true" 
+          :detail="true" 
           v-for="item in knowledgebaseItems" 
           :key="item.id" 
           @click="selectItem(item)">
@@ -40,6 +40,11 @@
   import TheHeader from "@/components/TheHeader.vue";
   import TheTabBar from "@/components/TheTabBar.vue";
 
+  interface KnowledgebaseItem {
+    id: string;
+    title: string;
+  }
+
   const knowledgebaseStore = useKnowledgebaseStore();
   const router = useRouter();
 
@@ -50,7 +55,7 @@
 
   const knowledgebaseItems = computed(() => knowledgebaseStore.items);
 
-  const selectItem = (item) => {
+  const selectItem = (item: KnowledgebaseItem) => {
     router.push(`/kennisbase/${item.id}`);
   };
 </script>

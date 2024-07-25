@@ -11,7 +11,7 @@
       <ion-list lines="none" v-else>
         <ion-item
           class="basicIonItem" 
-          detail="true" 
+          :detail="true" 
           v-for="inspection in assignedInspections" 
           :key="inspection.id" 
           @click="selectInspection(inspection)">
@@ -44,8 +44,15 @@
   import TheHeader from "@/components/TheHeader.vue";
   import TheTabBar from "@/components/TheTabBar.vue";
 
+  interface Inspection {
+    id: string;
+    date: string;
+    type: string;
+    location: string;
+  }
+
   const inspectionStore = useInspectionStore();
-  const assignedInspections = ref([]);
+  const assignedInspections = ref<Inspection[]>([]);
   const router = useRouter();
 
   onMounted(async () => {
@@ -53,7 +60,7 @@
     assignedInspections.value = inspectionStore.assignedInspections;
   });
 
-  const selectInspection = (inspection) => {
+  const selectInspection = (inspection: Inspection) => {
     router.push(`/toegewezen-inspecties/${inspection.id}`);
   };
 </script>

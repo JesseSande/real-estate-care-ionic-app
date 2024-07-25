@@ -11,7 +11,7 @@
       <ion-list lines="none" v-else>
         <ion-item 
           class="inspectionListItem"
-          detail="true" 
+          :detail="true" 
           v-for="inspection in sortedCompletedInspections" 
           :key="inspection.id" 
           @click="selectInspection(inspection)">
@@ -41,15 +41,22 @@
   import TheHeader from "@/components/TheHeader.vue";
   import TheTabBar from "@/components/TheTabBar.vue";
 
+  interface Inspection {
+    id: string;
+    date: string;
+    type: string;
+    location: string;
+  }
+
   const router = useRouter();
   const inspectionStore = useInspectionStore();
 
   // Afgeronde inspecties gesorteerd van meest recent naar minst recent
-  const sortedCompletedInspections = computed(() => {
-    return [...inspectionStore.completedInspections].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const sortedCompletedInspections = computed<Inspection[]>(() => {
+    return [...inspectionStore.completedInspections].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   });
 
-  const selectInspection = (inspection) => {
+  const selectInspection = (inspection: Inspection) => {
     router.push(`/afgeronde-inspecties/${inspection.id}`);
   };
 </script>

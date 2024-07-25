@@ -16,12 +16,20 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+  import { defineProps } from "vue";
 
-const props = defineProps({
-  blocks: {
-    type: Array,
-    required: true,
-  },
-});
+  interface Block {
+    tag: string;
+    attrs?: { [key: string]: any };
+    text?: string;
+    children?: Block[];
+  }
+
+  const props = defineProps<{
+    blocks: Block[];
+  }>();
 </script>
+
+<style scoped>
+
+</style>
