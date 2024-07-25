@@ -22,30 +22,37 @@
 
   const route = useRoute();
   const knowledgebaseStore = useKnowledgebaseStore();
-  const knowledgebaseItem = ref({ title: "", content: "" });
+  const knowledgebaseItem = ref<{ title: string; content: string }>({ title: "", content: "" });
+
+  interface Block {
+    tag: string;
+    text: string | null;
+    attrs: { [key: string]: string };
+    children: Block[];
+  }
 
   onMounted(async () => {
-    const id = route.params.id;
+    const id = route.params.id as string;
     knowledgebaseItem.value = await knowledgebaseStore.fetchKnowledgebaseItem(id);
   });
 
   // Content parsen in een gestructureerd format
-  const parsedContent = computed(() => parseContent(knowledgebaseItem.value.content));
+  const parsedContent = computed<Block[]>(() => parseContent(knowledgebaseItem.value.content));
 
   // Functie om content in blokken te parsen
-  function parseContent(content) {
+  function parseContent(content: string): Block[] {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, "text/html");
-    const blocks = [];
+    const blocks: Block[] = [];
     doc.body.childNodes.forEach((node) => {
-      blocks.push(parseNode(node));
+      blocks.push(parseNode(node as HTMLElement));
     });
     return blocks;
   }
 
   // Functie om individuele nodes te parsen
-  function parseNode(node) {
-    const block = {
+  function parseNode(node: HTMLElement): Block {
+    const block: Block = {
       tag: node.nodeName.toLowerCase(),
       text: node.textContent,
       attrs: {},
@@ -61,11 +68,10 @@
     if (node.childNodes) {
       node.childNodes.forEach((childNode) => {
         if (childNode.nodeType === Node.ELEMENT_NODE) {
-          block.children.push(parseNode(childNode));
+          block.children.push(parseNode(childNode as HTMLElement));
         }
       });
     }
-
     return block;
   }
 </script>

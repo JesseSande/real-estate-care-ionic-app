@@ -49,7 +49,7 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
         </ion-item>
         <ion-item class="settingsListItem" 
           id="oopsAlertNotifications" 
-          button="true"
+          :button="true"
         >Meldingen</ion-item>
         <ion-alert
           trigger="oopsAlertNotifications"
@@ -103,12 +103,12 @@ afkomstig van: https://ionicframework.com/docs/theming/dark-mode -->
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
   // Toevoegen of verwijderen van de "ion-palette-dark" class op het html element
-  const toggleDarkPalette = (shouldAdd) => {
+  const toggleDarkPalette = (shouldAdd: boolean) => {
     document.documentElement.classList.toggle("ion-palette-dark", shouldAdd);
   };
 
   // Aan- of uitzetten van de toggle en de palet updaten gebaseerd op isDark
-  const initializeDarkPalette = (isDark) => {
+  const initializeDarkPalette = (isDark: boolean) => {
     paletteToggle.value = isDark;
     toggleDarkPalette(isDark);
   };
