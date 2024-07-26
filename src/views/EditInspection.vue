@@ -699,13 +699,6 @@
         modificationInspection: []
     });
 
-    const fileInputs = {
-        damageInspection: ref(null),
-        maintenanceInspection: ref(null),
-        installationInspection: ref(null),
-        modificationInspection: ref(null)
-    };
-
     const options = ref<Options | null>(null);
     const inspectionDetails = ref({
         damageLocation: "",
@@ -820,22 +813,6 @@
             if ((error as Error).message !== "User cancelled photos app") {
                 console.error("Error taking photo:", error);
             }
-        }
-    };
-
-    // Bestand uploaden
-    const handleFileUpload = (event: Event, category: keyof PhotoCategories) => {
-        const input = event.target as HTMLInputElement;
-        if (input.files && input.files[0]) {
-            const file = input.files[0];
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                if (e.target) {
-                    const fileName = file.name;
-                    photos.value[category].push({ fileName, webPath: e.target.result });
-                }
-            };
-            reader.readAsDataURL(file);
         }
     };
 
