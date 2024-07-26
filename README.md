@@ -5,16 +5,28 @@ RealEstateCare – een (fictieve) dienstverlener die woningen onderhoudt, verbet
 In deze README geef ik relevante informatie over de uitwerking van mijn prototype, een beschrijving van mijn proces, keuzes die ik heb gemaakt en eventuele functionaliteiten die nog niet werken zoals gewenst. Ook geef ik een korte verantwoording over het al dan niet hebben kunnen toepassen van security, usability, accessibility en style guides/best practices.
 
 ### Inhoudsopgave
+ - Prototype bekijken
  - Beschrijving van de opdracht
  - Opbouw van de app
  - Functionaliteiten prototype
- - Prototype bekijken
  - Verantwoording security
  - Verantwoording usability
  - Verantwoording accessibility
  - Verantwoording style guides/best practices
  - Procesbeschrijving
  - Afsluiting
+
+## Prototype bekijken
+Het prototype kan uitgeprobeerd worden via: [https://real-estate-care-jvds.netlify.app/](https://real-estate-care-jvds.netlify.app/).
+
+Alternatief is om het prototype via de GitHub repository te clonen (main branch), in te stellen en te bezichtigen via de localhost. Dit is de link naar mijn GitHub repository: [https://github.com/JesseSande/real-estate-care-ionic-app](https://github.com/JesseSande/real-estate-care-ionic-app). 
+
+*N.b. Het kan zijn dat je even een refresh moet doen zodra je de applicatie hebt geopend om alles goed te laden. Dit kun je voor de zekerheid sowieso doen.* 
+
+ ### Simulatie inloggegevens
+ - Gebruikersnaam: demoaccount
+ - Wachtwoord: demodemo123
+ - Verificatiecode: 123456
 
 ##   Beschrijving van de opdracht
 De deliverables van deze opdracht waren een debriefing met een onderbouwing voor de gekozen frameworks, en een werkend prototype voor de case. Het technisch ontwerp van de uiteindelijke applicatie alsmede de gewenste vormgeving (van de hoofdpagina) en huisstijl waren gegeven in de briefing van de case. De omschrijving van de eindopdracht bood aanvullende informatie over de vereisten van het prototype voor deze case. 
@@ -57,16 +69,6 @@ Mijn werk kan op de volgende manieren nog verbeterd worden:
  -  Bij het uitvoeren danwel bewerken van een inspectie komen er afhankelijk van het type browser in de console log een aantal verborgen problemen/warnings in beeld, echter zijn deze warnings niet consistent aanwezig in alle browsers en heb ik ook de oorzaak niet kunnen herleiden of het probleem kunnen oplossen. Ik verwacht dat dit vanuit het Ionic framework komt. 
  - Eventueel via media queries specifieke instellingen uitwerken voor verschillende schermgroottes. Echter is de app nu zonder media queries ook al goed te gebruiken op verschillende schermgroottes. 
  - Verbeterpunten die in de verantwoording op security, usability, accessibility en style guides/best practices hieronder zijn genoemd. 
-
-## Prototype bekijken
-Het prototype kan uitgeprobeerd worden via: [https://real-estate-care-jvds.netlify.app/](https://real-estate-care-jvds.netlify.app/).
-
-Alternatief is om het prototype via de GitHub repository te clonen (main branch), in te stellen en te bezichtigen via de localhost. Dit is de link naar mijn GitHub repository: [https://github.com/JesseSande/real-estate-care-ionic-app](https://github.com/JesseSande/real-estate-care-ionic-app). 
-
- ### Simulatie inloggegevens
- - Gebruikersnaam: demoaccount
- - Wachtwoord: demodemo123
- - Verificatiecode: 123456
 
 ## Verantwoording security
 A.d.h.v. [blog TatvaSoft](https://www.tatvasoft.com/blog/vue-js-best-practices/):
