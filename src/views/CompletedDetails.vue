@@ -71,7 +71,7 @@
   }
 
   .inspectionDateHeader, .inspectionLocationText {
-    color: var(--ion-color-secondcolor);
+    color: var(--ion-text-color);
     margin: 0;
   }
 
