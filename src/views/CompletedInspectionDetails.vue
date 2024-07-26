@@ -144,13 +144,9 @@
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
     import TheTabBar from "@/components/TheTabBar.vue";
+    import { Photo } from "@/types/types";
 
     // Definieer de interfaces voor de verschillende inspectie details
-    interface Photo {
-        fileName: string;
-        webPath: string;
-    }
-
     interface DamageInspection {
         location: string;
         newDamage: boolean;

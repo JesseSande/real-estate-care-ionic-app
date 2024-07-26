@@ -40,13 +40,7 @@
   } from "@ionic/vue";
   import TheHeader from "@/components/TheHeader.vue";
   import TheTabBar from "@/components/TheTabBar.vue";
-
-  interface Inspection {
-    id: string;
-    date: string;
-    type: string;
-    location: string;
-  }
+  import { Inspection } from "@/types/types";
 
   const router = useRouter();
   const inspectionStore = useInspectionStore();

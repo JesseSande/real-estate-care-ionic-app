@@ -581,7 +581,9 @@
         useRouter 
     } from "vue-router";
     import { useInspectionStore } from "@/stores/inspectionStore";
-    import { trash } from "ionicons/icons";
+    import { 
+        trash 
+    } from "ionicons/icons";
     import { 
         IonPage, 
         IonContent, 
@@ -610,27 +612,87 @@
         CameraResultType, 
         CameraSource 
     } from "@capacitor/camera";
-    import {
-        Inspection, 
-        InspectionDetails, 
-        Photo, 
+    import { 
         Errors, 
-        Options
+        Options 
     } from "@/types/types";
+
+    interface DamageInspectionDetails {
+        location: string;
+        newDamage: boolean;
+        damageType: string;
+        damageDate: string;
+        immediateActionRequired: boolean;
+        damageDescription: string;
+        photos: Photo[];
+    }
+
+    interface MaintenanceInspectionDetails {
+        location: string;
+        maintenanceType: string;
+        immediateActionRequired: boolean;
+        costEstimate: string;
+        photos: Photo[];
+    }
+
+    interface InstallationInspectionDetails {
+        location: string;
+        installationType: string;
+        reportedMalfunction: string;
+        approved: boolean;
+        comments: string;
+        photos: Photo[];
+    }
+
+    interface ModificationInspectionDetails {
+        modificationLocation: string;
+        performedBy: string;
+        modificationDescription: string;
+        actionRequired: string;
+        modificationComments: string;
+        photos: Photo[];
+    }
+
+    interface InspectionDetails {
+        damageInspection: DamageInspectionDetails | null;
+        maintenanceInspection: MaintenanceInspectionDetails | null;
+        installationInspection: InstallationInspectionDetails | null;
+        modificationInspection: ModificationInspectionDetails | null;
+    }
+
+    interface Inspection {
+        id: string;
+        location: string;
+        date: string;
+        type: string;
+        details: InspectionDetails;
+    }
+
+    interface Photo {
+        fileName: string;
+        webPath: string | ArrayBuffer | null;
+    }
+
+    interface PhotoCategories {
+        damageInspection: Photo[];
+        maintenanceInspection: Photo[];
+        installationInspection: Photo[];
+        modificationInspection: Photo[];
+    }
 
     const route = useRoute();
     const router = useRouter();
     const inspectionStore = useInspectionStore();
     const inspection = ref<Inspection | null>(null);
-    const showCompleteAlert = ref(false);
-    const showDeleteAlert = ref(false);
+    const showCompleteAlert = ref<boolean>(false);
+    const showDeleteAlert = ref<boolean>(false);
     const showValidationError = ref(false);
     const errors = ref<Errors>({});
 
-    const deleteIndex = ref(null);
-    const currentCategory = ref(null);
+    const deleteIndex = ref<number | null>(null);
+    const currentCategory = ref<keyof PhotoCategories | null>(null);
 
-    const photos = ref<{ [key: string]: Photo[] }>({
+    const photos = ref<PhotoCategories>({
         damageInspection: [],
         maintenanceInspection: [],
         installationInspection: [],
@@ -638,28 +700,28 @@
     });
 
     const fileInputs = {
-        damageInspection: ref<HTMLInputElement | null>(null),
-        maintenanceInspection: ref<HTMLInputElement | null>(null),
-        installationInspection: ref<HTMLInputElement | null>(null),
-        modificationInspection: ref<HTMLInputElement | null>(null)
+        damageInspection: ref(null),
+        maintenanceInspection: ref(null),
+        installationInspection: ref(null),
+        modificationInspection: ref(null)
     };
 
     const options = ref<Options | null>(null);
-    const inspectionDetails = ref<InspectionDetails>({
+    const inspectionDetails = ref({
         damageLocation: "",
-        newDamage: "",
+        newDamage: false,
         damageType: "",
         damageDate: "",
-        immediateActionRequired: "",
+        immediateActionRequired: false,
         damageDescription: "",
         maintenanceLocation: "",
         maintenanceType: "",
-        maintenanceImmediateActionRequired: "",
+        maintenanceImmediateActionRequired: false,
         maintenanceCostEstimate: "",
         installationLocation: "",
         installationType: "",
         reportedMalfunction: "",
-        approved: "",
+        approved: false,
         installationComments: "",
         modificationLocation: "",
         performedBy: "",
@@ -671,12 +733,12 @@
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
         const id = route.params.id;
-        console.log('Route ID:', id); // Log de route ID
+        console.log("Route ID:", id); 
         inspection.value = inspectionStore.completedInspections.find((insp: Inspection) => insp.id == id);
-        console.log('Selected inspection for editing:', inspection.value); // Log de geselecteerde inspectie
+        console.log("Selected inspection for editing:", inspection.value); 
 
         if (!inspection.value) {
-            console.error('Inspectie niet gevonden');
+            console.error("Inspectie niet gevonden");
             return;
         }
 
@@ -696,26 +758,26 @@
 
             // Vul de inspectieDetails met de bestaande gegevens
             inspectionDetails.value = {
-                damageLocation: inspection.value.details.damageInspection?.location || '',
+                damageLocation: inspection.value.details.damageInspection?.location || "",
                 newDamage: inspection.value.details.damageInspection?.newDamage || false,
-                damageType: inspection.value.details.damageInspection?.damageType || '',
-                damageDate: inspection.value.details.damageInspection?.damageDate || '',
+                damageType: inspection.value.details.damageInspection?.damageType || "",
+                damageDate: inspection.value.details.damageInspection?.damageDate || "",
                 immediateActionRequired: inspection.value.details.damageInspection?.immediateActionRequired || false,
-                damageDescription: inspection.value.details.damageInspection?.damageDescription || '',
-                maintenanceLocation: inspection.value.details.maintenanceInspection?.location || '',
-                maintenanceType: inspection.value.details.maintenanceInspection?.maintenanceType || '',
+                damageDescription: inspection.value.details.damageInspection?.damageDescription || "",
+                maintenanceLocation: inspection.value.details.maintenanceInspection?.location || "",
+                maintenanceType: inspection.value.details.maintenanceInspection?.maintenanceType || "",
                 maintenanceImmediateActionRequired: inspection.value.details.maintenanceInspection?.immediateActionRequired || false,
-                maintenanceCostEstimate: inspection.value.details.maintenanceInspection?.costEstimate || '',
-                installationLocation: inspection.value.details.installationInspection?.location || '',
-                installationType: inspection.value.details.installationInspection?.installationType || '',
-                reportedMalfunction: inspection.value.details.installationInspection?.reportedMalfunction || '',
+                maintenanceCostEstimate: inspection.value.details.maintenanceInspection?.costEstimate || "",
+                installationLocation: inspection.value.details.installationInspection?.location || "",
+                installationType: inspection.value.details.installationInspection?.installationType || "",
+                reportedMalfunction: inspection.value.details.installationInspection?.reportedMalfunction || "",
                 approved: inspection.value.details.installationInspection?.approved || false,
-                installationComments: inspection.value.details.installationInspection?.comments || '',
-                modificationLocation: inspection.value.details.modificationInspection?.modificationLocation || '',
-                performedBy: inspection.value.details.modificationInspection?.performedBy || '',
-                modificationDescription: inspection.value.details.modificationInspection?.modificationDescription || '',
-                actionRequired: inspection.value.details.modificationInspection?.actionRequired || '',
-                modificationComments: inspection.value.details.modificationInspection?.modificationComments || ''
+                installationComments: inspection.value.details.installationInspection?.comments || "",
+                modificationLocation: inspection.value.details.modificationInspection?.modificationLocation || "",
+                performedBy: inspection.value.details.modificationInspection?.performedBy || "",
+                modificationDescription: inspection.value.details.modificationInspection?.modificationDescription || "",
+                actionRequired: inspection.value.details.modificationInspection?.actionRequired || "",
+                modificationComments: inspection.value.details.modificationInspection?.modificationComments || ""
             };
 
             // Controleer en initialiseer damageDate als deze niet bestaat of niet geldig is
@@ -734,13 +796,17 @@
     });
 
     // Controleren of een datum een geldige ISO 8601 string is
-    const isValidISODateString = (dateString) => {
+    const isValidISODateString = (dateString: string): boolean => {
         const date = new Date(dateString);
         return !isNaN(date.getTime());
     }
 
     // Foto maken met de camera
     const takePhoto = async () => {
+        if (currentCategory.value === null) {
+            console.error("No category selected");
+            return;
+        }
         try {
             const image = await Camera.getPhoto({
                 resultType: CameraResultType.DataUrl,
@@ -748,28 +814,33 @@
                 quality: 90,
             });
             const fileName = `photo_${Date.now()}.jpeg`;
-            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
-            console.log('Photo taken:', image);
+            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl! });
+            console.log("Photo taken:", image);
         } catch (error) {
-            if ((error as Error).message !== 'User cancelled photos app') {
-                console.error('Error taking photo:', error);
+            if ((error as Error).message !== "User cancelled photos app") {
+                console.error("Error taking photo:", error);
             }
         }
     };
 
     // Bestand uploaden
-    const handleFileUpload = (event: Event, category: string) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const fileName = file.name;
-            photos.value[category].push({ fileName, webPath: e.target!.result });
-        };
-        reader.readAsDataURL(file);
+    const handleFileUpload = (event: Event, category: keyof PhotoCategories) => {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (e.target) {
+                    const fileName = file.name;
+                    photos.value[category].push({ fileName, webPath: e.target.result });
+                }
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     // Foto-opties presenteren
-    const presentPhotoOptions = (category: string) => {
+    const presentPhotoOptions = (category: keyof PhotoCategories) => {
         currentCategory.value = category;
         takePhoto();
     };
@@ -777,26 +848,26 @@
     // Configuratie van alert knoppen
     const alertOkButton = [
         {
-            text: 'OK',
-            role: 'confirm',
+            text: "OK",
+            role: "confirm",
             handler: () => {
-                console.log('OK clicked');
-                router.push('/afgeronde-inspecties');
+                console.log("OK clicked");
+                router.push("/afgeronde-inspecties");
             }
         }
     ];
 
     const alertCancelConfirmButtons = [
         {
-            text: 'Annuleer',
-            role: 'cancel',
+            text: "Annuleer",
+            role: "cancel",
             handler: () => {
-                console.log('Geannuleerd');
+                console.log("Geannuleerd");
             },
         },
         {
-            text: 'Verwijder',
-            role: 'confirm',
+            text: "Verwijder",
+            role: "confirm",
             handler: () => {
                 deletePhoto();
             },
@@ -804,7 +875,7 @@
     ];
 
     // Het verwijderen van een foto bevestigen
-    const confirmDeletePhoto = (category: string, index: number) => {
+    const confirmDeletePhoto = (category: keyof PhotoCategories, index: number) => {
         currentCategory.value = category;
         deleteIndex.value = index;
         showDeleteAlert.value = true;
@@ -812,9 +883,10 @@
 
     // Foto verwijderen
     const deletePhoto = () => {
-        if (deleteIndex.value !== null) {
+        if (deleteIndex.value !== null && currentCategory.value !== null) {
             photos.value[currentCategory.value].splice(deleteIndex.value, 1);
             deleteIndex.value = null;
+            currentCategory.value = null;
             showDeleteAlert.value = false;
         }
     };
@@ -898,8 +970,12 @@
             } : null
         };
 
-        inspectionStore.updateInspection(inspection.value.id, updatedDetails);
-        showCompleteAlert.value = true;
+        if (inspection.value !== null) {
+            inspectionStore.updateInspection(inspection.value.id, updatedDetails);
+            showCompleteAlert.value = true;
+        } else {
+            console.error("Inspection is null");
+        }
     };
 
     const goToKnowledgebaseItem = (id: string) => {
