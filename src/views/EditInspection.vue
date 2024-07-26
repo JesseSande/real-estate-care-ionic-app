@@ -617,17 +617,55 @@
         Options 
     } from "@/types/types";
 
+    interface DamageInspectionDetails {
+        location: string;
+        newDamage: boolean;
+        damageType: string;
+        damageDate: string;
+        immediateActionRequired: boolean;
+        damageDescription: string;
+        photos: Photo[];
+    }
+
+    interface MaintenanceInspectionDetails {
+        location: string;
+        maintenanceType: string;
+        immediateActionRequired: boolean;
+        costEstimate: string;
+        photos: Photo[];
+    }
+
+    interface InstallationInspectionDetails {
+        location: string;
+        installationType: string;
+        reportedMalfunction: string;
+        approved: boolean;
+        comments: string;
+        photos: Photo[];
+    }
+
+    interface ModificationInspectionDetails {
+        modificationLocation: string;
+        performedBy: string;
+        modificationDescription: string;
+        actionRequired: string;
+        modificationComments: string;
+        photos: Photo[];
+    }
+
+    interface InspectionDetails {
+        damageInspection: DamageInspectionDetails | null;
+        maintenanceInspection: MaintenanceInspectionDetails | null;
+        installationInspection: InstallationInspectionDetails | null;
+        modificationInspection: ModificationInspectionDetails | null;
+    }
+
     interface Inspection {
         id: string;
         location: string;
         date: string;
         type: string;
-        details: {
-            damageInspection: boolean;
-            maintenanceInspection: boolean;
-            installationInspection: boolean;
-            modificationInspection: boolean;
-        };
+        details: InspectionDetails;
     }
 
     interface Photo {
