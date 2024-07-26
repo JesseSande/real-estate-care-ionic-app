@@ -612,7 +612,23 @@
         CameraResultType, 
         CameraSource 
     } from "@capacitor/camera";
-    import { Errors } from "@/types/types";
+    import { 
+        Errors, 
+        Options 
+    } from "@/types/types";
+
+    interface Inspection {
+        id: string;
+        location: string;
+        date: string;
+        type: string;
+        details: {
+            damageInspection: boolean;
+            maintenanceInspection: boolean;
+            installationInspection: boolean;
+            modificationInspection: boolean;
+        };
+    }
 
     interface Photo {
         fileName: string;
@@ -629,8 +645,8 @@
     const route = useRoute();
     const router = useRouter();
     const inspectionStore = useInspectionStore();
-    const inspection = ref(null);
-    const showCompleteAlert = ref(false);
+    const inspection = ref<Inspection | null>(null);
+    const showCompleteAlert = ref<boolean>(false);
     const showDeleteAlert = ref<boolean>(false);
     const showValidationError = ref(false);
     const errors = ref<Errors>({});
@@ -652,7 +668,7 @@
         modificationInspection: ref(null)
     };
 
-    const options = ref(null);
+    const options = ref<Options | null>(null);
     const inspectionDetails = ref({
         damageLocation: "",
         newDamage: false,
@@ -680,7 +696,7 @@
     onMounted(() => {
         const id = route.params.id;
         console.log("Route ID:", id); 
-        inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
+        inspection.value = inspectionStore.completedInspections.find((insp: Inspection) => insp.id == id);
         console.log("Selected inspection for editing:", inspection.value); 
 
         if (!inspection.value) {
@@ -749,6 +765,10 @@
 
     // Foto maken met de camera
     const takePhoto = async () => {
+        if (currentCategory.value === null) {
+            console.error("No category selected");
+            return;
+        }
         try {
             const image = await Camera.getPhoto({
                 resultType: CameraResultType.DataUrl,
@@ -756,7 +776,7 @@
                 quality: 90,
             });
             const fileName = `photo_${Date.now()}.jpeg`;
-            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
+            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl! });
             console.log("Photo taken:", image);
         } catch (error) {
             if ((error as Error).message !== "User cancelled photos app") {
@@ -912,8 +932,12 @@
             } : null
         };
 
-        inspectionStore.updateInspection(inspection.value.id, updatedDetails);
-        showCompleteAlert.value = true;
+        if (inspection.value !== null) {
+            inspectionStore.updateInspection(inspection.value.id, updatedDetails);
+            showCompleteAlert.value = true;
+        } else {
+            console.error("Inspection is null");
+        }
     };
 
     const goToKnowledgebaseItem = (id: string) => {
