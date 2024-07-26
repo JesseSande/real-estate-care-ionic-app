@@ -568,6 +568,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 @did-dismiss="showValidationError = false"
             ></ion-toast>
         </ion-content>
+        <TheTabBar />
     </ion-page>
 </template>
 
@@ -581,10 +582,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         useRouter 
     } from "vue-router";
     import { useInspectionStore } from "@/stores/inspectionStore";
-    import { 
-        ImageOutline, 
-        trash 
-    } from "ionicons/icons";
+    import { trash } from "ionicons/icons";
     import { 
         IonPage, 
         IonContent, 
@@ -607,25 +605,33 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         IonToast 
     } from "@ionic/vue";
     import TheHeader from "@/components/TheHeader.vue";
+    import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
         CameraSource 
     } from "@capacitor/camera";
+    import {
+        Inspection, 
+        InspectionDetails, 
+        Photo, 
+        Errors, 
+        Options
+    } from "@/types/types";
 
     const route = useRoute();
     const router = useRouter();
     const inspectionStore = useInspectionStore();
-    const inspection = ref(null);
+    const inspection = ref<Inspection | null>(null);
     const showCompleteAlert = ref(false);
     const showDeleteAlert = ref(false);
     const showValidationError = ref(false);
-    const errors = ref({});
+    const errors = ref<Errors>({});
 
-    const deleteIndex = ref(null);
-    const currentCategory = ref(null);
+    const deleteIndex = ref<number | null>(null);
+    const currentCategory = ref<string | null>(null);
 
-    const photos = ref({
+    const photos = ref<{ [key: string]: Photo[] }>({
         damageInspection: [],
         maintenanceInspection: [],
         installationInspection: [],
@@ -633,28 +639,28 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     });
 
     const fileInputs = {
-        damageInspection: ref(null),
-        maintenanceInspection: ref(null),
-        installationInspection: ref(null),
-        modificationInspection: ref(null)
+        damageInspection: ref<HTMLInputElement | null>(null),
+        maintenanceInspection: ref<HTMLInputElement | null>(null),
+        installationInspection: ref<HTMLInputElement | null>(null),
+        modificationInspection: ref<HTMLInputElement | null>(null)
     };
 
-    const options = ref(null);
-    const inspectionDetails = ref({
+    const options = ref<Options | null>(null);
+    const inspectionDetails = ref<InspectionDetails>({
         damageLocation: "",
-        newDamage: false,
+        newDamage: "",
         damageType: "",
         damageDate: "",
-        immediateActionRequired: false,
+        immediateActionRequired: "",
         damageDescription: "",
         maintenanceLocation: "",
         maintenanceType: "",
-        maintenanceImmediateActionRequired: false,
+        maintenanceImmediateActionRequired: "",
         maintenanceCostEstimate: "",
         installationLocation: "",
         installationType: "",
         reportedMalfunction: "",
-        approved: false,
+        approved: "",
         installationComments: "",
         modificationLocation: "",
         performedBy: "",
@@ -668,8 +674,8 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
 
         console.log('Component Mounted')
         
-        const id = route.params.id;
-        inspection.value = inspectionStore.assignedInspections.find((insp) => insp.id == id);
+        const id = route.params.id as string;
+        inspection.value = inspectionStore.assignedInspections.find((insp: Inspection) => insp.id == id) || null;
         console.log("Selected inspection:", inspection.value);
 
         // Stel de opties in op basis van de bestaande inspectiegegevens
@@ -680,7 +686,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             modificationInspection: false
         };
 
-        switch (inspection.value.type) {
+        switch (inspection.value?.type) {
             case "schade":
                 options.value.damageInspection = true;
                 break;
@@ -712,28 +718,29 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 quality: 90,
             });
             const fileName = `photo_${Date.now()}.jpeg`;
-            photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
+            photos.value[currentCategory.value!].push({ fileName, webPath: image.dataUrl! });
             console.log("Photo taken:", image);
         } catch (error) {
-            if (error.message !== "User cancelled photos app") {
+            if ((error as Error).message !== "User cancelled photos app") {
                 console.error("Error taking photo:", error);
             }
         }
     };
 
     // Bestand uploaden
-    const handleFileUpload = (event, category) => {
-        const file = event.target.files[0];
+    const handleFileUpload = (event: Event, category: string) => {
+        const target = event.target as HTMLInputElement;
+        const file = target.files![0];
         const reader = new FileReader();
         reader.onload = (e) => {
             const fileName = file.name;
-            photos.value[category].push({ fileName, webPath: e.target.result });
+            photos.value[category].push({ fileName, webPath: e.target!.result as string });
         };
         reader.readAsDataURL(file);
     };
 
     // Foto-opties presenteren
-    const presentPhotoOptions = (category) => {
+    const presentPhotoOptions = (category: string) => {
         currentCategory.value = category;
         takePhoto();
     };
@@ -768,7 +775,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     ];
 
     // Het verwijderen van een foto bevestigen
-    const confirmDeletePhoto = (category, index) => {
+    const confirmDeletePhoto = (category: string, index: number) => {
         currentCategory.value = category;
         deleteIndex.value = index;
         showDeleteAlert.value = true;
@@ -777,7 +784,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     // Foto verwijderen
     const deletePhoto = () => {
         if (deleteIndex.value !== null) {
-            photos.value[currentCategory.value].splice(deleteIndex.value, 1);
+            photos.value[currentCategory.value!].splice(deleteIndex.value, 1);
             deleteIndex.value = null;
             showDeleteAlert.value = false;
         }
@@ -787,12 +794,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
     const validateInspectionDetails = () => {
         errors.value = {};
 
-        const isValidISODateString = (dateString) => {
-            const date = new Date(dateString);
-            return !isNaN(date.getTime());
-        }
-
-        if (options.value.damageInspection) {
+        if (options.value?.damageInspection) {
             if (!inspectionDetails.value.damageLocation) errors.value.damageLocation = true;
             if (!inspectionDetails.value.newDamage) errors.value.newDamage = true;
             if (!inspectionDetails.value.damageType) errors.value.damageType = true;
@@ -801,21 +803,21 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             if (!inspectionDetails.value.damageDescription) errors.value.damageDescription = true;
         }
 
-        if (options.value.maintenanceInspection) {
+        if (options.value?.maintenanceInspection) {
             if (!inspectionDetails.value.maintenanceLocation) errors.value.maintenanceLocation = true;
             if (!inspectionDetails.value.maintenanceType) errors.value.maintenanceType = true;
             if (!inspectionDetails.value.maintenanceImmediateActionRequired) errors.value.maintenanceImmediateActionRequired = true;
             if (!inspectionDetails.value.maintenanceCostEstimate) errors.value.maintenanceCostEstimate = true;
         }
 
-        if (options.value.installationInspection) {
+        if (options.value?.installationInspection) {
             if (!inspectionDetails.value.installationLocation) errors.value.installationLocation = true;
             if (!inspectionDetails.value.installationType) errors.value.installationType = true;
             if (!inspectionDetails.value.reportedMalfunction) errors.value.reportedMalfunction = true;
             if (!inspectionDetails.value.approved) errors.value.approved = true;
         }
 
-        if (options.value.modificationInspection) {
+        if (options.value?.modificationInspection) {
             if (!inspectionDetails.value.modificationLocation) errors.value.modificationLocation = true;
             if (!inspectionDetails.value.performedBy) errors.value.performedBy = true;
             if (!inspectionDetails.value.modificationDescription) errors.value.modificationDescription = true;
@@ -833,7 +835,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         }
     
         const inspectionDetailsToStore = {
-            damageInspection: options.value.damageInspection ? {
+            damageInspection: options.value?.damageInspection ? {
                 location: inspectionDetails.value.damageLocation,
                 newDamage: inspectionDetails.value.newDamage,
                 damageType: inspectionDetails.value.damageType,
@@ -842,14 +844,14 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 damageDescription: inspectionDetails.value.damageDescription,
                 photos: photos.value.damageInspection
             } : null,
-            maintenanceInspection: options.value.maintenanceInspection ? {
+            maintenanceInspection: options.value?.maintenanceInspection ? {
                 location: inspectionDetails.value.maintenanceLocation,
                 maintenanceType: inspectionDetails.value.maintenanceType,
                 immediateActionRequired: inspectionDetails.value.maintenanceImmediateActionRequired,
                 costEstimate: inspectionDetails.value.maintenanceCostEstimate,
                 photos: photos.value.maintenanceInspection
             } : null,
-            installationInspection: options.value.installationInspection ? {
+            installationInspection: options.value?.installationInspection ? {
                 location: inspectionDetails.value.installationLocation,
                 installationType: inspectionDetails.value.installationType,
                 reportedMalfunction: inspectionDetails.value.reportedMalfunction,
@@ -857,7 +859,7 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 comments: inspectionDetails.value.installationComments,
                 photos: photos.value.installationInspection
             } : null,
-            modificationInspection: options.value.modificationInspection ? {
+            modificationInspection: options.value?.modificationInspection ? {
                 modificationLocation: inspectionDetails.value.modificationLocation,
                 performedBy: inspectionDetails.value.performedBy,
                 modificationDescription: inspectionDetails.value.modificationDescription,
@@ -867,12 +869,16 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
             } : null
         };
 
-        inspectionStore.completeInspection(inspection.value.id, inspectionDetailsToStore);
-        showCompleteAlert.value = true;
+        if (inspection.value) {
+            inspectionStore.completeInspection(inspection.value.id, inspectionDetailsToStore);
+            showCompleteAlert.value = true;
+        } else {
+            console.error("Inspection is null, cannot complete inspection");
+        }
     };
 
     // Doorverwijzing naar kennisbase item
-    const goToKnowledgebaseItem = (id) => {
+    const goToKnowledgebaseItem = (id: string) => {
         router.push(`/kennisbase/${id}`);
     };
 </script>

@@ -19,17 +19,11 @@
   import TheHeader from "@/components/TheHeader.vue";
   import TheTabBar from "@/components/TheTabBar.vue";
   import ContentRenderer from "@/components/ContentRenderer.vue";
+  import { Block } from '@/types/types';
 
   const route = useRoute();
   const knowledgebaseStore = useKnowledgebaseStore();
   const knowledgebaseItem = ref<{ title: string; content: string }>({ title: "", content: "" });
-
-  interface Block {
-    tag: string;
-    text: string | null;
-    attrs: { [key: string]: string };
-    children: Block[];
-  }
 
   onMounted(async () => {
     const id = route.params.id as string;
@@ -60,9 +54,9 @@
     };
 
     if (node.attributes) {
-      for (const attr of node.attributes) {
+      Array.from(node.attributes).forEach((attr) => {
         block.attrs[attr.name] = attr.value;
-      }
+      });
     }
 
     if (node.childNodes) {
