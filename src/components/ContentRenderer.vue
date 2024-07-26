@@ -17,17 +17,9 @@
 
 <script setup lang="ts">
   import { defineProps } from "vue";
+  import { Block } from '@/types/types';
 
-  interface Block {
-    tag: string;
-    attrs?: { [key: string]: any };
-    text?: string;
-    children?: Block[];
-  }
-
-  const props = defineProps<{
-    blocks: Block[];
-  }>();
+  const props = defineProps<{ blocks: Block[] }>();
 </script>
 
 <style scoped>

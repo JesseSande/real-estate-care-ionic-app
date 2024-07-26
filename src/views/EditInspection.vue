@@ -575,16 +575,13 @@
     import { 
         ref, 
         onMounted 
-    } from 'vue';
+    } from "vue";
     import { 
         useRoute, 
         useRouter 
-    } from 'vue-router';
-    import { useInspectionStore } from '@/stores/inspectionStore';
-    import { 
-        ImageOutline, 
-        trash 
-    } from 'ionicons/icons';
+    } from "vue-router";
+    import { useInspectionStore } from "@/stores/inspectionStore";
+    import { trash } from "ionicons/icons";
     import { 
         IonPage, 
         IonContent, 
@@ -605,28 +602,35 @@
         IonIcon,
         IonAlert,
         IonToast 
-    } from '@ionic/vue';
-    import TheHeader from '@/components/TheHeader.vue';
-    import TheTabBar from '@/components/TheTabBar.vue';
+    } from "@ionic/vue";
+    import TheHeader from "@/components/TheHeader.vue";
+    import TheTabBar from "@/components/TheTabBar.vue";
     import { 
         Camera, 
         CameraResultType, 
         CameraSource 
-    } from '@capacitor/camera';
+    } from "@capacitor/camera";
+    import {
+        Inspection, 
+        InspectionDetails, 
+        Photo, 
+        Errors, 
+        Options
+    } from "@/types/types";
 
     const route = useRoute();
     const router = useRouter();
     const inspectionStore = useInspectionStore();
-    const inspection = ref(null);
+    const inspection = ref<Inspection | null>(null);
     const showCompleteAlert = ref(false);
     const showDeleteAlert = ref(false);
     const showValidationError = ref(false);
-    const errors = ref({});
+    const errors = ref<Errors>({});
 
     const deleteIndex = ref(null);
     const currentCategory = ref(null);
 
-    const photos = ref({
+    const photos = ref<{ [key: string]: Photo[] }>({
         damageInspection: [],
         maintenanceInspection: [],
         installationInspection: [],
@@ -634,41 +638,41 @@
     });
 
     const fileInputs = {
-        damageInspection: ref(null),
-        maintenanceInspection: ref(null),
-        installationInspection: ref(null),
-        modificationInspection: ref(null)
+        damageInspection: ref<HTMLInputElement | null>(null),
+        maintenanceInspection: ref<HTMLInputElement | null>(null),
+        installationInspection: ref<HTMLInputElement | null>(null),
+        modificationInspection: ref<HTMLInputElement | null>(null)
     };
 
-    const options = ref(null);
-    const inspectionDetails = ref({
-        damageLocation: '',
-        newDamage: false,
-        damageType: '',
-        damageDate: '',
-        immediateActionRequired: false,
-        damageDescription: '',
-        maintenanceLocation: '',
-        maintenanceType: '',
-        maintenanceImmediateActionRequired: false,
-        maintenanceCostEstimate: '',
-        installationLocation: '',
-        installationType: '',
-        reportedMalfunction: '',
-        approved: false,
-        installationComments: '',
-        modificationLocation: '',
-        performedBy: '',
-        modificationDescription: '',
-        actionRequired: '',
-        modificationComments: ''
+    const options = ref<Options | null>(null);
+    const inspectionDetails = ref<InspectionDetails>({
+        damageLocation: "",
+        newDamage: "",
+        damageType: "",
+        damageDate: "",
+        immediateActionRequired: "",
+        damageDescription: "",
+        maintenanceLocation: "",
+        maintenanceType: "",
+        maintenanceImmediateActionRequired: "",
+        maintenanceCostEstimate: "",
+        installationLocation: "",
+        installationType: "",
+        reportedMalfunction: "",
+        approved: "",
+        installationComments: "",
+        modificationLocation: "",
+        performedBy: "",
+        modificationDescription: "",
+        actionRequired: "",
+        modificationComments: ""
     });
 
     // Haal inspectiegegevens op bij het laden van de component
     onMounted(() => {
         const id = route.params.id;
         console.log('Route ID:', id); // Log de route ID
-        inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
+        inspection.value = inspectionStore.completedInspections.find((insp: Inspection) => insp.id == id);
         console.log('Selected inspection for editing:', inspection.value); // Log de geselecteerde inspectie
 
         if (!inspection.value) {
@@ -747,25 +751,25 @@
             photos.value[currentCategory.value].push({ fileName, webPath: image.dataUrl });
             console.log('Photo taken:', image);
         } catch (error) {
-            if (error.message !== 'User cancelled photos app') {
+            if ((error as Error).message !== 'User cancelled photos app') {
                 console.error('Error taking photo:', error);
             }
         }
     };
 
     // Bestand uploaden
-    const handleFileUpload = (event, category) => {
+    const handleFileUpload = (event: Event, category: string) => {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
             const fileName = file.name;
-            photos.value[category].push({ fileName, webPath: e.target.result });
+            photos.value[category].push({ fileName, webPath: e.target!.result });
         };
         reader.readAsDataURL(file);
     };
 
     // Foto-opties presenteren
-    const presentPhotoOptions = (category) => {
+    const presentPhotoOptions = (category: string) => {
         currentCategory.value = category;
         takePhoto();
     };
@@ -800,7 +804,7 @@
     ];
 
     // Het verwijderen van een foto bevestigen
-    const confirmDeletePhoto = (category, index) => {
+    const confirmDeletePhoto = (category: string, index: number) => {
         currentCategory.value = category;
         deleteIndex.value = index;
         showDeleteAlert.value = true;
@@ -819,7 +823,7 @@
     const validateInspectionDetails = () => {
         errors.value = {};
 
-        if (options.value.damageInspection) {
+        if (options.value?.damageInspection) {
             if (!inspectionDetails.value.damageLocation) errors.value.damageLocation = true;
             if (!inspectionDetails.value.newDamage) errors.value.newDamage = true;
             if (!inspectionDetails.value.damageType) errors.value.damageType = true;
@@ -828,21 +832,21 @@
             if (!inspectionDetails.value.damageDescription) errors.value.damageDescription = true;
         }
 
-        if (options.value.maintenanceInspection) {
+        if (options.value?.maintenanceInspection) {
             if (!inspectionDetails.value.maintenanceLocation) errors.value.maintenanceLocation = true;
             if (!inspectionDetails.value.maintenanceType) errors.value.maintenanceType = true;
             if (!inspectionDetails.value.maintenanceImmediateActionRequired) errors.value.maintenanceImmediateActionRequired = true;
             if (!inspectionDetails.value.maintenanceCostEstimate) errors.value.maintenanceCostEstimate = true;
         }
 
-        if (options.value.installationInspection) {
+        if (options.value?.installationInspection) {
             if (!inspectionDetails.value.installationLocation) errors.value.installationLocation = true;
             if (!inspectionDetails.value.installationType) errors.value.installationType = true;
             if (!inspectionDetails.value.reportedMalfunction) errors.value.reportedMalfunction = true;
             if (!inspectionDetails.value.approved) errors.value.approved = true;
         }
 
-        if (options.value.modificationInspection) {
+        if (options.value?.modificationInspection) {
             if (!inspectionDetails.value.modificationLocation) errors.value.modificationLocation = true;
             if (!inspectionDetails.value.performedBy) errors.value.performedBy = true;
             if (!inspectionDetails.value.modificationDescription) errors.value.modificationDescription = true;
@@ -860,7 +864,7 @@
         }
 
         const updatedDetails = {
-            damageInspection: options.value.damageInspection ? {
+            damageInspection: options.value?.damageInspection ? {
                 location: inspectionDetails.value.damageLocation,
                 newDamage: inspectionDetails.value.newDamage,
                 damageType: inspectionDetails.value.damageType,
@@ -869,14 +873,14 @@
                 damageDescription: inspectionDetails.value.damageDescription,
                 photos: photos.value.damageInspection
             } : null,
-            maintenanceInspection: options.value.maintenanceInspection ? {
+            maintenanceInspection: options.value?.maintenanceInspection ? {
                 location: inspectionDetails.value.maintenanceLocation,
                 maintenanceType: inspectionDetails.value.maintenanceType,
                 immediateActionRequired: inspectionDetails.value.maintenanceImmediateActionRequired,
                 costEstimate: inspectionDetails.value.maintenanceCostEstimate,
                 photos: photos.value.maintenanceInspection
             } : null,
-            installationInspection: options.value.installationInspection ? {
+            installationInspection: options.value?.installationInspection ? {
                 location: inspectionDetails.value.installationLocation,
                 installationType: inspectionDetails.value.installationType,
                 reportedMalfunction: inspectionDetails.value.reportedMalfunction,
@@ -884,7 +888,7 @@
                 comments: inspectionDetails.value.installationComments,
                 photos: photos.value.installationInspection
             } : null,
-            modificationInspection: options.value.modificationInspection ? {
+            modificationInspection: options.value?.modificationInspection ? {
                 modificationLocation: inspectionDetails.value.modificationLocation,
                 performedBy: inspectionDetails.value.performedBy,
                 modificationDescription: inspectionDetails.value.modificationDescription,
@@ -898,7 +902,7 @@
         showCompleteAlert.value = true;
     };
 
-    const goToKnowledgebaseItem = (id) => {
+    const goToKnowledgebaseItem = (id: string) => {
         router.push(`/kennisbase/${id}`);
     };
 </script>

@@ -145,19 +145,80 @@
     import TheHeader from "@/components/TheHeader.vue";
     import TheTabBar from "@/components/TheTabBar.vue";
 
+    // Definieer de interfaces voor de verschillende inspectie details
+    interface Photo {
+        fileName: string;
+        webPath: string;
+    }
+
+    interface DamageInspection {
+        location: string;
+        newDamage: boolean;
+        damageType: string;
+        damageDate: string;
+        immediateActionRequired: boolean;
+        damageDescription: string;
+        photos: Photo[];
+    }
+
+    interface MaintenanceInspection {
+        location: string;
+        maintenanceType: string;
+        immediateActionRequired: boolean;
+        costEstimate: string;
+        photos: Photo[];
+    }
+
+    interface InstallationInspection {
+        location: string;
+        installationType: string;
+        reportedMalfunction: string;
+        approved: boolean;
+        comments: string;
+        photos: Photo[];
+    }
+
+    interface ModificationInspection {
+        modificationLocation: string;
+        performedBy: string;
+        modificationDescription: string;
+        actionRequired: string;
+        modificationComments: string;
+        photos: Photo[];
+    }
+
+    interface InspectionDetails {
+        damageInspection?: DamageInspection;
+        maintenanceInspection?: MaintenanceInspection;
+        installationInspection?: InstallationInspection;
+        modificationInspection?: ModificationInspection;
+    }
+
+    interface Inspection {
+        id: string;
+        location: string;
+        date: string;
+        type: string;
+        details?: InspectionDetails;
+    }
+
     const route = useRoute();
     const router = useRouter();
     const inspectionStore = useInspectionStore();
-    const inspection = ref(null);
+    const inspection = ref<Inspection | null>(null);
 
     onMounted(() => {
-        const id = route.params.id;
-        inspection.value = inspectionStore.completedInspections.find((insp) => insp.id == id);
+        const id = route.params.id as string;
+        inspection.value = inspectionStore.completedInspections.find((insp: Inspection) => insp.id == id);
         console.log("Selected inspection:", inspection.value);
     });
 
     const editInspection = () => {
-        router.push(`/inspectie-bewerken/${inspection.value.id}`);
+        if (inspection.value) {
+            router.push(`/inspectie-bewerken/${inspection.value.id}`);
+        } else {
+            console.error("No inspection selected");
+        }
     };
 </script>
 
