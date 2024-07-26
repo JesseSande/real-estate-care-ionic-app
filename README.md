@@ -21,7 +21,7 @@ Het prototype kan uitgeprobeerd worden via: [https://real-estate-care-jvds.netli
 
 Alternatief is om het prototype via de GitHub repository te clonen (main branch), in te stellen en te bezichtigen via de localhost. Dit is de link naar mijn GitHub repository: [https://github.com/JesseSande/real-estate-care-ionic-app](https://github.com/JesseSande/real-estate-care-ionic-app). 
 
-*N.b. Het kan zijn dat je even een refresh moet doen zodra je de applicatie hebt geopend om alles goed te laden. Dit kun je voor de zekerheid sowieso doen.* 
+*N.b. Het kan zijn dat je even een refresh moet doen zodra je de applicatie (inlogpagina) hebt geopend om alles goed te laden. Dit kun je voor de zekerheid sowieso doen.* 
 
  ### Simulatie inloggegevens
  - Gebruikersnaam: demoaccount
