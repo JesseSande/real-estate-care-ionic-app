@@ -638,13 +638,6 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
         modificationInspection: []
     });
 
-    const fileInputs = {
-        damageInspection: ref<HTMLInputElement | null>(null),
-        maintenanceInspection: ref<HTMLInputElement | null>(null),
-        installationInspection: ref<HTMLInputElement | null>(null),
-        modificationInspection: ref<HTMLInputElement | null>(null)
-    };
-
     const options = ref<Options | null>(null);
     const inspectionDetails = ref<InspectionDetails>({
         damageLocation: "",
@@ -725,18 +718,6 @@ Hiermee kan de aangeklikte toegewezen inspectie worden uitgevoerd. -->
                 console.error("Error taking photo:", error);
             }
         }
-    };
-
-    // Bestand uploaden
-    const handleFileUpload = (event: Event, category: string) => {
-        const target = event.target as HTMLInputElement;
-        const file = target.files![0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const fileName = file.name;
-            photos.value[category].push({ fileName, webPath: e.target!.result as string });
-        };
-        reader.readAsDataURL(file);
     };
 
     // Foto-opties presenteren

@@ -3,7 +3,7 @@
 <template>
   <div>
     <component 
-        v-for="(block, index) in blocks" 
+        v-for="(block, index) in props.blocks" 
         :is="block.tag" 
         :key="index" 
         v-bind="block.attrs">
